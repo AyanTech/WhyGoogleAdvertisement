@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.gms.ads.nativead.NativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -40,7 +39,7 @@
             android:background="@drawable/back_color_accent_button"
             android:clipToPadding="false"
             android:fontFamily="@font/iran_sans_mobile_medium"
-            app:foreground="?android:attr/selectableItemBackground"
+            android:foreground="?android:attr/selectableItemBackground"
             android:foregroundGravity="center"
             android:gravity="center"
             android:maxLines="1"
