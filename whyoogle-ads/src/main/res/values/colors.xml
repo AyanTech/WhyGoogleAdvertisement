@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="advertisementHeadLineColor">#FF27272B</color>
+    <color name="advertisementActiveButtonColor">#9c27b0</color>
+    <color name="advertisementDisableButtonColor">#DADADA</color>
+
+</resources>
