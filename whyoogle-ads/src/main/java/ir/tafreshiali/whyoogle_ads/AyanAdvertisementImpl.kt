@@ -120,8 +120,8 @@ class AyanAdvertisementImpl(
      * @return the saved [AdmobAdvertisementProperties]*/
     override fun readAdmobAdvertisementProperties(): AdmobAdvertisementProperties =
         AdmobAdvertisementProperties(
-            nativeAdvertisementId = AdmobAdvertisementKey.interstitialAdvertisementKey,
-            interstitialAdvertisementId = AdmobAdvertisementKey.nativeAdvertisementKey
+            nativeAdvertisementId = AdmobAdvertisementKey.nativeAdvertisementKey,
+            interstitialAdvertisementId = AdmobAdvertisementKey.interstitialAdvertisementKey
         )
 
 
