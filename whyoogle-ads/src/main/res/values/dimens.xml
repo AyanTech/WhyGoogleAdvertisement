@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_half">0.5dp</dimen>
+    <dimen name="margin_1">1dp</dimen>
+    <dimen name="margin_2">2dp</dimen>
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_12">12dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
+    <dimen name="margin_32">32dp</dimen>
+    <dimen name="margin_38">38dp</dimen>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="margin_48">48dp</dimen>
+    <dimen name="margin_56">56dp</dimen>
+    <dimen name="margin_64">64dp</dimen>
+    <dimen name="margin_72">72dp</dimen>
+    <dimen name="margin_80">80dp</dimen>
+    <dimen name="margin_88">88dp</dimen>
+    <dimen name="margin_96">96dp</dimen>
+    <dimen name="margin_104">104dp</dimen>
+    <dimen name="margin_112">112dp</dimen>
+    <dimen name="margin_120">120dp</dimen>
+    <dimen name="margin_128">128dp</dimen>
+    <dimen name="margin_142">142dp</dimen>
+    <dimen name="margin_180">180dp</dimen>
+    <dimen name="margin_200">200dp</dimen>
+    <dimen name="margin_250">250dp</dimen>
+    <dimen name="margin_300">300dp</dimen>
+
+    <dimen name="half_radius">4dp</dimen>
+    <dimen name="radius_6">6dp</dimen>
+    <dimen name="radius_12">12dp</dimen>
+    <dimen name="radius_16">16dp</dimen>
+    <dimen name="radius_20">20dp</dimen>
+    <dimen name="radius_24">24dp</dimen>
+    <dimen name="radius_32">32dp</dimen>
+
+
+    <dimen name="main_Elevation">2dp</dimen>
+
+    <dimen name="small_text">8sp</dimen>
+    <dimen name="sub_normal_text">10sp</dimen>
+    <dimen name="normal_text">12sp</dimen>
+    <dimen name="sub_medium_text">14sp</dimen>
+    <dimen name="medium_text">16sp</dimen>
+    <dimen name="text_x_large">18sp</dimen>
+    <dimen name="text_xx_large">20sp</dimen>
+    <dimen name="text_xxx_large">22sp</dimen>
+    <dimen name="text_xxxx_large">24sp</dimen>
+    <dimen name="adButtonTextSize">@dimen/normal_text</dimen>
+
+</resources>

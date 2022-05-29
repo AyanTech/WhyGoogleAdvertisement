@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="MainCards">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="cardCornerRadius">@dimen/half_radius</item>
+        <item name="cardElevation">@dimen/main_Elevation</item>
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="cardUseCompatPadding">true</item>
+    </style>
+
+    <style name="AppButton">
+        <item name="android:textColor">@drawable/enable_disable_button_text_color</item>
+        <item name="android:textSize">@dimen/sub_medium_text</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">@dimen/margin_32</item>
+        <item name="android:paddingRight">@dimen/margin_32</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:height">@dimen/margin_40</item>
+        <item name="android:background">@drawable/back_color_accent_button</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+</resources>
