@@ -56,6 +56,13 @@ dependencies {
 
     //Ayan - Why google
     implementation(ayan.WhyGoogle.whyGoogle)
+
+    //Ayan - NetWorking
+    implementation(ayan.Networking.gson)
+    implementation(ayan.Networking.gsonConvertor)
+    implementation(ayan.Networking.okhttp)
+    implementation(ayan.Networking.pishkhanNetworking)
+
 }
 
 afterEvaluate {
@@ -77,7 +84,7 @@ afterEvaluate {
                 artifactId = "whygoogle-ads"
 
                 // Version Library Name (Example : "1.0.0")
-                version = "0.0.4"
+                version = "0.0.5"
             }
         }
     }

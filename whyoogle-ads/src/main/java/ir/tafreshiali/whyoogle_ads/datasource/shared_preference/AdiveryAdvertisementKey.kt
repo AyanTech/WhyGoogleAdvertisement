@@ -7,10 +7,10 @@ import ir.ayantech.whygoogle.helper.PreferencesManager
 @SuppressLint("StaticFieldLeak")
 object AdiveryAdvertisementKey {
 
-    private const val APP_AD_KEY = "adiveryappkey"
-    private const val AD_INTERSTITIAL_KEY = "adiveryInterstitialAdUnitID"
-    private const val AD_BANNER_KEY = "adiveryBannerAdUnitID"
-    private const val AD_NATIVE_KEY = "adiveryNativeAdUnitID"
+     const val APP_AD_KEY = "adiveryappkey"
+     const val AD_INTERSTITIAL_KEY = "adiveryInterstitialAdUnitID"
+     const val AD_BANNER_KEY = "adiveryBannerAdUnitID"
+     const val AD_NATIVE_KEY = "adiveryNativeAdUnitID"
 
     private lateinit var context: Context
     fun init(context: Context) {

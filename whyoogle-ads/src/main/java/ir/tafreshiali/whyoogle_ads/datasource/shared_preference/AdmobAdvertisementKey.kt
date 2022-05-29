@@ -7,10 +7,10 @@ import ir.ayantech.whygoogle.helper.PreferencesManager
 @SuppressLint("StaticFieldLeak")
 object AdmobAdvertisementKey {
 
-    private const val APP_AD_KEY = "admobappkey"
-    private const val AD_INTERSTITIAL_KEY = "admobInterstitialAdUnitID"
-    private const val AD_BANNER_KEY = "admobBannerAdUnitID"
-    private const val AD_NATIVE_KEY = "admobNativeAdUnitID"
+     const val APP_AD_KEY = "admobappkey"
+     const val AD_INTERSTITIAL_KEY = "admobInterstitialAdUnitID"
+     const val AD_BANNER_KEY = "admobBannerAdUnitID"
+     const val AD_NATIVE_KEY = "admobNativeAdUnitID"
 
     private lateinit var context: Context
 
