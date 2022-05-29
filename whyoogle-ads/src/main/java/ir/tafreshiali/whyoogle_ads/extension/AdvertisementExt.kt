@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.annotation.LayoutRes
 import com.google.android.gms.ads.nativead.NativeAdView
 import ir.ayantech.ayannetworking.api.AyanApi
+import ir.ayantech.pishkhancore.model.AppConfigAdvertisementOutput
 import ir.tafreshiali.whyoogle_ads.AdvertisementEndpoint
 import ir.tafreshiali.whyoogle_ads.AyanAdvertisement
 import ir.tafreshiali.whyoogle_ads.R

@@ -63,6 +63,10 @@ dependencies {
     implementation(ayan.Networking.okhttp)
     implementation(ayan.Networking.pishkhanNetworking)
 
+    //Ayan - Core
+    implementation(ayan.PishkhanCore.pishkhanCore)
+
+
 }
 
 afterEvaluate {
@@ -84,7 +88,7 @@ afterEvaluate {
                 artifactId = "whygoogle-ads"
 
                 // Version Library Name (Example : "1.0.0")
-                version = "0.0.5"
+                version = "0.0.6"
             }
         }
     }
