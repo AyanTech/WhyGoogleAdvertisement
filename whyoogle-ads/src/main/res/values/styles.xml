@@ -14,8 +14,8 @@
         <item name="android:textColor">@drawable/enable_disable_button_text_color</item>
         <item name="android:textSize">@dimen/sub_medium_text</item>
         <item name="android:gravity">center</item>
-        <item name="android:paddingLeft">@dimen/margin_32</item>
-        <item name="android:paddingRight">@dimen/margin_32</item>
+        <item name="android:paddingStart">@dimen/margin_32</item>
+        <item name="android:paddingEnd">@dimen/margin_32</item>
         <item name="android:clipToPadding">false</item>
         <item name="android:textStyle">bold</item>
         <item name="android:height">@dimen/margin_40</item>
