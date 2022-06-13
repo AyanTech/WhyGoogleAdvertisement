@@ -28,12 +28,13 @@
             android:layout_marginTop="@dimen/margin_4"
             android:layout_marginEnd="@dimen/margin_4"
             android:layout_marginBottom="@dimen/margin_4"
-            android:maxLines="2"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:fadingEdge="horizontal"
-            android:scrollHorizontally="true"
             android:layout_toStartOf="@+id/ad_call_to_action"
-            android:layout_toEndOf="@+id/ad_app_icon" />
+            android:layout_toEndOf="@+id/ad_app_icon"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/ad_call_to_action"

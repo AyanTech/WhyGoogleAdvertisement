@@ -40,7 +40,8 @@
         android:layout_toEndOf="@+id/adivery_icon"
         android:fadingEdge="horizontal"
         android:marqueeRepeatLimit="marquee_forever"
-        android:maxLines="2"
+        android:singleLine="true"
+        android:ellipsize="marquee"
         android:scrollHorizontally="true"
         android:textColor="@color/advertisementHeadLineColor" />
 
