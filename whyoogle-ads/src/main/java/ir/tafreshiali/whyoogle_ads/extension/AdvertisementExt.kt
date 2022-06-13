@@ -283,24 +283,23 @@ fun loadAdiveryNativeAdvertisementView(
     onAdLoaded: (AdiveryNativeAdView) -> Unit,
     @LayoutRes adiveryNativeLayoutId: Int
 ) {
+
     var adView: AdiveryNativeAdView? = null
 
-    // Inflate a layout and add it to the parent ViewGroup.
-    val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
-            as LayoutInflater
-    val adiveryAdView = inflater.inflate(adiveryNativeLayoutId, null, true) as ViewGroup
 
     adView = AdvertisementCore.requestNativeAds(context, adiveryNativeLayoutId) {
         trying {
-            adiveryAdView.findViewById<TextView>(R.id.adivery_headline).isSelected = true
+            adView?.let {
+                it.findViewById<TextView>(ir.tafreshiali.whyoogle_ads.R.id.adivery_headline).isSelected =
+                    true
 
-            val adiveryButton =
-                adiveryAdView.findViewById<AppCompatButton>(R.id.adivery_call_to_action)
+                val adiveryButton =
+                    it.findViewById<AppCompatButton>(ir.tafreshiali.whyoogle_ads.R.id.adivery_call_to_action)
 
-            adiveryButton.setOnClickListener {
-                adiveryButton.performClick()
+                adiveryButton.setOnClickListener {
+                    adiveryButton.performClick()
+                }
             }
-
             adView?.let { onAdLoaded(it) }
         }
     }
