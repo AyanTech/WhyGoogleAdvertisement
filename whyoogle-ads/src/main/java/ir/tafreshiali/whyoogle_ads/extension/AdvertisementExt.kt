@@ -12,9 +12,11 @@ import ir.ayantech.advertisement.core.AdvertisementCore
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
+import com.adivery.sdk.AdiveryNativeAdView
 import com.google.android.gms.ads.nativead.NativeAdView
 import ir.ayantech.ayannetworking.api.AyanApi
 import ir.ayantech.pishkhancore.model.AppConfigAdvertisementOutput
+import ir.ayantech.whygoogle.helper.trying
 import ir.tafreshiali.whyoogle_ads.AdvertisementEndpoint
 import ir.tafreshiali.whyoogle_ads.AyanAdvertisement
 import ir.tafreshiali.whyoogle_ads.R
@@ -223,6 +225,7 @@ fun ViewGroup.loadAdmobNativeAdvertisementView(
     // NativeAdView's headlineView property to register it.
     val headlineView = adView.findViewById<TextView>(R.id.ad_headline)
     headlineView.text = nativeAd.headline
+    headlineView.isSelected = true
     adView.headlineView = headlineView
 
 
@@ -258,6 +261,7 @@ fun ViewGroup.loadAdiveryNativeAdvertisementView(
 ) {
     this.addView(
         AdvertisementCore.requestNativeAds(context, adiveryNativeLayoutId) {
+            findViewById<TextView>(R.id.adivery_headline).isSelected = true
             onAdLoaded()
         }
     )
@@ -267,6 +271,42 @@ fun ViewGroup.loadAdiveryNativeAdvertisementView(
             .performClick()
     }
 }
+
+
+/**
+ * Loading Adivery Native Advertisement To the [AdiveryNativeAdView]
+ * @param [onAdLoaded] a lambda function for updating upstreams to react when ever advertisement loaded
+ * @param [adiveryNativeLayoutId] of type [LayoutRes] the id of created layout in (project / library ) res folder */
+
+fun loadAdiveryNativeAdvertisementView(
+    context: Context,
+    onAdLoaded: (AdiveryNativeAdView) -> Unit,
+    @LayoutRes adiveryNativeLayoutId: Int
+) {
+    var adView: AdiveryNativeAdView? = null
+
+    // Inflate a layout and add it to the parent ViewGroup.
+    val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+            as LayoutInflater
+    val adiveryAdView = inflater.inflate(adiveryNativeLayoutId, null, true) as ViewGroup
+
+    adView = AdvertisementCore.requestNativeAds(context, adiveryNativeLayoutId) {
+        trying {
+            adiveryAdView.findViewById<TextView>(R.id.adivery_headline).isSelected = true
+
+            val adiveryButton =
+                adiveryAdView.findViewById<AppCompatButton>(R.id.adivery_call_to_action)
+
+            adiveryButton.setOnClickListener {
+                adiveryButton.performClick()
+            }
+
+            adView?.let { onAdLoaded(it) }
+        }
+    }
+}
+
+
 
 
 

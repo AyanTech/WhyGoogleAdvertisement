@@ -38,6 +38,10 @@
         android:layout_marginBottom="@dimen/margin_4"
         android:layout_toStartOf="@+id/adivery_call_to_action"
         android:layout_toEndOf="@+id/adivery_icon"
+        android:fadingEdge="horizontal"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:maxLines="2"
+        android:scrollHorizontally="true"
         android:textColor="@color/advertisementHeadLineColor" />
 
     <ImageView

@@ -28,6 +28,10 @@
             android:layout_marginTop="@dimen/margin_4"
             android:layout_marginEnd="@dimen/margin_4"
             android:layout_marginBottom="@dimen/margin_4"
+            android:maxLines="2"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:fadingEdge="horizontal"
+            android:scrollHorizontally="true"
             android:layout_toStartOf="@+id/ad_call_to_action"
             android:layout_toEndOf="@+id/ad_app_icon" />
 
