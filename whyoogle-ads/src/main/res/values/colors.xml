@@ -6,5 +6,8 @@
     <color name="advertisementDisableButtonColor">#DADADA</color>
     <color name="grayText">#8C8989</color>
     <color name="gray">#EFEFEF</color>
+    <color name="simple_native_ad_bg">#EFEFEF</color>
+    <color name="square_ad_divider">#ECF0F1</color>
+    <color name="colorAccent">#7da453</color>
 
 </resources>
