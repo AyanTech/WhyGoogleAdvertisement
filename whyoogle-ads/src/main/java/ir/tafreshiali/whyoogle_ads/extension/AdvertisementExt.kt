@@ -216,38 +216,41 @@ fun ViewGroup.loadAdmobNativeAdvertisementView(
     ),
     onViewReady: () -> Unit
 ) {
-    // Inflate a layout and add it to the parent ViewGroup.
-    val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
-            as LayoutInflater
-    val adView = inflater.inflate(admobNativeLayoutId, null, true) as NativeAdView
+    trying {
 
-    // Locate the view that will hold the headline, set its text, and use the
-    // NativeAdView's headlineView property to register it.
-    val headlineView = adView.findViewById<TextView>(R.id.ad_headline)
-    headlineView.text = nativeAd.headline
-    headlineView.isSelected = true
-    adView.headlineView = headlineView
+        // Inflate a layout and add it to the parent ViewGroup.
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+                as LayoutInflater
+        val adView = inflater.inflate(admobNativeLayoutId, null, true) as NativeAdView
 
-
-    val adAppIcon = adView.findViewById<ImageView>(R.id.ad_app_icon)
-    adAppIcon.setImageDrawable(nativeAd.icon?.drawable)
-    adView.iconView = adAppIcon
+        // Locate the view that will hold the headline, set its text, and use the
+        // NativeAdView's headlineView property to register it.
+        val headlineView = adView.findViewById<TextView>(R.id.ad_headline)
+        headlineView.text = nativeAd.headline
+        headlineView.isSelected = true
+        adView.headlineView = headlineView
 
 
-    val adCallToAction = adView.findViewById<AppCompatButton>(R.id.ad_call_to_action)
-    adCallToAction.text = nativeAd.callToAction
-    adView.callToActionView = adCallToAction
+        val adAppIcon = adView.findViewById<ImageView>(R.id.ad_app_icon)
+        adAppIcon.setImageDrawable(nativeAd.icon?.drawable)
+        adView.iconView = adAppIcon
 
-    adView.setNativeAd(nativeAd)
 
-    removeAllViews()
+        val adCallToAction = adView.findViewById<AppCompatButton>(R.id.ad_call_to_action)
+        adCallToAction.text = nativeAd.callToAction
+        adView.callToActionView = adCallToAction
 
-    addView(
-        adView,
-        layoutParams
-    )
+        adView.setNativeAd(nativeAd)
 
-    onViewReady()
+        removeAllViews()
+
+        addView(
+            adView,
+            layoutParams
+        )
+
+        onViewReady()
+    }
 }
 
 
@@ -261,14 +264,17 @@ fun ViewGroup.loadAdiveryNativeAdvertisementView(
 ) {
     this.addView(
         AdvertisementCore.requestNativeAds(context, adiveryNativeLayoutId) {
-            findViewById<TextView>(R.id.adivery_headline).isSelected = true
-            onAdLoaded()
+            trying {
+                findViewById<TextView>(R.id.adivery_headline).isSelected = true
+                onAdLoaded()
+            }
         }
     )
-
-    this.setOnClickListener {
-        this.findViewById<AppCompatButton>(R.id.adivery_call_to_action)
-            .performClick()
+    trying {
+        this.setOnClickListener {
+            this.findViewById<AppCompatButton>(R.id.adivery_call_to_action)
+                .performClick()
+        }
     }
 }
 
@@ -283,18 +289,16 @@ fun loadAdiveryNativeAdvertisementView(
     onAdLoaded: (AdiveryNativeAdView) -> Unit,
     @LayoutRes adiveryNativeLayoutId: Int
 ) {
-
     var adView: AdiveryNativeAdView? = null
-
 
     adView = AdvertisementCore.requestNativeAds(context, adiveryNativeLayoutId) {
         trying {
             adView?.let {
-                it.findViewById<TextView>(ir.tafreshiali.whyoogle_ads.R.id.adivery_headline).isSelected =
+                it.findViewById<TextView>(R.id.adivery_headline).isSelected =
                     true
 
                 val adiveryButton =
-                    it.findViewById<AppCompatButton>(ir.tafreshiali.whyoogle_ads.R.id.adivery_call_to_action)
+                    it.findViewById<AppCompatButton>(R.id.adivery_call_to_action)
 
                 adiveryButton.setOnClickListener {
                     adiveryButton.performClick()
