@@ -10,6 +10,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.nativead.NativeAd
 import ir.ayantech.advertisement.core.AdvertisementCore
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import com.adivery.sdk.AdiveryNativeAdView
@@ -310,6 +311,96 @@ fun loadAdiveryNativeAdvertisementView(
 }
 
 
+/** Loading Admob Native Advertisement To The [LinearLayout]
+ * @param context of type [Context] for instantiating [ViewGroup]
+ * @param admobNativeLayoutId of type [LayoutRes] the id of created layout in (project / library ) res folder
+ * @param admobNativeAdvertisement of type [NativeAd] needed for [loadAdmobNativeAdvertisementView]
+ * @param onAdLoaded a lambda function for updating upstreams to react when ever advertisement loaded*/
+fun loadAdmobNativeAdvertisementView(
+    context: Context,
+    @LayoutRes admobNativeLayoutId: Int,
+    admobNativeAdvertisement: NativeAd,
+    onAdLoaded: (ViewGroup) -> Unit
+) {
+    LinearLayout(context).let { admobNativeContainer ->
+        admobNativeContainer.loadAdmobNativeAdvertisementView(
+            nativeAd = admobNativeAdvertisement,
+            admobNativeLayoutId = admobNativeLayoutId,
+            onViewReady = { onAdLoaded(admobNativeContainer) }
+        )
+    }
+}
 
+
+/**
+ * handling application native  advertisement
+ * @param [applicationAdvertisementType] [applicationNativeAdvertisementType] for handling different type of native advertisement
+ * @param [loadAdiveryNativeView] [loadAdmobNativeView] a lambda functions for updating upstreams to react when ever interstitial advertisement requested */
+
+fun handleApplicationNativeAdvertisement(
+    applicationAdvertisementType: String = ApplicationAdvertisementType.appAdvertisementType,
+    applicationNativeAdvertisementType: String = ApplicationAdvertisementType.appNativeAdvertisementType,
+    loadAdiveryNativeView: () -> Unit,
+    loadAdmobNativeView: () -> Unit
+) {
+
+    when (applicationAdvertisementType) {
+        "admob" -> {
+            when (applicationNativeAdvertisementType) {
+                "adivery" -> {
+                    loadAdiveryNativeView()
+                }
+
+                "admob" -> {
+                    loadAdmobNativeView()
+                }
+            }
+        }
+
+        "adivery" -> {
+            when (applicationNativeAdvertisementType) {
+                "adivery" -> {
+                    loadAdiveryNativeView()
+                }
+            }
+        }
+    }
+}
+
+
+/** handling application interstitial advertisement
+ * @param [loadAdmobInterstitialAdvertisement] [loadAdiveryInterstitialAdvertisement] a lambda functions for updating upstreams to react when ever interstitial advertisement requested  */
+
+fun showApplicationInterstitialAdvertisement(
+    loadAdmobInterstitialAdvertisement: () -> Unit,
+    loadAdiveryInterstitialAdvertisement: () -> Unit = {}
+) {
+    when (ApplicationAdvertisementType.appAdvertisementType) {
+        "admob" -> {
+            when (ApplicationAdvertisementType.appInterstitialAdvertisementType) {
+                "adivery" -> {
+                    AdvertisementCore.showInterstitialAds()
+                    loadAdiveryInterstitialAdvertisement()
+                }
+
+                "admob" -> {
+
+                    ir.tafreshiali.whyoogle_ads.AdvertisementCore.admobInterstitialAdvertisement?.let { admobInterstitialAd ->
+                        loadAdmobInterstitialAdvertisement()
+                    }
+                }
+            }
+        }
+
+        "adivery" -> {
+            when (ApplicationAdvertisementType.appInterstitialAdvertisementType) {
+                "adivery" -> {
+                    AdvertisementCore.showInterstitialAds()
+                    loadAdiveryInterstitialAdvertisement()
+                }
+            }
+        }
+    }
+}
 
 
