@@ -1,5 +1,6 @@
 package ir.tafreshiali.whyoogle_ads.extension
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.util.Log
@@ -369,10 +370,15 @@ fun handleApplicationNativeAdvertisement(
 
 
 /** handling application interstitial advertisement
+ * @param activity we need activity for loading admob advertisement
+ * @param [ayanAdvertisement] [admobAdvertisement] for loading admob advertisement
  * @param [loadAdmobInterstitialAdvertisement] [loadAdiveryInterstitialAdvertisement] a lambda functions for updating upstreams to react when ever interstitial advertisement requested  */
 
 fun showApplicationInterstitialAdvertisement(
-    loadAdmobInterstitialAdvertisement: () -> Unit,
+    activity: Activity,
+    ayanAdvertisement: AyanAdvertisement,
+    admobAdvertisement: AdmobAdvertisement,
+    loadAdmobInterstitialAdvertisement: () -> Unit={},
     loadAdiveryInterstitialAdvertisement: () -> Unit = {}
 ) {
     when (ApplicationAdvertisementType.appAdvertisementType) {
@@ -386,6 +392,14 @@ fun showApplicationInterstitialAdvertisement(
                 "admob" -> {
 
                     ir.tafreshiali.whyoogle_ads.AdvertisementCore.admobInterstitialAdvertisement?.let { admobInterstitialAd ->
+                        admobInterstitialAd.addAdmobInterstitialCallback(
+                            application = activity.application,
+                            ayanAdvertisement = ayanAdvertisement,
+                            admobAdvertisement = admobAdvertisement
+                        )
+
+                        admobInterstitialAd.show(activity)
+
                         loadAdmobInterstitialAdvertisement()
                     }
                 }
