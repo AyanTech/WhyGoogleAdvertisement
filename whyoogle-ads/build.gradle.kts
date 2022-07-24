@@ -52,19 +52,17 @@ dependencies {
 
     //Ayan - Advertisement
     api(ad.AdmobAdvertisement.admobAdvertisement)
+
     api(ad.AdiveryAdvertisement.advertisement)
 
     //Ayan - Why google
-    implementation(ayan.WhyGoogle.whyGoogle)
+    compileOnly(ayan.WhyGoogle.whyGoogle)
 
     //Ayan - NetWorking
-    implementation(ayan.Networking.gson)
-    implementation(ayan.Networking.gsonConvertor)
-    implementation(ayan.Networking.okhttp)
-    implementation(ayan.Networking.pishkhanNetworking)
+    compileOnly(ayan.Networking.pishkhanNetworking)
 
     //Ayan - Core
-    implementation(ayan.PishkhanCore.pishkhanCore)
+    compileOnly(ayan.PishkhanCore.pishkhanCore)
 
 
 }
@@ -88,7 +86,7 @@ afterEvaluate {
                 artifactId = "whygoogle-ads"
 
                 // Version Library Name (Example : "1.0.0")
-                version = "0.0.23"
+                version = "0.0.24"
             }
         }
     }
