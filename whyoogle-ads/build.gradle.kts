@@ -62,7 +62,7 @@ dependencies {
     compileOnly(ayan.Networking.pishkhanNetworking)
 
     //Ayan - Core
-    compileOnly(ayan.PishkhanCore.pishkhanCore)
+    implementation(ayan.PishkhanCore.pishkhanCore)
 
 
 }
