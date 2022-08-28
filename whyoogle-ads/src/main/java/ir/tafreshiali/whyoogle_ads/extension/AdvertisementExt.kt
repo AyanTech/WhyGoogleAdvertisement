@@ -6,16 +6,16 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatButton
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.nativead.NativeAd
-import ir.ayantech.advertisement.core.AdvertisementCore
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.LayoutRes
+import androidx.appcompat.widget.AppCompatButton
 import com.adivery.sdk.AdiveryNativeAdView
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
+import ir.ayantech.advertisement.core.AdvertisementCore
 import ir.ayantech.ayannetworking.api.AyanApi
 import ir.ayantech.pishkhancore.model.AppConfigAdvertisementOutput
 import ir.ayantech.whygoogle.helper.trying
@@ -47,15 +47,12 @@ fun AyanApi.getAppConfigAdvertisement(
  * @param ayanAdvertisement of type [AyanAdvertisement]
  * @param callback a lambda function for doing some operation on the advertisement activation state
  * @param handleAdiveryNativeAdvertisement
- * @param handleAdmobInterstitialAdvertisement
- * @param handleAdmobNativeAdvertisement
  * @param showAdmobNativeAdvertisement*/
 fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
-    ayanAdvertisement: AyanAdvertisement,
+    application: Application,
+    ayanAdvertisement: AyanAdvertisement = ir.tafreshiali.whyoogle_ads.AdvertisementCore.ayanAdvertisement,
     callback: (Boolean) -> Unit,
     handleAdiveryNativeAdvertisement: () -> Unit,
-    handleAdmobInterstitialAdvertisement: (InterstitialAd?) -> Unit,
-    handleAdmobNativeAdvertisement: (NativeAd?) -> Unit,
     showAdmobNativeAdvertisement: () -> Unit
 ) {
     if (this.Active) {
@@ -67,8 +64,23 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
                 this.initializeAdmobAdvertisement(
                     ayanAdvertisement = ayanAdvertisement,
                     handleAdiveryNativeAdvertisement = handleAdiveryNativeAdvertisement,
-                    handleAdmobInterstitialAdvertisement = handleAdmobInterstitialAdvertisement,
-                    handleAdmobNativeAdvertisement = handleAdmobNativeAdvertisement,
+                    handleAdmobInterstitialAdvertisement = { admobInterstitialAd ->
+                        ir.tafreshiali.whyoogle_ads.AdvertisementCore.updateApplicationAdmobInterstitialAdvertisement(
+                            admobInterstitialAd = admobInterstitialAd
+                        )
+
+
+                        ir.tafreshiali.whyoogle_ads.AdvertisementCore.admobInterstitialAdvertisement?.addAdmobInterstitialCallback(
+                            ayanAdvertisement = ir.tafreshiali.whyoogle_ads.AdvertisementCore.ayanAdvertisement,
+                            application = application,
+                            admobAdvertisement = ir.tafreshiali.whyoogle_ads.AdvertisementCore.admobAdvertisement
+                        )
+                    },
+                    handleAdmobNativeAdvertisement = { admobNativeAd ->
+                        ir.tafreshiali.whyoogle_ads.AdvertisementCore.updateApplicationAdmobNativeAdvertisement(
+                            admobNativeAd = admobNativeAd
+                        )
+                    },
                     showAdmobNativeAdvertisement = showAdmobNativeAdvertisement
                 )
             }
@@ -376,9 +388,9 @@ fun handleApplicationNativeAdvertisement(
 
 fun showApplicationInterstitialAdvertisement(
     activity: Activity,
-    ayanAdvertisement: AyanAdvertisement,
-    admobAdvertisement: AdmobAdvertisement,
-    loadAdmobInterstitialAdvertisement: () -> Unit={},
+    ayanAdvertisement: AyanAdvertisement = ir.tafreshiali.whyoogle_ads.AdvertisementCore.ayanAdvertisement,
+    admobAdvertisement: AdmobAdvertisement = ir.tafreshiali.whyoogle_ads.AdvertisementCore.admobAdvertisement,
+    loadAdmobInterstitialAdvertisement: () -> Unit = {},
     loadAdiveryInterstitialAdvertisement: () -> Unit = {}
 ) {
     when (ApplicationAdvertisementType.appAdvertisementType) {
