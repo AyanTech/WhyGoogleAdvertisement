@@ -10,9 +10,7 @@ import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdOptions
 
 /** Admob Advertisement Impl
- * for handling application admob advertisement
- * @param [appDataStoreManager] of type [AppDataStore]*/
-
+ * for handling application admob advertisement*/
 class AdmobAdvertisementImpl : AdmobAdvertisement {
 
     /**
@@ -25,7 +23,6 @@ class AdmobAdvertisementImpl : AdmobAdvertisement {
         context: Application,
         admobInitializeStatus: (AdapterStatus.State) -> Unit
     ) {
-
         MobileAds.initialize(context) { admobStatus ->
             admobStatus.adapterStatusMap.values.forEachIndexed { _, adapterStatus ->
                 admobInitializeStatus(adapterStatus.initializationState)
@@ -49,7 +46,7 @@ class AdmobAdvertisementImpl : AdmobAdvertisement {
      * a function for loading the admob interstitial advertisement
      * @param context of type [Application]
      * @param admobInitializeAdvertisementId the Optional admob advertisement id for loading interstitial ads
-     * Important Note about [admobInitializeAdvertisementId] = the recommended way is to not pass the [admobInitializeAdvertisementId] directly instead when ever the advertisement request is succeed save information to the [appDataStoreManager]
+     * Important Note about [admobInitializeAdvertisementId] = the recommended way is to not pass the [admobInitializeAdvertisementId] directly instead when ever the advertisement request is succeed save information to the [android.content.SharedPreferences]
      * @param onInterstitialAdLoaded for triggering upstream layers to be react when ever admob interstitial advertisement loaded successfully
      * @param onInterstitialFailed for triggering upstream layers to be react when ever admob interstitial advertisement fail to load*/
 

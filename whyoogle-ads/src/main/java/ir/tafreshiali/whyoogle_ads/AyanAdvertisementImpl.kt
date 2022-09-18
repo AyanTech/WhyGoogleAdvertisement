@@ -1,6 +1,8 @@
 package ir.tafreshiali.whyoogle_ads
 
 import android.app.Application
+import android.util.Log
+import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.initialization.AdapterStatus
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.nativead.NativeAd
@@ -16,8 +18,6 @@ import ir.tafreshiali.whyoogle_ads.datasource.shared_preference.AdmobAdvertiseme
  * for handling application general advertisement (adivery or admob)
  * @param context of type [Application]
  * @param admobAdvertisement of type [AdmobAdvertisement] for handling admob advertisement
- * @param [appDataStoreManager] of type [AppDataStore]
- * @param externalScope of type [CoroutineScope] for reading data form data store
  */
 class AyanAdvertisementImpl(
     private val context: Application,
@@ -57,7 +57,7 @@ class AyanAdvertisementImpl(
                 ?: readAdmobAdvertisementProperties(),
             adiveryAdvertisementProperties = adiveryAdvertisementProperties
                 ?: readAdiveryAdvertisementProperties(),
-                onMainAdmobInitializationFailed = onMainAdmobInitializationFailed,
+            onMainAdmobInitializationFailed = onMainAdmobInitializationFailed,
             onInterstitialAdLoaded = onInterstitialAdLoaded,
             onInterstitialFailed = onInterstitialFailed,
             onNativeAdLoaded = onNativeAdLoaded,
@@ -143,7 +143,9 @@ class AyanAdvertisementImpl(
         AdvertisementCore.requestInterstitialAds(context = context)
     }
 
-    /** Here we initialize admob and based on the response we decide to load witch advertisement (adivery or admob)
+    /** Here we have two main steps :
+     * step 1 - we check if the admob [ClassLoader] is not null . if it is null or not exist we load the adivery advertisement and skip the admob initialization . if admob [ClassLoader] is exist we continue admob initialization (step 2).
+     * step 2 - initialize admob and based on the response ([AdapterStatus.State]) we decide to load witch advertisement (adivery or admob)
      * @param onMainAdmobInitializationFailed for triggering upstream layers when ever the main admob initialization is fails ( the [AdapterStatus.State] is  [AdapterStatus.State.NOT_READY])
      * @param onInterstitialAdLoaded for triggering upstream layers when ever admob interstitial advertisement loaded successfully
      * @param onInterstitialFailed for triggering upstream layers when ever admob interstitial advertisement is failed to load
@@ -159,40 +161,49 @@ class AyanAdvertisementImpl(
         onNativeAdLoaded: (ad: NativeAd) -> Unit,
         onNativeAdFailed: () -> Unit
     ) {
-        admobAdvertisement.initInitializeAdmob(
-            context = context,
-            admobInitializeStatus = { admobStatus ->
+        if (MobileAds::class.java.classLoader != null) {
+            Log.d("Admob", "Admob Is Exist In The Project")
+
+            admobAdvertisement.initInitializeAdmob(
+                context = context,
+                admobInitializeStatus = { admobStatus ->
 
 
-                if (admobStatus == AdapterStatus.State.READY) {
+                    if (admobStatus == AdapterStatus.State.READY) {
 
-                    /** If the admob main initialization successful
-                     * we load admob interstitial and native advertisement */
+                        /** If the admob main initialization successful
+                         * we load admob interstitial and native advertisement */
 
-                    admobAdvertisement.loadInterstitial(
-                        admobInitializeAdvertisementId = admobAdvertisementProperties.interstitialAdvertisementId,
-                        context = context,
-                        onInterstitialAdLoaded = onInterstitialAdLoaded,
-                        onInterstitialFailed = onInterstitialFailed
-                    )
+                        admobAdvertisement.loadInterstitial(
+                            admobInitializeAdvertisementId = admobAdvertisementProperties.interstitialAdvertisementId,
+                            context = context,
+                            onInterstitialAdLoaded = onInterstitialAdLoaded,
+                            onInterstitialFailed = onInterstitialFailed
+                        )
 
-                    admobAdvertisement.loadNativeAdLoader(
-                        admobNativeAdvertisementId = admobAdvertisementProperties.nativeAdvertisementId,
-                        context = context,
-                        onNativeAdLoaded = onNativeAdLoaded,
-                        onNativeAdFailed = onNativeAdFailed
-                    )
+                        admobAdvertisement.loadNativeAdLoader(
+                            admobNativeAdvertisementId = admobAdvertisementProperties.nativeAdvertisementId,
+                            context = context,
+                            onNativeAdLoaded = onNativeAdLoaded,
+                            onNativeAdFailed = onNativeAdFailed
+                        )
 
-                }
+                    }
 
-                if (admobStatus == AdapterStatus.State.NOT_READY) {
+                    if (admobStatus == AdapterStatus.State.NOT_READY) {
 
-                    /** If the admob main initialization Fail
-                     * we load just Adivery Advertisement */
+                        /** If the admob main initialization Fail
+                         * we load just Adivery Advertisement */
 
-                    loadAdiveryAdvertisement(adiveryAdvertisementProperties = adiveryAdvertisementProperties)
-                    onMainAdmobInitializationFailed()
-                }
-            })
+                        loadAdiveryAdvertisement(adiveryAdvertisementProperties = adiveryAdvertisementProperties)
+                        onMainAdmobInitializationFailed()
+                    }
+                })
+        } else {
+            Log.d("Admob", "Admob Dose Not Exist In The Project")
+
+            loadAdiveryAdvertisement(adiveryAdvertisementProperties = adiveryAdvertisementProperties)
+            onMainAdmobInitializationFailed()
+        }
     }
 }

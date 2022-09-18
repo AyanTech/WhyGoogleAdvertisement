@@ -51,7 +51,7 @@ dependencies {
     androidTestImplementation(Espresso.espresso)
 
     //Ayan - Advertisement
-    api(ad.AdmobAdvertisement.admobAdvertisement)
+    compileOnly(ad.AdmobAdvertisement.admobAdvertisement)
 
     api(ad.AdiveryAdvertisement.advertisement)
 
@@ -63,6 +63,9 @@ dependencies {
 
     //Ayan - Core
     implementation(ayan.PishkhanCore.pishkhanCore)
+
+    //kotlin reflection
+    implementation(Reflection.kotlinReflection)
 
 
 }
@@ -86,7 +89,7 @@ afterEvaluate {
                 artifactId = "whygoogle-ads"
 
                 // Version Library Name (Example : "1.0.0")
-                version = "1.0.2"
+                version = "1.0.3"
             }
         }
     }
