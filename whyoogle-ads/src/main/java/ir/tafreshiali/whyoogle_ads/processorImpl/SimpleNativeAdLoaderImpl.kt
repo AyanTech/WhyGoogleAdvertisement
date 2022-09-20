@@ -11,6 +11,10 @@ import ir.tafreshiali.whyoogle_ads.processor.SimpleNativeAdProcessor
 
 class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
 
+    /**
+     * used when ever we want to load native advertisement in a specific view.
+     * @param [appGeneralAdStatus] [appNativeAdStatus] of type [Boolean] that determine if ad should load or not
+     * @param adView of type [ViewGroup] the view that ad load in it , it can be defined in xml or kotlin code.*/
     override fun simpleNativeAdProcessor(
         appGeneralAdStatus: Boolean,
         appNativeAdStatus: Boolean,

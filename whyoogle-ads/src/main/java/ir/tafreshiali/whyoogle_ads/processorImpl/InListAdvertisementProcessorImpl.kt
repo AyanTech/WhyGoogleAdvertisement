@@ -11,6 +11,13 @@ import ir.tafreshiali.whyoogle_ads.extension.loadAdmobNativeAdvertisementView
 import ir.tafreshiali.whyoogle_ads.processor.InListAdvertisementProcessor
 
 class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
+
+    /**
+     * usually we want to load and show native ads as the second item in the list for this use case we use [listNativeAdProcessor]. At the end, it checks if the list value is empty or not.
+     * @param [activityContext] [appGeneralAdStatus] [itemList]
+     * @param updateListItems when ever the native ad loaded successfully this lambda function triggers, usually in this block we should update the our list .(call the [androidx.recyclerview.widget.ListAdapter.notifyItemInserted] and etc)
+     * */
+
     override fun listNativeAdProcessor(
         activityContext: Context,
         appGeneralAdStatus: Boolean,

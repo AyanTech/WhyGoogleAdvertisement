@@ -9,7 +9,18 @@ import ir.tafreshiali.whyoogle_ads.extension.loadAdiveryNativeAdvertisementView
 import ir.tafreshiali.whyoogle_ads.extension.loadAdmobNativeAdvertisementView
 import ir.tafreshiali.whyoogle_ads.processor.AdvertisementInitializerProcessor
 
+
 class AdvertisementInitializerProcessorImpl : AdvertisementInitializerProcessor {
+
+    /**
+     * Used to send ads request to the server and initialize the advertisement
+     * Important Note = [appAdvertisementGeneralProcessor] should calls once in a [androidx.appcompat.app.AppCompatActivity.onCreate] or in a [android.app.Application.onCreate] but before call this function,
+     * you should ensure that you would initialize the [ir.ayantech.pishkhancore.core.PishkhanCore.ayanApi]
+     * @param [activityContext] [application]
+     * @param adView the view that we want to load the ad in it.
+     * @param updateAppGeneralAdvertisementStatus a lambda function that has [Boolean] value witch determine that app should shows the ads or not.
+     * @param onNativeAdLoaded when ever the advertisement loaded successfully the lambda function triggers*/
+
     override fun appAdvertisementGeneralProcessor(
         activityContext: Context,
         application: Application,
