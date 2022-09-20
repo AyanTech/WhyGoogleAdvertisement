@@ -31,12 +31,12 @@ import ir.tafreshiali.whyoogle_ads.datasource.shared_preference.ApplicationAdver
  * getAppConfigAdvertisement an extension function for getting application advertisement info
  * @param callBack of type lambda function that triggers us that the server has responded to our request*/
 fun AyanApi.getAppConfigAdvertisement(
-    callBack: (AppConfigAdvertisementOutput?) -> Unit
+    callBack: (AppConfigAdvertisementOutput) -> Unit
 ) {
     simpleCall<AppConfigAdvertisementOutput>(
         endPoint = AdvertisementEndpoint.AppConfigAdvertisement,
         onSuccess = { response ->
-            callBack.invoke(response)
+            response?.let(callBack)
         }
     )
 }
