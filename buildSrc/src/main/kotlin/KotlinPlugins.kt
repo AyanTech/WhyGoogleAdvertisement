@@ -4,6 +4,7 @@ object KotlinPlugins {
     const val kapt = "kapt"
     const val kotlin = "kotlin"
     const val parcelize = "kotlin-parcelize"
-    const val maven ="maven-publish"
+    const val kotlinAndroid = "kotlin-android"
+    const val maven = "maven-publish"
 
 }

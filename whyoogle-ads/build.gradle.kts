@@ -1,6 +1,7 @@
 plugins {
     id(Plugins.androidLibrary)
     kotlin(KotlinPlugins.android)
+    id(KotlinPlugins.kotlinAndroid)
     id(KotlinPlugins.maven)
 }
 
