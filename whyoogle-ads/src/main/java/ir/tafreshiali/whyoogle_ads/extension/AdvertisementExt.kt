@@ -16,6 +16,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import ir.ayantech.advertisement.core.AdvertisementCore
+import ir.ayantech.advertisement.core.AdvertisementCore.nativeAdUnitID
 import ir.ayantech.ayannetworking.api.AyanApi
 import ir.ayantech.pishkhancore.model.AppConfigAdvertisementOutput
 import ir.ayantech.whygoogle.helper.trying
@@ -57,7 +58,9 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
 ) {
     if (this.Active) {
         ApplicationAdvertisementType.appAdvertisementType =
-            this.Sources.first { it.Key == ApplicationAdvertisementType.APPLICATION_ADVERTISEMENT_SOURCE }.Value
+            this.Sources.firstOrNull { it.Key == ApplicationAdvertisementType.APPLICATION_ADVERTISEMENT_SOURCE }?.Value
+                ?: return
+
         when (ApplicationAdvertisementType.appAdvertisementType) {
 
             AdmobAdvertisementKey.ADMOB_ADVERTISEMENT_KEY -> {
@@ -111,10 +114,14 @@ fun AppConfigAdvertisementOutput.initializeAdiveryAdvertisement(ayanAdvertisemen
     }
 
     ayanAdvertisement.saveAdiveryAdvertisementKeys(
-        appKey = this.Sources.first { it.Key == AdiveryAdvertisementKey.APP_AD_KEY }.Value,
-        interstitialAdUnitID = this.Sources.first { it.Key == AdiveryAdvertisementKey.AD_INTERSTITIAL_KEY }.Value,
-        nativeAdUnitID = this.Sources.first { it.Key == AdiveryAdvertisementKey.AD_NATIVE_KEY }.Value,
-        bannerAdUnitID = this.Sources.first { it.Key == AdiveryAdvertisementKey.AD_BANNER_KEY }.Value
+        appKey = this.Sources.firstOrNull { it.Key == AdiveryAdvertisementKey.APP_AD_KEY }?.Value
+            ?: return,
+        interstitialAdUnitID = this.Sources.firstOrNull { it.Key == AdiveryAdvertisementKey.AD_INTERSTITIAL_KEY }?.Value
+            ?: return,
+        nativeAdUnitID = this.Sources.firstOrNull { it.Key == AdiveryAdvertisementKey.AD_NATIVE_KEY }?.Value
+            ?: return,
+        bannerAdUnitID = this.Sources.firstOrNull { it.Key == AdiveryAdvertisementKey.AD_BANNER_KEY }?.Value
+            ?: return
     )
     ayanAdvertisement.loadAdiveryAdvertisement(adiveryAdvertisementProperties = ayanAdvertisement.readAdiveryAdvertisementProperties())
 
@@ -141,8 +148,10 @@ fun AppConfigAdvertisementOutput.initializeAdmobAdvertisement(
     this.initializeAdiveryAdvertisement(ayanAdvertisement = ayanAdvertisement)
 
     ayanAdvertisement.saveAdmobAdvertisementKeys(
-        nativeAdvertisementId = this.Sources.first { it.Key == AdmobAdvertisementKey.AD_NATIVE_KEY }.Value,
-        interstitialAdvertisementId = this.Sources.first { it.Key == AdmobAdvertisementKey.AD_INTERSTITIAL_KEY }.Value
+        nativeAdvertisementId = this.Sources.firstOrNull { it.Key == AdmobAdvertisementKey.AD_NATIVE_KEY }?.Value
+            ?: return,
+        interstitialAdvertisementId = this.Sources.firstOrNull { it.Key == AdmobAdvertisementKey.AD_INTERSTITIAL_KEY }?.Value
+            ?: return
     )
 
     ayanAdvertisement.loadAdmobAdvertisement(
