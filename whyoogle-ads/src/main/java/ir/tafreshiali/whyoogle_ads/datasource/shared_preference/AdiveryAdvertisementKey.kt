@@ -6,11 +6,11 @@ import ir.ayantech.whygoogle.helper.PreferencesManager
 
 @SuppressLint("StaticFieldLeak")
 object AdiveryAdvertisementKey {
-
-     const val APP_AD_KEY = "adiveryappkey"
-     const val AD_INTERSTITIAL_KEY = "adiveryInterstitialAdUnitID"
-     const val AD_BANNER_KEY = "adiveryBannerAdUnitID"
-     const val AD_NATIVE_KEY = "adiveryNativeAdUnitID"
+    const val ADIVERY_ADVERTISEMENT_KEY = "adivery"
+    const val APP_AD_KEY = "adiveryappkey"
+    const val AD_INTERSTITIAL_KEY = "adiveryInterstitialAdUnitID"
+    const val AD_BANNER_KEY = "adiveryBannerAdUnitID"
+    const val AD_NATIVE_KEY = "adiveryNativeAdUnitID"
 
     private lateinit var context: Context
     fun init(context: Context) {
@@ -28,16 +28,15 @@ object AdiveryAdvertisementKey {
             .save(fieldName = AD_INTERSTITIAL_KEY, value = value)
 
     var bannerAdvertisementKey: String
-            get() = PreferencesManager.getInstance(context).read(fieldName = AD_BANNER_KEY)
-            set(value) = PreferencesManager.getInstance(context)
-                .save(fieldName = AD_BANNER_KEY, value = value)
+        get() = PreferencesManager.getInstance(context).read(fieldName = AD_BANNER_KEY)
+        set(value) = PreferencesManager.getInstance(context)
+            .save(fieldName = AD_BANNER_KEY, value = value)
 
-    
+
     var nativeAdvertisementKey: String
-            get() = PreferencesManager.getInstance(context).read(fieldName = AD_NATIVE_KEY)
-            set(value) = PreferencesManager.getInstance(context)
-                .save(fieldName = AD_NATIVE_KEY, value = value)
-
+        get() = PreferencesManager.getInstance(context).read(fieldName = AD_NATIVE_KEY)
+        set(value) = PreferencesManager.getInstance(context)
+            .save(fieldName = AD_NATIVE_KEY, value = value)
 
 
 }

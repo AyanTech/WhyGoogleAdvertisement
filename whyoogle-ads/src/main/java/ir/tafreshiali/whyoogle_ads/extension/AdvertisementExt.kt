@@ -57,10 +57,10 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
 ) {
     if (this.Active) {
         ApplicationAdvertisementType.appAdvertisementType =
-            this.Sources.first { it.Key == "source" }.Value
+            this.Sources.first { it.Key == ApplicationAdvertisementType.APPLICATION_ADVERTISEMENT_SOURCE }.Value
         when (ApplicationAdvertisementType.appAdvertisementType) {
 
-            "admob" -> {
+            AdmobAdvertisementKey.ADMOB_ADVERTISEMENT_KEY -> {
                 this.initializeAdmobAdvertisement(
                     ayanAdvertisement = ayanAdvertisement,
                     handleAdiveryNativeAdvertisement = handleAdiveryNativeAdvertisement,
@@ -85,7 +85,7 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
                 )
             }
 
-            "adivery" -> {
+            AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY -> {
                 this.initializeAdiveryAdvertisement(ayanAdvertisement)
                 handleAdiveryNativeAdvertisement()
             }
@@ -97,9 +97,19 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
 
 /**
  * initializeAdiveryAdvertisement Based on [AppConfigAdvertisementOutput]
+ * First we check if the source of the advertisement equals to [AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY] or not
+ * and then follow up the rest of the adivery initializing process
  * @param ayanAdvertisement of type [AyanAdvertisement]
  * */
 fun AppConfigAdvertisementOutput.initializeAdiveryAdvertisement(ayanAdvertisement: AyanAdvertisement) {
+
+    if (ApplicationAdvertisementType.appAdvertisementType == AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY) {
+        ApplicationAdvertisementType.appNativeAdvertisementType =
+            AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY
+        ApplicationAdvertisementType.appInterstitialAdvertisementType =
+            AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY
+    }
+
     ayanAdvertisement.saveAdiveryAdvertisementKeys(
         appKey = this.Sources.first { it.Key == AdiveryAdvertisementKey.APP_AD_KEY }.Value,
         interstitialAdUnitID = this.Sources.first { it.Key == AdiveryAdvertisementKey.AD_INTERSTITIAL_KEY }.Value,
@@ -129,6 +139,7 @@ fun AppConfigAdvertisementOutput.initializeAdmobAdvertisement(
 
 ) {
     this.initializeAdiveryAdvertisement(ayanAdvertisement = ayanAdvertisement)
+
     ayanAdvertisement.saveAdmobAdvertisementKeys(
         nativeAdvertisementId = this.Sources.first { it.Key == AdmobAdvertisementKey.AD_NATIVE_KEY }.Value,
         interstitialAdvertisementId = this.Sources.first { it.Key == AdmobAdvertisementKey.AD_INTERSTITIAL_KEY }.Value
@@ -136,29 +147,36 @@ fun AppConfigAdvertisementOutput.initializeAdmobAdvertisement(
 
     ayanAdvertisement.loadAdmobAdvertisement(
         onMainAdmobInitializationFailed = {
-            ApplicationAdvertisementType.appAdvertisementType = "adivery"
-            ApplicationAdvertisementType.appInterstitialAdvertisementType = "adivery"
-            ApplicationAdvertisementType.appNativeAdvertisementType = "adivery"
+            ApplicationAdvertisementType.appAdvertisementType =
+                AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY
+            ApplicationAdvertisementType.appInterstitialAdvertisementType =
+                AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY
+            ApplicationAdvertisementType.appNativeAdvertisementType =
+                AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY
             handleAdiveryNativeAdvertisement()
         },
         onInterstitialAdLoaded = {
 
             handleAdmobInterstitialAdvertisement(it)
 
-            ApplicationAdvertisementType.appInterstitialAdvertisementType = "admob"
+            ApplicationAdvertisementType.appInterstitialAdvertisementType =
+                AdmobAdvertisementKey.ADMOB_ADVERTISEMENT_KEY
         },
         onInterstitialFailed = {
             handleAdmobInterstitialAdvertisement(null)
-            ApplicationAdvertisementType.appInterstitialAdvertisementType = "adivery"
+            ApplicationAdvertisementType.appInterstitialAdvertisementType =
+                AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY
         },
         onNativeAdFailed = {
             handleAdmobNativeAdvertisement(null)
-            ApplicationAdvertisementType.appNativeAdvertisementType = "adivery"
+            ApplicationAdvertisementType.appNativeAdvertisementType =
+                AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY
             handleAdiveryNativeAdvertisement()
         },
         onNativeAdLoaded = {
             handleAdmobNativeAdvertisement(it)
-            ApplicationAdvertisementType.appNativeAdvertisementType = "admob"
+            ApplicationAdvertisementType.appNativeAdvertisementType =
+                AdmobAdvertisementKey.ADMOB_ADVERTISEMENT_KEY
             showAdmobNativeAdvertisement()
         }
     )
@@ -200,7 +218,7 @@ fun InterstitialAd.addAdmobInterstitialCallback(
                         null
                     )
                     ApplicationAdvertisementType.appInterstitialAdvertisementType =
-                        "adivery"
+                        AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY
                 },
                 admobInitializeAdvertisementId = ayanAdvertisement.readAdmobAdvertisementProperties().interstitialAdvertisementId
             )
@@ -358,21 +376,21 @@ fun handleApplicationNativeAdvertisement(
 ) {
 
     when (applicationAdvertisementType) {
-        "admob" -> {
+        AdmobAdvertisementKey.ADMOB_ADVERTISEMENT_KEY -> {
             when (applicationNativeAdvertisementType) {
-                "adivery" -> {
+                AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY -> {
                     loadAdiveryNativeView()
                 }
 
-                "admob" -> {
+                AdmobAdvertisementKey.ADMOB_ADVERTISEMENT_KEY -> {
                     loadAdmobNativeView()
                 }
             }
         }
 
-        "adivery" -> {
+        AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY -> {
             when (applicationNativeAdvertisementType) {
-                "adivery" -> {
+                AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY -> {
                     loadAdiveryNativeView()
                 }
             }
@@ -394,14 +412,14 @@ fun showApplicationInterstitialAdvertisement(
     loadAdiveryInterstitialAdvertisement: () -> Unit = {}
 ) {
     when (ApplicationAdvertisementType.appAdvertisementType) {
-        "admob" -> {
+        AdmobAdvertisementKey.ADMOB_ADVERTISEMENT_KEY -> {
             when (ApplicationAdvertisementType.appInterstitialAdvertisementType) {
-                "adivery" -> {
+                AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY -> {
                     AdvertisementCore.showInterstitialAds()
                     loadAdiveryInterstitialAdvertisement()
                 }
 
-                "admob" -> {
+                AdmobAdvertisementKey.ADMOB_ADVERTISEMENT_KEY -> {
 
                     ir.tafreshiali.whyoogle_ads.AdvertisementCore.admobInterstitialAdvertisement?.let { admobInterstitialAd ->
                         admobInterstitialAd.addAdmobInterstitialCallback(
@@ -418,9 +436,9 @@ fun showApplicationInterstitialAdvertisement(
             }
         }
 
-        "adivery" -> {
+        AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY -> {
             when (ApplicationAdvertisementType.appInterstitialAdvertisementType) {
-                "adivery" -> {
+                AdiveryAdvertisementKey.ADIVERY_ADVERTISEMENT_KEY -> {
                     AdvertisementCore.showInterstitialAds()
                     loadAdiveryInterstitialAdvertisement()
                 }
