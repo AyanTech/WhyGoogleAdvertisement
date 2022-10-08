@@ -28,6 +28,18 @@ dependencies {
 
 }
 ```
+**Important Note: Don't Forget To Init [AdvertisementCore](https://github.com/alitafreshi/why-google-advertisement/blob/main/whyoogle-ads/src/main/java/ir/tafreshiali/whyoogle_ads/AdvertisementCore.kt),[AdiveryAdvertisementKey](https://github.com/alitafreshi/why-google-advertisement/blob/main/whyoogle-ads/src/main/java/ir/tafreshiali/whyoogle_ads/datasource/shared_preference/AdiveryAdvertisementKey.kt),[AdmobAdvertisementKey](https://github.com/alitafreshi/why-google-advertisement/blob/main/whyoogle-ads/src/main/java/ir/tafreshiali/whyoogle_ads/datasource/shared_preference/AdmobAdvertisementKey.kt) and [ApplicationAdvertisementType](https://github.com/alitafreshi/why-google-advertisement/blob/main/whyoogle-ads/src/main/java/ir/tafreshiali/whyoogle_ads/datasource/shared_preference/ApplicationAdvertisementType.kt) Like Below In Application Class :**
+
+```kotlin
+override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        AdvertisementCore.init(application = this)
+        AdiveryAdvertisementKey.init(this)
+        AdmobAdvertisementKey.init(this)
+        ApplicationAdvertisementType.init(this)
+    }
+```
+
 
 2. ### **Adding Your Project To Firebase And Admob**
 
