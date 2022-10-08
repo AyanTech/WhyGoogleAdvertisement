@@ -16,8 +16,10 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import ir.ayantech.advertisement.core.AdvertisementCore
-import ir.ayantech.advertisement.core.AdvertisementCore.nativeAdUnitID
 import ir.ayantech.ayannetworking.api.AyanApi
+import ir.ayantech.ayannetworking.api.AyanCallStatus
+import ir.ayantech.ayannetworking.api.OnChangeStatus
+import ir.ayantech.ayannetworking.api.OnFailure
 import ir.ayantech.pishkhancore.model.AppConfigAdvertisementOutput
 import ir.ayantech.whygoogle.helper.trying
 import ir.tafreshiali.whyoogle_ads.AdvertisementEndpoint
@@ -30,14 +32,22 @@ import ir.tafreshiali.whyoogle_ads.datasource.shared_preference.ApplicationAdver
 
 /**
  * getAppConfigAdvertisement an extension function for getting application advertisement info
- * @param callBack of type lambda function that triggers us that the server has responded to our request*/
+ * @param callBack of type lambda function that triggers us that the server has responded to our request
+ * @param [changeStatus] [failure] for state handling in upstreams*/
+
 fun AyanApi.getAppConfigAdvertisement(
-    callBack: (AppConfigAdvertisementOutput) -> Unit
+    callBack: (AppConfigAdvertisementOutput) -> Unit,
+    changeStatus: OnChangeStatus,
+    failure: OnFailure
 ) {
-    simpleCall<AppConfigAdvertisementOutput>(
+    ayanCall<AppConfigAdvertisementOutput>(
         endPoint = AdvertisementEndpoint.AppConfigAdvertisement,
-        onSuccess = { response ->
-            response?.let(callBack)
+        ayanCallStatus = AyanCallStatus {
+            success {
+                it.response?.Parameters?.let(callBack)
+            }
+            changeStatus(changeStatus)
+            failure(failure)
         }
     )
 }

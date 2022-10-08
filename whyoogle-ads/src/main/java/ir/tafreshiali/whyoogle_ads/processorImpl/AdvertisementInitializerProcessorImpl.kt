@@ -3,6 +3,8 @@ package ir.tafreshiali.whyoogle_ads.processorImpl
 import android.app.Application
 import android.view.ViewGroup
 import ir.ayantech.ayannetworking.api.AyanApi
+import ir.ayantech.ayannetworking.api.OnChangeStatus
+import ir.ayantech.ayannetworking.api.OnFailure
 import ir.tafreshiali.whyoogle_ads.extension.checkAdvertisementStatus
 import ir.tafreshiali.whyoogle_ads.extension.getAppConfigAdvertisement
 import ir.tafreshiali.whyoogle_ads.extension.loadAdiveryNativeAdvertisementView
@@ -25,31 +27,37 @@ class AdvertisementInitializerProcessorImpl : AdvertisementInitializerProcessor 
         ayanApi: AyanApi,
         application: Application,
         adView: ViewGroup,
+        changeStatus: OnChangeStatus,
+        failure: OnFailure,
         updateAppGeneralAdvertisementStatus: (Boolean) -> Unit,
         onNativeAdLoaded: () -> Unit
     ) {
-        ayanApi.getAppConfigAdvertisement {
-            if (it.Active) {
-                it.checkAdvertisementStatus(
-                    application = application,
-                    callback = updateAppGeneralAdvertisementStatus,
-                    handleAdiveryNativeAdvertisement = {
-                        adView.loadAdiveryNativeAdvertisementView(
-                            adiveryNativeLayoutId = ir.tafreshiali.whyoogle_ads.R.layout.adivery_native_ad,
-                            onAdLoaded = onNativeAdLoaded
-                        )
-                    },
-                    showAdmobNativeAdvertisement = {
-                        ir.tafreshiali.whyoogle_ads.AdvertisementCore.admobNativeAdvertisement?.let {
-                            adView.loadAdmobNativeAdvertisementView(
-                                nativeAd = it,
-                                admobNativeLayoutId = ir.tafreshiali.whyoogle_ads.R.layout.admob_simple_native_ad,
-                                onViewReady = onNativeAdLoaded
+        ayanApi.getAppConfigAdvertisement(
+            callBack = {
+                if (it.Active) {
+                    it.checkAdvertisementStatus(
+                        application = application,
+                        callback = updateAppGeneralAdvertisementStatus,
+                        handleAdiveryNativeAdvertisement = {
+                            adView.loadAdiveryNativeAdvertisementView(
+                                adiveryNativeLayoutId = ir.tafreshiali.whyoogle_ads.R.layout.adivery_native_ad,
+                                onAdLoaded = onNativeAdLoaded
                             )
+                        },
+                        showAdmobNativeAdvertisement = {
+                            ir.tafreshiali.whyoogle_ads.AdvertisementCore.admobNativeAdvertisement?.let {
+                                adView.loadAdmobNativeAdvertisementView(
+                                    nativeAd = it,
+                                    admobNativeLayoutId = ir.tafreshiali.whyoogle_ads.R.layout.admob_simple_native_ad,
+                                    onViewReady = onNativeAdLoaded
+                                )
+                            }
                         }
-                    }
-                )
-            }
-        }
+                    )
+                }
+            },
+            changeStatus = changeStatus,
+            failure = failure
+        )
     }
 }
