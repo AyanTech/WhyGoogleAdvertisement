@@ -5,7 +5,6 @@ tasks.register("clean", Delete::class) {
 
 buildscript {
     repositories {
-        maven(url = "https://jitpack.io")
         google()
         mavenLocal()
         mavenCentral()
@@ -14,7 +13,6 @@ buildscript {
     dependencies {
         classpath(Build.buildTools)
         classpath(Build.kotlinGradlePlugin)
-        //classpath(Build.jitpackGradlePlugin)
     }
 }
 
