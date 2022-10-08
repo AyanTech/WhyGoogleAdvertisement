@@ -11,7 +11,7 @@
 
 **Refer to the following page for the latest version : [Jitpack Page](https://jitpack.io/#alitafreshi/why-google-advertisement)**
 
-```php
+```kotlin
 dependencies {
 
     implementation(com.github.alitafreshi:why-google-advertisement:$advertisementVersion)
@@ -21,7 +21,7 @@ dependencies {
 
 **In projects that we have admob advertisement we should add the admob dependency individualy like below :**
 
-```php
+```kotlin
 dependencies {
 
    "playstoreImplementation"(com.google.android.gms:play-services-ads:$admobAdVersion)
