@@ -20,6 +20,7 @@ class AdvertisementInitializerProcessorImpl : AdvertisementInitializerProcessor 
      * you should ensure that you would initialize the [ir.ayantech.ayannetworking.api.AyanApi]
      * @param application
      * @param adView the view that we want to load the ad in it.
+     * @param [changeStatus] [failure] for state handling in upstreams.
      * @param updateAppGeneralAdvertisementStatus a lambda function that has [Boolean] value witch determine that app should shows the ads or not.
      * @param onNativeAdLoaded when ever the advertisement loaded successfully the lambda function triggers*/
 
