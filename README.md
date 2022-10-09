@@ -1,6 +1,6 @@
 # WhyGoogle Advertisement
 
-## **Here You Can Found Some Useful Information About How :**
+## **Here You Can Find Some Useful Information About How :**
 
 1. **Add This Library To Your Project**
 2. **This Library Works**
