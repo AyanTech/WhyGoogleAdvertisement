@@ -28,8 +28,8 @@ class AdvertisementInitializerProcessorImpl : AdvertisementInitializerProcessor 
         ayanApi: AyanApi,
         application: Application,
         adView: ViewGroup,
-        changeStatus: OnChangeStatus,
-        failure: OnFailure,
+        changeStatus: OnChangeStatus?,
+        failure: OnFailure?,
         updateAppGeneralAdvertisementStatus: (Boolean) -> Unit,
         onNativeAdLoaded: () -> Unit
     ) {

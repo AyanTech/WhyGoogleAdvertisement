@@ -12,8 +12,8 @@ interface AdvertisementInitializerProcessor {
         ayanApi: AyanApi,
         application: Application,
         adView: ViewGroup,
-        changeStatus: OnChangeStatus,
-        failure: OnFailure,
+        changeStatus: OnChangeStatus? = null,
+        failure: OnFailure? = null,
         updateAppGeneralAdvertisementStatus: (Boolean) -> Unit,
         onNativeAdLoaded: () -> Unit
     )

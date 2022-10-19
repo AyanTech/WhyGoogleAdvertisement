@@ -37,8 +37,8 @@ import ir.tafreshiali.whyoogle_ads.datasource.shared_preference.ApplicationAdver
 
 fun AyanApi.getAppConfigAdvertisement(
     callBack: (AppConfigAdvertisementOutput) -> Unit,
-    changeStatus: OnChangeStatus,
-    failure: OnFailure
+    changeStatus: OnChangeStatus? = null,
+    failure: OnFailure? = null
 ) {
     ayanCall<AppConfigAdvertisementOutput>(
         endPoint = AdvertisementEndpoint.AppConfigAdvertisement,
@@ -46,8 +46,12 @@ fun AyanApi.getAppConfigAdvertisement(
             success {
                 it.response?.Parameters?.let(callBack)
             }
-            changeStatus(changeStatus)
-            failure(failure)
+            changeStatus?.let {
+                changeStatus(it)
+            }
+            failure?.let {
+                failure(it)
+            }
         }
     )
 }
