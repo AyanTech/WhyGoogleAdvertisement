@@ -57,8 +57,8 @@ class AdvertisementInitializerProcessorImpl : AdvertisementInitializerProcessor 
                     )
                 }
             },
-            changeStatus = changeStatus,
-            failure = failure
+            onChangeStatus = changeStatus,
+            onFailure = failure
         )
     }
 }
