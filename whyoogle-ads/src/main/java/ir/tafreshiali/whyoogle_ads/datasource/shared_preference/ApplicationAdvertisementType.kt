@@ -8,6 +8,10 @@ import ir.ayantech.whygoogle.helper.PreferencesManager
 @SuppressLint("StaticFieldLeak")
 object ApplicationAdvertisementType {
     const val APPLICATION_ADVERTISEMENT_SOURCE = "source"
+    const val APP_ADIVERY_KEY = "adiveryappkey"
+    const val AD_INTERSTITIAL_ADIVERY_KEY = "adiveryInterstitialAdUnitID"
+    const val AD_INTERSTITIAL_ADMOB_KEY = "admobInterstitialAdUnitID"
+
     private const val APPLICATION_ADVERTISEMENT_TYPE = "app_add_type"
     private const val APPLICATION_NATIVE_ADVERTISEMENT_TYPE = "app_native_ad_type"
     private const val APPLICATION_INTERSTITIAL_ADVERTISEMENT_TYPE = "app_interstitial_ad_type"

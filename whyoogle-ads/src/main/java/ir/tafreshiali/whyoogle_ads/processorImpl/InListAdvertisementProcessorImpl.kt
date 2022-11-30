@@ -1,7 +1,9 @@
 package ir.tafreshiali.whyoogle_ads.processorImpl
 
-import android.content.Context
+import android.app.Application
+import android.util.Log
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import com.adivery.sdk.AdiveryNativeAdView
 import ir.tafreshiali.whyoogle_ads.AdvertisementCore
 import ir.tafreshiali.whyoogle_ads.R
@@ -14,12 +16,16 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
 
     /**
      * usually we want to load and show native ads as the second item in the list for this use case we use [listNativeAdProcessor]. At the end, it checks if the list value is empty or not.
-     * @param [activityContext] [appGeneralAdStatus] [itemList]
+     * @param [context] [appGeneralAdStatus] [itemList]
      * @param updateListItems when ever the native ad loaded successfully this lambda function triggers, usually in this block we should update the our list .(call the [androidx.recyclerview.widget.ListAdapter.notifyItemInserted] and etc)
      * */
 
     override fun listNativeAdProcessor(
-        activityContext: Context,
+        adiveryNativeAdUnit: String,
+        admobNativeAdvertisementId: String,
+        @LayoutRes adiveryNativeLayoutId: Int,
+        @LayoutRes admobNativeLayoutId: Int,
+        context: Application,
         appGeneralAdStatus: Boolean,
         itemList: ArrayList<Any>,
         updateListItems: () -> Unit
@@ -29,8 +35,9 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
                 handleApplicationNativeAdvertisement(
                     loadAdiveryNativeView = {
                         loadAdiveryNativeAdvertisementView(
-                            context = activityContext,
-                            adiveryNativeLayoutId = R.layout.adivery_card_ad,
+                            adiveryNativeAdUnit = adiveryNativeAdUnit,
+                            context = context,
+                            adiveryNativeLayoutId = adiveryNativeLayoutId,
                             onAdLoaded = { adiveryView ->
 
                                 if (itemList.find { it is AdiveryNativeAdView } == null) {
@@ -44,20 +51,28 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
                         )
                     },
                     loadAdmobNativeView = {
-                        AdvertisementCore.admobNativeAdvertisement?.let { admobNativeAd ->
-                            loadAdmobNativeAdvertisementView(
-                                context = activityContext,
-                                admobNativeAdvertisement = admobNativeAd,
-                                admobNativeLayoutId = R.layout.admob_native_ad,
-                                onAdLoaded = { admobAdView ->
-                                    if (itemList.find { it is ViewGroup } == null) {
-                                        itemList.add(1, admobAdView)
 
-                                        updateListItems()
+                        AdvertisementCore.admobAdvertisement.loadNativeAdLoader(
+                            context = context,
+                            admobNativeAdvertisementId = admobNativeAdvertisementId,
+                            onNativeAdLoaded = { admobNativeAd ->
+                                loadAdmobNativeAdvertisementView(
+                                    context = context,
+                                    admobNativeAdvertisement = admobNativeAd,
+                                    admobNativeLayoutId = R.layout.admob_native_ad,
+                                    onAdLoaded = { admobAdView ->
+                                        if (itemList.find { it is ViewGroup } == null) {
+                                            itemList.add(1, admobAdView)
+
+                                            updateListItems()
+                                        }
                                     }
-                                }
-                            )
-                        }
+                                )
+                            },
+                            onNativeAdFailed = {
+                                Log.d("Admob", "Loading Admob Native Advertisement in a list failed")
+                            }
+                        )
                     }
                 )
             }

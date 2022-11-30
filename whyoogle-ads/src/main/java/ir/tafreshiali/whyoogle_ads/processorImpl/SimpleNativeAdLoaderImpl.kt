@@ -1,6 +1,10 @@
 package ir.tafreshiali.whyoogle_ads.processorImpl
 
+import android.app.Application
+import android.content.Context
+import android.util.Log
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import ir.ayantech.whygoogle.helper.makeVisible
 import ir.tafreshiali.whyoogle_ads.AdvertisementCore
 import ir.tafreshiali.whyoogle_ads.R
@@ -16,6 +20,11 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
      * @param [appGeneralAdStatus] [appNativeAdStatus] of type [Boolean] that determine if ad should load or not
      * @param adView of type [ViewGroup] the view that ad load in it , it can be defined in xml or kotlin code.*/
     override fun simpleNativeAdProcessor(
+        context: Application,
+        adiveryNativeAdUnit: String,
+        admobNativeAdvertisementId: String,
+        @LayoutRes adiveryNativeLayoutId: Int,
+        @LayoutRes admobNativeLayoutId: Int,
         appGeneralAdStatus: Boolean,
         appNativeAdStatus: Boolean,
         adView: ViewGroup
@@ -24,21 +33,28 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
             handleApplicationNativeAdvertisement(
                 loadAdiveryNativeView = {
                     adView.loadAdiveryNativeAdvertisementView(
-                        adiveryNativeLayoutId = R.layout.adivery_native_ad,
+                        adiveryNativeAdUnit = adiveryNativeAdUnit,
+                        adiveryNativeLayoutId = adiveryNativeLayoutId,
                         onAdLoaded = { adView.makeVisible() })
                 },
                 loadAdmobNativeView = {
-                    AdvertisementCore.admobNativeAdvertisement?.let { admobNativeAd ->
-                        adView.loadAdmobNativeAdvertisementView(
-                            nativeAd = admobNativeAd,
-                            admobNativeLayoutId = R.layout.admob_simple_native_ad,
-                            onViewReady = {
-                                adView.makeVisible()
-                            }
-                        )
-                    }
+                    AdvertisementCore.admobAdvertisement.loadNativeAdLoader(
+                        context = context,
+                        admobNativeAdvertisementId = admobNativeAdvertisementId,
+                        onNativeAdLoaded = { admobNativeAd ->
+                            adView.loadAdmobNativeAdvertisementView(
+                                nativeAd = admobNativeAd,
+                                admobNativeLayoutId = adiveryNativeLayoutId,
+                                onViewReady = {
+                                    adView.makeVisible()
+                                }
+                            )
+                        },
+                        onNativeAdFailed = {
+                            Log.d("Admob", "Loading Native Ad Is Failed")
+                        }
+                    )
                 }
             )
     }
-
 }

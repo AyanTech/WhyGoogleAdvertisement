@@ -135,17 +135,17 @@ class AdmobAdvertisementImpl : AdmobAdvertisement {
             .forNativeAd { ad: NativeAd ->
 
                 onNativeAdLoaded(ad)
-                Log.d("NativeAd", "NativeCompose Admob Advertisement is Loaded")
+                Log.d("Admob", "Native Admob Advertisement is Loaded")
                 Log.d(
-                    "NativeAd",
-                    "NativeCompose Admob Advertisement is Loaded and the title is ${ad.headline}"
+                    "Admob",
+                    "Native Admob Advertisement is Loaded and the title is ${ad.headline}"
                 )
             }
             .withAdListener(object : AdListener() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     // Handle the failure by logging, altering the UI, and so on.
                     onNativeAdFailed()
-                    Log.d("NativeAd", "NativeCompose Admob Advertisement is Failed")
+                    Log.d("Admob", "Native Admob Advertisement is Failed")
                 }
             })
             .withNativeAdOptions(

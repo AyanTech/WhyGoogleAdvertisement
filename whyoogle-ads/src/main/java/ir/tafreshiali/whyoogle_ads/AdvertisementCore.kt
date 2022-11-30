@@ -11,8 +11,6 @@ object AdvertisementCore {
 
     var admobInterstitialAdvertisement: InterstitialAd? = null
 
-    var admobNativeAdvertisement: NativeAd? = null
-
     lateinit var admobAdvertisement: AdmobAdvertisement
 
     lateinit var ayanAdvertisement: AyanAdvertisement
@@ -27,10 +25,5 @@ object AdvertisementCore {
 
     fun updateApplicationAdmobInterstitialAdvertisement(admobInterstitialAd: InterstitialAd?) {
         admobInterstitialAdvertisement = admobInterstitialAd
-    }
-
-    fun updateApplicationAdmobNativeAdvertisement(admobNativeAd: NativeAd? = null) {
-        admobNativeAdvertisement = admobNativeAd
-
     }
 }

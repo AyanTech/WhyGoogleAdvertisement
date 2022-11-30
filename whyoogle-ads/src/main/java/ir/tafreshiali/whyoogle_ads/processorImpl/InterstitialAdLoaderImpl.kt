@@ -5,8 +5,17 @@ import ir.tafreshiali.whyoogle_ads.extension.showApplicationInterstitialAdvertis
 import ir.tafreshiali.whyoogle_ads.processor.InterstitialAdProcessor
 
 class InterstitialAdLoaderImpl : InterstitialAdProcessor {
-    override fun loadInterstitialAdvertisement(activity: Activity, appGeneralAdStatus: Boolean) {
+    override fun loadInterstitialAdvertisement(
+        activity: Activity,
+        appGeneralAdStatus: Boolean,
+        admobInterstitialAdUnit: String,
+        adiveryInterstitialAdUnit: String,
+    ) {
         if (appGeneralAdStatus)
-            showApplicationInterstitialAdvertisement(activity = activity)
+            showApplicationInterstitialAdvertisement(
+                activity = activity,
+                admobInterstitialAdUnit = admobInterstitialAdUnit,
+                adiveryInterstitialAdUnit = adiveryInterstitialAdUnit
+            )
     }
 }

@@ -5,12 +5,10 @@ import android.view.ViewGroup
 import ir.ayantech.ayannetworking.api.AyanApi
 import ir.ayantech.ayannetworking.api.OnChangeStatus
 import ir.ayantech.ayannetworking.api.OnFailure
+import ir.tafreshiali.whyoogle_ads.datasource.shared_preference.ApplicationAdvertisementType
 import ir.tafreshiali.whyoogle_ads.extension.checkAdvertisementStatus
 import ir.tafreshiali.whyoogle_ads.extension.getAppConfigAdvertisement
-import ir.tafreshiali.whyoogle_ads.extension.loadAdiveryNativeAdvertisementView
-import ir.tafreshiali.whyoogle_ads.extension.loadAdmobNativeAdvertisementView
 import ir.tafreshiali.whyoogle_ads.processor.AdvertisementInitializerProcessor
-
 
 class AdvertisementInitializerProcessorImpl : AdvertisementInitializerProcessor {
 
@@ -39,21 +37,12 @@ class AdvertisementInitializerProcessorImpl : AdvertisementInitializerProcessor 
                     it.checkAdvertisementStatus(
                         application = application,
                         callback = updateAppGeneralAdvertisementStatus,
-                        handleAdiveryNativeAdvertisement = {
-                            adView.loadAdiveryNativeAdvertisementView(
-                                adiveryNativeLayoutId = ir.tafreshiali.whyoogle_ads.R.layout.adivery_native_ad,
-                                onAdLoaded = onNativeAdLoaded
-                            )
-                        },
-                        showAdmobNativeAdvertisement = {
-                            ir.tafreshiali.whyoogle_ads.AdvertisementCore.admobNativeAdvertisement?.let {
-                                adView.loadAdmobNativeAdvertisementView(
-                                    nativeAd = it,
-                                    admobNativeLayoutId = ir.tafreshiali.whyoogle_ads.R.layout.admob_simple_native_ad,
-                                    onViewReady = onNativeAdLoaded
-                                )
-                            }
-                        }
+                        adiveryInterstitialAdUnit = it.Sources.firstOrNull { it.Key == ApplicationAdvertisementType.AD_INTERSTITIAL_ADIVERY_KEY }?.Value
+                            ?: "",
+                        admobInterstitialAdUnit = it.Sources.firstOrNull { it.Key == ApplicationAdvertisementType.AD_INTERSTITIAL_ADMOB_KEY }?.Value
+                            ?: "",
+                        adiveryAppKey = it.Sources.firstOrNull { it.Key == ApplicationAdvertisementType.APP_ADIVERY_KEY }?.Value
+                            ?: ""
                     )
                 }
             },

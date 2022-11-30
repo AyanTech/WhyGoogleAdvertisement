@@ -4,5 +4,10 @@ import android.app.Activity
 import android.content.Context
 
 interface InterstitialAdProcessor {
-    fun loadInterstitialAdvertisement(activity: Activity, appGeneralAdStatus: Boolean)
+    fun loadInterstitialAdvertisement(
+        activity: Activity,
+        appGeneralAdStatus: Boolean,
+        admobInterstitialAdUnit: String,
+        adiveryInterstitialAdUnit: String,
+    )
 }
