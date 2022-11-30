@@ -10,21 +10,29 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageView
 import com.adivery.sdk.AdiveryNativeAdView
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textview.MaterialTextView
 import ir.ayantech.advertisement.core.AdvertisementCore
 import ir.ayantech.ayannetworking.api.AyanApi
 import ir.ayantech.ayannetworking.api.OnChangeStatus
 import ir.ayantech.ayannetworking.api.OnFailure
+import ir.ayantech.pishkhancore.helper.loadFromString
 import ir.ayantech.pishkhancore.model.AppConfigAdvertisementOutput
+import ir.ayantech.whygoogle.helper.isNull
+import ir.ayantech.whygoogle.helper.openUrl
 import ir.ayantech.whygoogle.helper.trying
 import ir.tafreshiali.whyoogle_ads.AdvertisementEndpoint
 import ir.tafreshiali.whyoogle_ads.AyanAdvertisement
 import ir.tafreshiali.whyoogle_ads.R
 import ir.tafreshiali.whyoogle_ads.admob.AdmobAdvertisement
+import ir.tafreshiali.whyoogle_ads.ayan_ads.domain.AyanCustomAdvertisementModel
 import ir.tafreshiali.whyoogle_ads.constance.ApplicationCommonAdvertisementKeys
 import ir.tafreshiali.whyoogle_ads.datasource.shared_preference.ApplicationAdvertisementType
 
@@ -53,6 +61,7 @@ fun AyanApi.getAppConfigAdvertisement(
  * @param ayanAdvertisement of type [AyanAdvertisement]
  * @param callback a lambda function for doing some operation on the advertisement activation state*/
 fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
+    ayanApi: AyanApi,
     adiveryAppKey: String,
     admobInterstitialAdUnit: String,
     adiveryInterstitialAdUnit: String,
@@ -92,6 +101,15 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
                 ayanAdvertisement.loadAdiveryAdvertisement(
                     adiveryInterstitialAdUnit = adiveryInterstitialAdUnit,
                     adiveryAppKey = adiveryAppKey
+                )
+            }
+
+            ApplicationCommonAdvertisementKeys.AYAN_ADVERTISEMENT -> {
+                ayanAdvertisement.loadAyanCustomNativeAdvertisement(
+                    ayanApi = ayanApi,
+                    callBack = {
+
+                    }
                 )
             }
         }
@@ -246,6 +264,84 @@ fun ViewGroup.loadAdmobNativeAdvertisementView(
 
         onViewReady()
     }
+}
+
+fun ViewGroup.loadAyanNativeAdvertisementView(
+    activityContext: AppCompatActivity,
+    @LayoutRes ayanNativeLayoutId: Int,
+    layoutParams: ViewGroup.LayoutParams = ViewGroup.LayoutParams(
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    ),
+    ayanCustomAdvertisementModel: AyanCustomAdvertisementModel,
+    onAdLoaded: () -> Unit,
+    onAdFailed: () -> Unit
+) {
+    trying {
+        // Inflate a layout and add it to the parent ViewGroup.
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+                as LayoutInflater
+        val adView = inflater.inflate(ayanNativeLayoutId, null, true) as LinearLayout
+
+        val header = adView.findViewById<MaterialTextView>(R.id.ayan_ad_title)
+
+        header?.let {
+            it.text = ayanCustomAdvertisementModel.Title
+            it.isSelected = true
+        } ?: run {
+            Log.d("AYAN_ADVERTISEMENT", "cant replace the title in the passed layout")
+            return@trying
+        }
+
+        val adIcon = adView.findViewById<AppCompatImageView>(R.id.ayan_ad_app_icon)
+        adIcon?.loadFromString(ayanCustomAdvertisementModel.Banner) ?: run {
+            Log.d("AYAN_ADVERTISEMENT", "cant load the banner link in the passed layout")
+            return@trying
+        }
+
+        val adButtonTitle = adView.findViewById<MaterialButton>(R.id.ayan_ad_call_to_action)
+        adButtonTitle?.let {
+            it.text = ayanCustomAdvertisementModel.ButtonRedirectName
+            it.setOnClickListener {
+                ayanCustomAdvertisementModel.ButtonRedirectLink.openUrl(context = activityContext)
+            }
+        } ?: run {
+            Log.d("AYAN_ADVERTISEMENT", "cant load the button content in the passed layout")
+            return@trying
+        }
+        if (adButtonTitle.isNull() || adIcon.isNull() || header.isNull()) {
+            onAdFailed()
+            return@trying
+        } else {
+            addView(
+                adView,
+                layoutParams
+            )
+            onAdLoaded()
+        }
+    }
+}
+
+
+fun loadAyanNativeAdvertisementView(
+    activityContext: AppCompatActivity,
+    @LayoutRes ayanNativeLayoutId: Int,
+    ayanCustomAdvertisementModel: AyanCustomAdvertisementModel,
+    layoutParams: ViewGroup.LayoutParams = ViewGroup.LayoutParams(
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    ),
+    onAdLoaded: () -> Unit,
+    onAdFailed: () -> Unit
+) {
+    LinearLayout(activityContext).loadAyanNativeAdvertisementView(
+        activityContext = activityContext,
+        ayanNativeLayoutId = ayanNativeLayoutId,
+        layoutParams = layoutParams,
+        ayanCustomAdvertisementModel = ayanCustomAdvertisementModel,
+        onAdLoaded = onAdLoaded,
+        onAdFailed = onAdFailed
+    )
 }
 
 

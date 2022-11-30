@@ -6,7 +6,11 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.initialization.AdapterStatus
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import ir.ayantech.advertisement.core.AdvertisementCore
+import ir.ayantech.ayannetworking.api.AyanApi
+import ir.ayantech.ayannetworking.api.OnChangeStatus
+import ir.ayantech.ayannetworking.api.OnFailure
 import ir.tafreshiali.whyoogle_ads.admob.AdmobAdvertisement
+import ir.tafreshiali.whyoogle_ads.ayan_ads.domain.AyanCustomAdvertisementModel
 
 /**
  * Ayan Advertisement Impl
@@ -65,6 +69,21 @@ class AyanAdvertisementImpl(
             context = context,
             customAdUnit = adiveryInterstitialAdUnit
         )
+    }
+
+    override fun loadAyanCustomNativeAdvertisement(
+        ayanApi: AyanApi,
+        callBack: (AyanCustomAdvertisementModel) -> Unit,
+        onChangeStatus: OnChangeStatus?,
+        onFailure: OnFailure?
+    ) {
+        ayanApi.call<AyanCustomAdvertisementModel>(endPoint = AdvertisementEndpoint.AppConfigAdvertisementContainerInfo) {
+            useCommonFailureCallback = false
+            useCommonChangeStatusCallback = false
+            success { it?.let(callBack) }
+            onChangeStatus?.let { changeStatusCallback(it) }
+            onFailure?.let { failure(it) }
+        }
     }
 
     /** Here we have two main steps :

@@ -2,6 +2,10 @@ package ir.tafreshiali.whyoogle_ads
 
 import com.google.android.gms.ads.initialization.AdapterStatus
 import com.google.android.gms.ads.interstitial.InterstitialAd
+import ir.ayantech.ayannetworking.api.AyanApi
+import ir.ayantech.ayannetworking.api.OnChangeStatus
+import ir.ayantech.ayannetworking.api.OnFailure
+import ir.tafreshiali.whyoogle_ads.ayan_ads.domain.AyanCustomAdvertisementModel
 
 interface AyanAdvertisement {
 
@@ -29,6 +33,13 @@ interface AyanAdvertisement {
      * @param adiveryInterstitialAdUnit of type [String] for initializing adivery interstitial advertisement
      * */
 
-    fun loadAdiveryAdvertisement(adiveryInterstitialAdUnit: String,adiveryAppKey: String)
+    fun loadAdiveryAdvertisement(adiveryInterstitialAdUnit: String, adiveryAppKey: String)
+
+    fun loadAyanCustomNativeAdvertisement(
+        ayanApi: AyanApi,
+        callBack: (AyanCustomAdvertisementModel) -> Unit,
+        onChangeStatus: OnChangeStatus? = null,
+        onFailure: OnFailure? = null
+    )
 
 }

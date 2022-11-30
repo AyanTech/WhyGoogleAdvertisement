@@ -1,13 +1,11 @@
 package ir.tafreshiali.whyoogle_ads.processorImpl
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import ir.ayantech.whygoogle.helper.makeVisible
 import ir.tafreshiali.whyoogle_ads.AdvertisementCore
-import ir.tafreshiali.whyoogle_ads.R
 import ir.tafreshiali.whyoogle_ads.extension.handleApplicationNativeAdvertisement
 import ir.tafreshiali.whyoogle_ads.extension.loadAdiveryNativeAdvertisementView
 import ir.tafreshiali.whyoogle_ads.extension.loadAdmobNativeAdvertisementView

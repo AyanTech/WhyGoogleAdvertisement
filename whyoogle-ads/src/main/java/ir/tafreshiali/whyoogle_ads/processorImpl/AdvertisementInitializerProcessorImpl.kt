@@ -19,8 +19,7 @@ class AdvertisementInitializerProcessorImpl : AdvertisementInitializerProcessor 
      * @param application
      * @param adView the view that we want to load the ad in it.
      * @param [changeStatus] [failure] for state handling in upstreams.
-     * @param updateAppGeneralAdvertisementStatus a lambda function that has [Boolean] value witch determine that app should shows the ads or not.
-     * @param onNativeAdLoaded when ever the advertisement loaded successfully the lambda function triggers*/
+     * @param updateAppGeneralAdvertisementStatus a lambda function that has [Boolean] value witch determine that app should shows the ads or not.*/
 
     override fun appAdvertisementGeneralProcessor(
         ayanApi: AyanApi,
@@ -28,13 +27,13 @@ class AdvertisementInitializerProcessorImpl : AdvertisementInitializerProcessor 
         adView: ViewGroup,
         changeStatus: OnChangeStatus?,
         failure: OnFailure?,
-        updateAppGeneralAdvertisementStatus: (Boolean) -> Unit,
-        onNativeAdLoaded: () -> Unit
+        updateAppGeneralAdvertisementStatus: (Boolean) -> Unit
     ) {
         ayanApi.getAppConfigAdvertisement(
             callBack = {
                 if (it.Active) {
                     it.checkAdvertisementStatus(
+                        ayanApi = ayanApi,
                         application = application,
                         callback = updateAppGeneralAdvertisementStatus,
                         adiveryInterstitialAdUnit = it.Sources.firstOrNull { it.Key == ApplicationAdvertisementType.AD_INTERSTITIAL_ADIVERY_KEY }?.Value
