@@ -33,7 +33,6 @@ class AdvertisementInitializerProcessorImpl : AdvertisementInitializerProcessor 
             callBack = {
                 if (it.Active) {
                     it.checkAdvertisementStatus(
-                        ayanApi = ayanApi,
                         application = application,
                         callback = updateAppGeneralAdvertisementStatus,
                         adiveryInterstitialAdUnit = it.Sources.firstOrNull { it.Key == ApplicationAdvertisementType.AD_INTERSTITIAL_ADIVERY_KEY }?.Value

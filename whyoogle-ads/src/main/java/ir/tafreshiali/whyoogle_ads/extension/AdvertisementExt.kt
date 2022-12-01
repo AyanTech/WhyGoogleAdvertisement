@@ -61,7 +61,6 @@ fun AyanApi.getAppConfigAdvertisement(
  * @param ayanAdvertisement of type [AyanAdvertisement]
  * @param callback a lambda function for doing some operation on the advertisement activation state*/
 fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
-    ayanApi: AyanApi,
     adiveryAppKey: String,
     admobInterstitialAdUnit: String,
     adiveryInterstitialAdUnit: String,
@@ -105,12 +104,11 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
             }
 
             ApplicationCommonAdvertisementKeys.AYAN_ADVERTISEMENT -> {
-                ayanAdvertisement.loadAyanCustomNativeAdvertisement(
-                    ayanApi = ayanApi,
-                    callBack = {
+                ApplicationAdvertisementType.appNativeAdvertisementType =
+                    ApplicationCommonAdvertisementKeys.AYAN_ADVERTISEMENT
 
-                    }
-                )
+                ApplicationAdvertisementType.appInterstitialAdvertisementType =
+                    ApplicationCommonAdvertisementKeys.AYAN_ADVERTISEMENT
             }
         }
     }

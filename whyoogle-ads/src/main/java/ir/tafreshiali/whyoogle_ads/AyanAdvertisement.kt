@@ -5,6 +5,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import ir.ayantech.ayannetworking.api.AyanApi
 import ir.ayantech.ayannetworking.api.OnChangeStatus
 import ir.ayantech.ayannetworking.api.OnFailure
+import ir.tafreshiali.whyoogle_ads.ayan_ads.domain.AyanCustomAdvertisementInput
 import ir.tafreshiali.whyoogle_ads.ayan_ads.domain.AyanCustomAdvertisementModel
 
 interface AyanAdvertisement {
@@ -37,6 +38,7 @@ interface AyanAdvertisement {
 
     fun loadAyanCustomNativeAdvertisement(
         ayanApi: AyanApi,
+        input: AyanCustomAdvertisementInput,
         callBack: (AyanCustomAdvertisementModel) -> Unit,
         onChangeStatus: OnChangeStatus? = null,
         onFailure: OnFailure? = null

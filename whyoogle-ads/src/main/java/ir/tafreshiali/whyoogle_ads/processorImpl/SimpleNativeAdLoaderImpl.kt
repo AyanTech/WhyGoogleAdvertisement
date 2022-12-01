@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import ir.ayantech.ayannetworking.api.AyanApi
 import ir.ayantech.whygoogle.helper.makeVisible
 import ir.tafreshiali.whyoogle_ads.AdvertisementCore
+import ir.tafreshiali.whyoogle_ads.ayan_ads.domain.AyanCustomAdvertisementInput
 import ir.tafreshiali.whyoogle_ads.extension.handleApplicationNativeAdvertisement
 import ir.tafreshiali.whyoogle_ads.extension.loadAdiveryNativeAdvertisementView
 import ir.tafreshiali.whyoogle_ads.extension.loadAdmobNativeAdvertisementView
@@ -24,6 +25,7 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
         context: Application,
         adiveryNativeAdUnit: String,
         admobNativeAdvertisementId: String,
+        ayanNativeAdvertisementInput: AyanCustomAdvertisementInput,
         adiveryNativeLayoutId: Int,
         admobNativeLayoutId: Int,
         ayanNativeLayoutId: Int,
@@ -61,6 +63,7 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
                 loadAyanNativeView = {
                     AdvertisementCore.ayanAdvertisement.loadAyanCustomNativeAdvertisement(
                         ayanApi = ayanApi,
+                        input = ayanNativeAdvertisementInput,
                         callBack = { ayanAdCustomModel ->
                             adView.loadAyanNativeAdvertisementView(
                                 activityContext = activityContext,

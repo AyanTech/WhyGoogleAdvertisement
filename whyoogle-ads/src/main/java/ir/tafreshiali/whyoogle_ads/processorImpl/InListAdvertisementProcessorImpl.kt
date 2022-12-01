@@ -9,6 +9,7 @@ import com.adivery.sdk.AdiveryNativeAdView
 import ir.ayantech.ayannetworking.api.AyanApi
 import ir.tafreshiali.whyoogle_ads.AdvertisementCore
 import ir.tafreshiali.whyoogle_ads.R
+import ir.tafreshiali.whyoogle_ads.ayan_ads.domain.AyanCustomAdvertisementInput
 import ir.tafreshiali.whyoogle_ads.extension.handleApplicationNativeAdvertisement
 import ir.tafreshiali.whyoogle_ads.extension.loadAdiveryNativeAdvertisementView
 import ir.tafreshiali.whyoogle_ads.extension.loadAdmobNativeAdvertisementView
@@ -26,6 +27,7 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
     override fun listNativeAdProcessor(
         adiveryNativeAdUnit: String,
         admobNativeAdvertisementId: String,
+        ayanNativeAdvertisementInput: AyanCustomAdvertisementInput,
         @LayoutRes adiveryNativeLayoutId: Int,
         @LayoutRes admobNativeLayoutId: Int,
         @LayoutRes ayanNativeLayoutId: Int,
@@ -86,6 +88,7 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
                     loadAyanNativeView = {
                         AdvertisementCore.ayanAdvertisement.loadAyanCustomNativeAdvertisement(
                             ayanApi = ayanApi,
+                            input = ayanNativeAdvertisementInput,
                             callBack = { ayanAdCustomModel ->
                                 loadAyanNativeAdvertisementView(
                                     activityContext = activityContext,

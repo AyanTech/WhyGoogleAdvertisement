@@ -10,6 +10,7 @@ import ir.ayantech.ayannetworking.api.AyanApi
 import ir.ayantech.ayannetworking.api.OnChangeStatus
 import ir.ayantech.ayannetworking.api.OnFailure
 import ir.tafreshiali.whyoogle_ads.admob.AdmobAdvertisement
+import ir.tafreshiali.whyoogle_ads.ayan_ads.domain.AyanCustomAdvertisementInput
 import ir.tafreshiali.whyoogle_ads.ayan_ads.domain.AyanCustomAdvertisementModel
 
 /**
@@ -73,11 +74,15 @@ class AyanAdvertisementImpl(
 
     override fun loadAyanCustomNativeAdvertisement(
         ayanApi: AyanApi,
+        input: AyanCustomAdvertisementInput,
         callBack: (AyanCustomAdvertisementModel) -> Unit,
         onChangeStatus: OnChangeStatus?,
         onFailure: OnFailure?
     ) {
-        ayanApi.call<AyanCustomAdvertisementModel>(endPoint = AdvertisementEndpoint.AppConfigAdvertisementContainerInfo) {
+        ayanApi.call<AyanCustomAdvertisementModel>(
+            endPoint = AdvertisementEndpoint.AppConfigAdvertisementContainerInfo,
+            input = input
+        ) {
             useCommonFailureCallback = false
             useCommonChangeStatusCallback = false
             success { it?.let(callBack) }
