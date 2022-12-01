@@ -331,17 +331,19 @@ fun loadAyanNativeAdvertisementView(
         ViewGroup.LayoutParams.MATCH_PARENT,
         ViewGroup.LayoutParams.WRAP_CONTENT
     ),
-    onAdLoaded: () -> Unit,
+    onAdLoaded: (ViewGroup) -> Unit,
     onAdFailed: () -> Unit
 ) {
-    LinearLayout(activityContext).loadAyanNativeAdvertisementView(
-        activityContext = activityContext,
-        ayanNativeLayoutId = ayanNativeLayoutId,
-        layoutParams = layoutParams,
-        ayanCustomAdvertisementModel = ayanCustomAdvertisementModel,
-        onAdLoaded = onAdLoaded,
-        onAdFailed = onAdFailed
-    )
+    LinearLayout(activityContext).let { ayanNativeAdContainer ->
+        ayanNativeAdContainer.loadAyanNativeAdvertisementView(
+            activityContext = activityContext,
+            ayanNativeLayoutId = ayanNativeLayoutId,
+            layoutParams = layoutParams,
+            ayanCustomAdvertisementModel = ayanCustomAdvertisementModel,
+            onAdLoaded = { onAdLoaded(ayanNativeAdContainer) },
+            onAdFailed = onAdFailed
+        )
+    }
 }
 
 
@@ -441,7 +443,8 @@ fun handleApplicationNativeAdvertisement(
     applicationAdvertisementType: String = ApplicationAdvertisementType.appAdvertisementType,
     applicationNativeAdvertisementType: String = ApplicationAdvertisementType.appNativeAdvertisementType,
     loadAdiveryNativeView: () -> Unit,
-    loadAdmobNativeView: () -> Unit
+    loadAdmobNativeView: () -> Unit,
+    loadAyanNativeView: () -> Unit
 ) {
 
     when (applicationAdvertisementType) {
@@ -461,6 +464,14 @@ fun handleApplicationNativeAdvertisement(
             when (applicationNativeAdvertisementType) {
                 ApplicationCommonAdvertisementKeys.ADIVERY_ADVERTISEMENT_KEY -> {
                     loadAdiveryNativeView()
+                }
+            }
+        }
+
+        ApplicationCommonAdvertisementKeys.AYAN_ADVERTISEMENT -> {
+            when (applicationNativeAdvertisementType) {
+                ApplicationCommonAdvertisementKeys.AYAN_ADVERTISEMENT -> {
+                    loadAyanNativeView()
                 }
             }
         }
