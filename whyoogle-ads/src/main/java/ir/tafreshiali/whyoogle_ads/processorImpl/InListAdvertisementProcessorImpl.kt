@@ -45,7 +45,7 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
                     loadAdiveryNativeView = {
                         loadAdiveryNativeAdvertisementView(
                             adiveryNativeAdUnit = adiveryNativeAdUnit,
-                            context = context,
+                            context = activityContext,
                             adiveryNativeLayoutId = adiveryNativeLayoutId,
                             onAdLoaded = { adiveryView ->
 
