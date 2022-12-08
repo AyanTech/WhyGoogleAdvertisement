@@ -21,6 +21,6 @@ interface InListAdvertisementProcessor {
         appGeneralAdStatus: Boolean,
         itemList: ArrayList<Any>,
         adViewInListIndex: Int,
-        updateListItems: () -> Unit
+        updateListItems: (ArrayList<Any>) -> Unit
     ): Boolean
 }

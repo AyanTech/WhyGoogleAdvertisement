@@ -37,7 +37,7 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
         appGeneralAdStatus: Boolean,
         itemList: ArrayList<Any>,
         adViewInListIndex: Int,
-        updateListItems: () -> Unit
+        updateListItems: (ArrayList<Any>) -> Unit
     ): Boolean {
         if (appGeneralAdStatus) {
             if (itemList.isNotEmpty()) {
@@ -53,7 +53,7 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
 
                                     itemList.add(adViewInListIndex, adiveryView)
 
-                                    updateListItems()
+                                    updateListItems(itemList)
                                 }
 
                             }
@@ -72,7 +72,7 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
                                         if (itemList.find { it is ViewGroup } == null) {
                                             itemList.add(adViewInListIndex, admobAdView)
 
-                                            updateListItems()
+                                            updateListItems(itemList)
                                         }
                                     }
                                 )
@@ -98,7 +98,7 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
                                         if (itemList.find { it is ViewGroup } == null) {
                                             itemList.add(adViewInListIndex, ayanAdView)
 
-                                            updateListItems()
+                                            updateListItems(itemList)
                                         }
                                     },
                                     onAdFailed = {
