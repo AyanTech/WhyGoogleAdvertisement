@@ -14,6 +14,7 @@ interface AdvertisementInitializerProcessor {
         adView: ViewGroup,
         changeStatus: OnChangeStatus? = null,
         failure: OnFailure? = null,
+        admobMainInitializationStatus: (Boolean) -> Unit,
         updateAppGeneralAdvertisementStatus: (Boolean) -> Unit
     )
 }

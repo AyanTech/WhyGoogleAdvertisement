@@ -28,6 +28,7 @@ import ir.ayantech.pishkhancore.model.AppConfigAdvertisementOutput
 import ir.ayantech.whygoogle.helper.isNull
 import ir.ayantech.whygoogle.helper.openUrl
 import ir.ayantech.whygoogle.helper.trying
+import ir.tafreshiali.whyoogle_ads.AdvertisementCore.ayanAdvertisement
 import ir.tafreshiali.whyoogle_ads.AdvertisementEndpoint
 import ir.tafreshiali.whyoogle_ads.AyanAdvertisement
 import ir.tafreshiali.whyoogle_ads.R
@@ -66,6 +67,7 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
     adiveryInterstitialAdUnit: String,
     application: Application,
     ayanAdvertisement: AyanAdvertisement = ir.tafreshiali.whyoogle_ads.AdvertisementCore.ayanAdvertisement,
+    admobMainInitializationStatus: (Boolean) -> Unit,
     callback: (Boolean) -> Unit,
 ) {
     if (this.Active) {
@@ -79,6 +81,7 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
                 initializeAdmobAdvertisement(
                     admobInterstitialAdUnit = admobInterstitialAdUnit,
                     ayanAdvertisement = ayanAdvertisement,
+                    admobMainInitializationStatus =admobMainInitializationStatus,
                     handleAdmobInterstitialAdvertisement = { admobInterstitialAd ->
                         ir.tafreshiali.whyoogle_ads.AdvertisementCore.updateApplicationAdmobInterstitialAdvertisement(
                             admobInterstitialAd = admobInterstitialAd
@@ -124,6 +127,7 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
 fun initializeAdmobAdvertisement(
     admobInterstitialAdUnit: String,
     ayanAdvertisement: AyanAdvertisement,
+    admobMainInitializationStatus: (Boolean) -> Unit,
     handleAdmobInterstitialAdvertisement: (InterstitialAd?) -> Unit
 ) {
     ayanAdvertisement.loadAdmobAdvertisement(
@@ -131,15 +135,15 @@ fun initializeAdmobAdvertisement(
         admobMainInitializationStatus = { status ->
             if (!status) {
                 ApplicationAdvertisementType.reset()
-                return@loadAdmobAdvertisement
+            } else {
+                ApplicationAdvertisementType.appAdvertisementType =
+                    ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY
+                ApplicationAdvertisementType.appInterstitialAdvertisementType =
+                    ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY
+                ApplicationAdvertisementType.appNativeAdvertisementType =
+                    ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY
             }
-
-            ApplicationAdvertisementType.appAdvertisementType =
-                ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY
-            ApplicationAdvertisementType.appInterstitialAdvertisementType =
-                ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY
-            ApplicationAdvertisementType.appNativeAdvertisementType =
-                ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY
+            admobMainInitializationStatus(status)
         },
         onInterstitialAdLoaded = {
 

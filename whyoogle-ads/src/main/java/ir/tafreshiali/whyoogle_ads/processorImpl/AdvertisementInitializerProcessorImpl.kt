@@ -27,6 +27,7 @@ class AdvertisementInitializerProcessorImpl : AdvertisementInitializerProcessor 
         adView: ViewGroup,
         changeStatus: OnChangeStatus?,
         failure: OnFailure?,
+        admobMainInitializationStatus: (Boolean) -> Unit,
         updateAppGeneralAdvertisementStatus: (Boolean) -> Unit
     ) {
         ayanApi.getAppConfigAdvertisement(
@@ -34,6 +35,7 @@ class AdvertisementInitializerProcessorImpl : AdvertisementInitializerProcessor 
                 if (it.Active) {
                     it.checkAdvertisementStatus(
                         application = application,
+                        admobMainInitializationStatus = admobMainInitializationStatus,
                         callback = updateAppGeneralAdvertisementStatus,
                         adiveryInterstitialAdUnit = it.Sources.firstOrNull { it.Key == ApplicationAdvertisementType.AD_INTERSTITIAL_ADIVERY_KEY }?.Value
                             ?: "",
