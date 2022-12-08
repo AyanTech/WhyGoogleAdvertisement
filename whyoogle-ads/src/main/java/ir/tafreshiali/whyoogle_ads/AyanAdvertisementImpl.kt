@@ -29,21 +29,21 @@ class AyanAdvertisementImpl(
      * In Admob Advertisement we should load adivery
      * too for situations that admob ( initialization / native / interstitial  )
      * fails and replace them with adivery Equivalent Advertisements
-     * @param onMainAdmobInitializationFailed for triggering upstream layers when ever the main admob initialization is fails ( the [AdapterStatus.State] is  [AdapterStatus.State.NOT_READY])
+     * @param admobMainInitializationStatus for triggering upstream layers when ever the main admob initialization is fails ( the [AdapterStatus.State] is  [AdapterStatus.State.NOT_READY])
      * @param onInterstitialAdLoaded for triggering upstream layers when ever admob interstitial advertisement loaded successfully
      * @param onInterstitialFailed for triggering upstream layers when ever admob interstitial advertisement is failed to load
      */
 
     override fun loadAdmobAdvertisement(
         admobInterstitialAdUnit: String,
-        onMainAdmobInitializationFailed: () -> Unit,
+        admobMainInitializationStatus: (Boolean) -> Unit,
         onInterstitialAdLoaded: (interstitialAd: InterstitialAd) -> Unit,
         onInterstitialFailed: () -> Unit
     ) {
 
         initializeAdmobAdvertisement(
             admobInterstitialAdUnit = admobInterstitialAdUnit,
-            onMainAdmobInitializationFailed = onMainAdmobInitializationFailed,
+            admobMainInitializationStatus = admobMainInitializationStatus,
             onInterstitialAdLoaded = onInterstitialAdLoaded,
             onInterstitialFailed = onInterstitialFailed
         )
@@ -94,13 +94,13 @@ class AyanAdvertisementImpl(
     /** Here we have two main steps :
      * step 1 - we check if the admob [ClassLoader] is not null . if it is null or not exist we load the adivery advertisement and skip the admob initialization . if admob [ClassLoader] is exist we continue admob initialization (step 2).
      * step 2 - initialize admob and based on the response ([AdapterStatus.State]) we decide to load witch advertisement (adivery or admob)
-     * @param onMainAdmobInitializationFailed for triggering upstream layers when ever the main admob initialization is fails ( the [AdapterStatus.State] is  [AdapterStatus.State.NOT_READY])
+     * @param admobMainInitializationStatus for triggering upstream layers when ever the main admob initialization is fails ( the [AdapterStatus.State] is  [AdapterStatus.State.NOT_READY])
      * @param onInterstitialAdLoaded for triggering upstream layers when ever admob interstitial advertisement loaded successfully
      * @param onInterstitialFailed for triggering upstream layers when ever admob interstitial advertisement is failed to load*/
 
     private fun initializeAdmobAdvertisement(
         admobInterstitialAdUnit: String,
-        onMainAdmobInitializationFailed: () -> Unit,
+        admobMainInitializationStatus: (Boolean) -> Unit,
         onInterstitialAdLoaded: (interstitialAd: InterstitialAd) -> Unit,
         onInterstitialFailed: () -> Unit
     ) {
@@ -110,7 +110,6 @@ class AyanAdvertisementImpl(
             admobAdvertisement.initInitializeAdmob(
                 context = context,
                 admobInitializeStatus = { admobStatus ->
-
 
                     if (admobStatus == AdapterStatus.State.READY) {
 
@@ -124,14 +123,11 @@ class AyanAdvertisementImpl(
                             onInterstitialFailed = onInterstitialFailed
                         )
                     }
-
-                    if (admobStatus == AdapterStatus.State.NOT_READY) {
-                        onMainAdmobInitializationFailed()
-                    }
+                    admobMainInitializationStatus(admobStatus == AdapterStatus.State.READY)
                 })
         } else {
             Log.d("Admob", "Admob Dose Not Exist In The Project")
-            onMainAdmobInitializationFailed()
+            admobMainInitializationStatus(false)
         }
     }
 }

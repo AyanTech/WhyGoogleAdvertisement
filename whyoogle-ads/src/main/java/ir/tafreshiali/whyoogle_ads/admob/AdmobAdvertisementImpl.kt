@@ -30,13 +30,13 @@ class AdmobAdvertisementImpl : AdmobAdvertisement {
                 if (adapterStatus.initializationState == AdapterStatus.State.READY)
                     Log.d(
                         "ADMOB_STATUS",
-                        "initInterstitialAdmob adapterStatus Description Is =${adapterStatus.description} and adapterStatus initializationState is =${adapterStatus.initializationState} it is Ready"
+                        "initAdmob adapterStatus Description Is =${adapterStatus.description} and adapterStatus initializationState is =${adapterStatus.initializationState} it is Ready"
                     )
 
                 if (adapterStatus.initializationState == AdapterStatus.State.NOT_READY)
                     Log.d(
                         "ADMOB_STATUS",
-                        "initInterstitialAdmob adapterStatus Description Is =${adapterStatus.description} and adapterStatus initializationState is =${adapterStatus.initializationState} it is Not Ready"
+                        "initAdmob adapterStatus Description Is =${adapterStatus.description} and adapterStatus initializationState is =${adapterStatus.initializationState} it is Not Ready"
                     )
             }
         }

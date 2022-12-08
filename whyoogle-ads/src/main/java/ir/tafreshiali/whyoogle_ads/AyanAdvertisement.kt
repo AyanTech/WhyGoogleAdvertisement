@@ -16,15 +16,14 @@ interface AyanAdvertisement {
      * In Admob Advertisement we should load adivery
      * too for situations that admob ( initialization / native / interstitial  )
      * fails and replace them with adivery Equivalent Advertisements
-     * @param onMainAdmobInitializationFailed for triggering upstream layers when ever the main admob initialization is fails ( the [AdapterStatus.State] is  [AdapterStatus.State.NOT_READY])
+     * @param admobMainInitializationStatus for triggering upstream layers when ever the main admob initialization is fails ( the [AdapterStatus.State] is  [AdapterStatus.State.NOT_READY])
      * @param onInterstitialAdLoaded for triggering upstream layers when ever admob interstitial advertisement loaded successfully
      * @param onInterstitialFailed for triggering upstream layers when ever admob interstitial advertisement is failed to load*/
 
 
     fun loadAdmobAdvertisement(
         admobInterstitialAdUnit: String,
-        onMainAdmobInitializationFailed: () -> Unit,
-        onInterstitialAdLoaded: (interstitialAd: InterstitialAd) -> Unit,
+        admobMainInitializationStatus: (Boolean) -> Unit,        onInterstitialAdLoaded: (interstitialAd: InterstitialAd) -> Unit,
         onInterstitialFailed: () -> Unit
     )
 

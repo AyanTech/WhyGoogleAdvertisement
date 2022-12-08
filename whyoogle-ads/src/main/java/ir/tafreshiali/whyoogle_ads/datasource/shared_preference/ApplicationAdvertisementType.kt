@@ -22,6 +22,11 @@ object ApplicationAdvertisementType {
         this.context = context
     }
 
+    fun reset() {
+        appAdvertisementType = ""
+        appNativeAdvertisementType = ""
+        appInterstitialAdvertisementType = ""
+    }
 
     var appAdvertisementType: String
         get() = PreferencesManager.getInstance(context)

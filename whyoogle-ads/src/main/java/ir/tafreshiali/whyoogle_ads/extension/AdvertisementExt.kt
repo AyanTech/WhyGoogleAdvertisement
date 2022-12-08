@@ -78,8 +78,6 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
             ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY -> {
                 initializeAdmobAdvertisement(
                     admobInterstitialAdUnit = admobInterstitialAdUnit,
-                    adiveryAppKey = adiveryAppKey,
-                    adiveryInterstitialAdUnit = adiveryInterstitialAdUnit,
                     ayanAdvertisement = ayanAdvertisement,
                     handleAdmobInterstitialAdvertisement = { admobInterstitialAd ->
                         ir.tafreshiali.whyoogle_ads.AdvertisementCore.updateApplicationAdmobInterstitialAdvertisement(
@@ -125,36 +123,37 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
 
 fun initializeAdmobAdvertisement(
     admobInterstitialAdUnit: String,
-    adiveryAppKey: String,
-    adiveryInterstitialAdUnit: String,
     ayanAdvertisement: AyanAdvertisement,
     handleAdmobInterstitialAdvertisement: (InterstitialAd?) -> Unit
 ) {
-    ayanAdvertisement.loadAdiveryAdvertisement(
-        adiveryAppKey = adiveryAppKey,
-        adiveryInterstitialAdUnit = adiveryInterstitialAdUnit
-    )
     ayanAdvertisement.loadAdmobAdvertisement(
         admobInterstitialAdUnit = admobInterstitialAdUnit,
-        onMainAdmobInitializationFailed = {
+        admobMainInitializationStatus = { status ->
+            if (!status) {
+                ApplicationAdvertisementType.reset()
+                return@loadAdmobAdvertisement
+            }
+
             ApplicationAdvertisementType.appAdvertisementType =
-                ApplicationCommonAdvertisementKeys.ADIVERY_ADVERTISEMENT_KEY
+                ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY
             ApplicationAdvertisementType.appInterstitialAdvertisementType =
-                ApplicationCommonAdvertisementKeys.ADIVERY_ADVERTISEMENT_KEY
+                ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY
             ApplicationAdvertisementType.appNativeAdvertisementType =
-                ApplicationCommonAdvertisementKeys.ADIVERY_ADVERTISEMENT_KEY
+                ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY
         },
         onInterstitialAdLoaded = {
 
             handleAdmobInterstitialAdvertisement(it)
+
+            ApplicationAdvertisementType.appAdvertisementType =
+                ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY
 
             ApplicationAdvertisementType.appInterstitialAdvertisementType =
                 ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY
         },
         onInterstitialFailed = {
             handleAdmobInterstitialAdvertisement(null)
-            ApplicationAdvertisementType.appInterstitialAdvertisementType =
-                ApplicationCommonAdvertisementKeys.ADIVERY_ADVERTISEMENT_KEY
+            ApplicationAdvertisementType.appInterstitialAdvertisementType = ""
         }
     )
 }
@@ -477,33 +476,22 @@ fun showApplicationInterstitialAdvertisement(
     when (ApplicationAdvertisementType.appAdvertisementType) {
 
         ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY -> {
-            when (ApplicationAdvertisementType.appInterstitialAdvertisementType) {
-                ApplicationCommonAdvertisementKeys.ADIVERY_ADVERTISEMENT_KEY -> {
-                    AdvertisementCore.showInterstitialAds(customAdUnit = adiveryInterstitialAdUnit)
-                    loadAdiveryInterstitialAdvertisement()
-                }
 
-                ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY -> {
-                    ir.tafreshiali.whyoogle_ads.AdvertisementCore.admobInterstitialAdvertisement?.let { admobInterstitialAd ->
-                        admobInterstitialAd.addAdmobInterstitialCallback(
-                            application = activity.application,
-                            admobAdvertisement = admobAdvertisement,
-                            admobInterstitialAdUnit = admobInterstitialAdUnit
-                        )
-                        admobInterstitialAd.show(activity)
+            ir.tafreshiali.whyoogle_ads.AdvertisementCore.admobInterstitialAdvertisement?.let { admobInterstitialAd ->
+                admobInterstitialAd.addAdmobInterstitialCallback(
+                    application = activity.application,
+                    admobAdvertisement = admobAdvertisement,
+                    admobInterstitialAdUnit = admobInterstitialAdUnit
+                )
+                admobInterstitialAd.show(activity)
 
-                        loadAdmobInterstitialAdvertisement()
-                    }
-                }
+                loadAdmobInterstitialAdvertisement()
             }
         }
+
         ApplicationCommonAdvertisementKeys.ADIVERY_ADVERTISEMENT_KEY -> {
-            when (ApplicationAdvertisementType.appInterstitialAdvertisementType) {
-                ApplicationCommonAdvertisementKeys.ADIVERY_ADVERTISEMENT_KEY -> {
-                    AdvertisementCore.showInterstitialAds(customAdUnit = adiveryInterstitialAdUnit)
-                    loadAdiveryInterstitialAdvertisement()
-                }
-            }
+            AdvertisementCore.showInterstitialAds(customAdUnit = adiveryInterstitialAdUnit)
+            loadAdiveryInterstitialAdvertisement()
         }
     }
 }
