@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="MainCards">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="cardCornerRadius">@dimen/half_radius</item>
+        <item name="cardElevation">@dimen/main_Elevation</item>
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="cardUseCompatPadding">true</item>
+    </style>
+
+
+    <!--ADIVERY ADVERTISEMENT UI COMPONENTS STYLE-->
+
+    <style name="AdiveryTextViewStyle">
+        <item name="fontFamily">@font/iran_sans_mobile_regular</item>
+        <item name="android:fontFamily">@font/iran_sans_mobile_regular</item>
+        <item name="android:textColor">@color/advertisementHeadLineColor</item>
+    </style>
+
+
+    <style name="AdiveryButtonStyle">
+        <item name="android:textColor">@drawable/enable_disable_button_text_color</item>
+        <item name="android:textSize">@dimen/sub_medium_text</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">@dimen/margin_32</item>
+        <item name="android:paddingEnd">@dimen/margin_32</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:height">@dimen/margin_40</item>
+        <item name="android:background">@drawable/back_color_accent_button</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="fontFamily">@font/iran_sans_mobile_regular</item>
+        <item name="android:fontFamily">@font/iran_sans_mobile_regular</item>
+    </style>
+
+    <!--ADMOB ADVERTISEMENT UI COMPONENTS STYLE-->
+
+    <style name="AdmobTextViewStyle">
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/advertisementHeadLineColor</item>
+    </style>
+
+
+    <style name="AdmobButtonStyle">
+        <item name="android:textColor">@drawable/enable_disable_button_text_color</item>
+        <item name="android:textSize">@dimen/sub_medium_text</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">@dimen/margin_32</item>
+        <item name="android:paddingEnd">@dimen/margin_32</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:height">@dimen/margin_40</item>
+        <item name="android:background">@drawable/back_color_accent_button</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+</resources>

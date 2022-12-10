@@ -1,4 +1,5 @@
 <com.google.android.gms.ads.nativead.NativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/background_result">
@@ -21,6 +22,7 @@
 
         <TextView
             android:id="@+id/ad_headline"
+            style="@style/AdmobTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -34,11 +36,12 @@
             android:fadingEdge="horizontal"
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
-            android:singleLine="true" />
+            android:singleLine="true"
+            tools:text="Buy A House In America" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/ad_call_to_action"
-            style="@style/AppButton"
+            style="@style/AdmobButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/margin_32"
             android:layout_alignParentEnd="true"
@@ -46,7 +49,8 @@
             android:layout_marginStart="@dimen/margin_4"
             android:layout_marginTop="@dimen/margin_4"
             android:layout_marginEnd="@dimen/margin_4"
-            android:layout_marginBottom="@dimen/margin_4" />
+            android:layout_marginBottom="@dimen/margin_4"
+            tools:text="Register" />
 
     </RelativeLayout>
 
