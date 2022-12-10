@@ -19,8 +19,8 @@ interface InListAdvertisementProcessor {
         context: Application,
         activityContext: AppCompatActivity,
         appGeneralAdStatus: Boolean,
-        itemList: ArrayList<Any>,
+        itemList: MutableList<Any>,
         adViewInListIndex: Int,
-        updateListItems: (ArrayList<Any>) -> Unit
+        updateListItems: (MutableList<Any>) -> Unit
     ): Boolean
 }

@@ -7,6 +7,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.adivery.sdk.AdiveryNativeAdView
 import ir.ayantech.ayannetworking.api.AyanApi
+import ir.ayantech.pishkhancore.core.PishkhanCore.ayanApi
 import ir.tafreshiali.whyoogle_ads.AdvertisementCore
 import ir.tafreshiali.whyoogle_ads.R
 import ir.tafreshiali.whyoogle_ads.ayan_ads.domain.AyanCustomAdvertisementInput
@@ -35,9 +36,9 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
         context: Application,
         activityContext: AppCompatActivity,
         appGeneralAdStatus: Boolean,
-        itemList: ArrayList<Any>,
+        itemList: MutableList<Any>,
         adViewInListIndex: Int,
-        updateListItems: (ArrayList<Any>) -> Unit
+        updateListItems: (MutableList<Any>) -> Unit
     ): Boolean {
         if (appGeneralAdStatus) {
             if (itemList.isNotEmpty()) {
