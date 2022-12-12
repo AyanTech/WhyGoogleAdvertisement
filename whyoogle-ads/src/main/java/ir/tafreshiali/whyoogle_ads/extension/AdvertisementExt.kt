@@ -300,7 +300,7 @@ fun ViewGroup.loadAyanNativeAdvertisementView(
             return@trying
         }
 
-        val adButtonTitle = adView.findViewById<MaterialButton>(R.id.ayan_ad_call_to_action)
+        val adButtonTitle = adView.findViewById<AppCompatButton>(R.id.ayan_ad_call_to_action)
         adButtonTitle?.let {
             it.text = ayanCustomAdvertisementModel.ButtonRedirectName
             it.setOnClickListener {

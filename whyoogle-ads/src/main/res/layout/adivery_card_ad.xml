@@ -21,7 +21,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/adivery_call_to_action"
-            style="@style/AdiveryButtonStyle"
+            style="@style/AdiveryAdsButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/margin_32"
             android:layout_alignParentEnd="true"
@@ -34,7 +34,7 @@
 
         <TextView
             android:id="@+id/adivery_headline"
-            style="@style/AdiveryTextViewStyle"
+            style="@style/AdiveryAdsTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

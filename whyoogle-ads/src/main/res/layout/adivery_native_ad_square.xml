@@ -44,7 +44,7 @@
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
                     android:gravity="center"
-                    style="@style/AdiveryTextViewStyle"
+                    style="@style/AdiveryAdsTextViewStyle"
                     tools:text="خرید ملک"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:scrollHorizontally="true"
@@ -59,7 +59,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/adivery_call_to_action"
-        style="@style/AdiveryButtonStyle"
+        style="@style/AdiveryAdsButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/margin_24"
         android:layout_marginStart="@dimen/margin_8"
