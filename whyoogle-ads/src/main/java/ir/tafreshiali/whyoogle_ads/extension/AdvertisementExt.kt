@@ -25,6 +25,7 @@ import ir.ayantech.ayannetworking.api.OnChangeStatus
 import ir.ayantech.ayannetworking.api.OnFailure
 import ir.ayantech.pishkhancore.helper.loadFromString
 import ir.ayantech.pishkhancore.model.AppConfigAdvertisementOutput
+import ir.ayantech.whygoogle.adapter.MultiViewTypeViewHolder
 import ir.ayantech.whygoogle.helper.isNull
 import ir.ayantech.whygoogle.helper.openUrl
 import ir.ayantech.whygoogle.helper.trying
@@ -499,5 +500,31 @@ fun showApplicationInterstitialAdvertisement(
         }
     }
 }
+
+
+/**
+ * For Handling The Clicks On Whole Item In List
+ * Important Note : Should Be Used In The [androidx.recyclerview.widget.RecyclerView.onCreateViewHolder] */
+fun MultiViewTypeViewHolder<Any>.registerClickForNativeAdvertisement() {
+    this.registerClickListener(this.itemView) { rootView ->
+        when (rootView) {
+            is AdiveryNativeAdView -> {
+                rootView.findViewById<AppCompatButton>(ir.ayantech.pishkhancore.R.id.adivery_call_to_action)
+                    .performClick()
+            }
+
+            is NativeAdView -> {
+                rootView.findViewById<AppCompatButton>(ir.tafreshiali.whyoogle_ads.R.id.ad_call_to_action)
+            }
+
+            is LinearLayout -> {
+                rootView.findViewById<MaterialButton>(ir.tafreshiali.whyoogle_ads.R.id.ayan_ad_call_to_action)
+                    .performClick()
+            }
+        }
+    }
+}
+
+
 
 
