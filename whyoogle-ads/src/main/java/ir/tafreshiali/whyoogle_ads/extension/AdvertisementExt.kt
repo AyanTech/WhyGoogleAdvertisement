@@ -18,7 +18,6 @@ import com.adivery.sdk.AdiveryNativeAdView
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import ir.ayantech.advertisement.core.AdvertisementCore
 import ir.ayantech.ayannetworking.api.AyanApi
@@ -26,11 +25,9 @@ import ir.ayantech.ayannetworking.api.OnChangeStatus
 import ir.ayantech.ayannetworking.api.OnFailure
 import ir.ayantech.pishkhancore.helper.loadFromString
 import ir.ayantech.pishkhancore.model.AppConfigAdvertisementOutput
+import ir.ayantech.pishkhancore.model.Source
 import ir.ayantech.whygoogle.adapter.MultiViewTypeViewHolder
-import ir.ayantech.whygoogle.helper.isNull
-import ir.ayantech.whygoogle.helper.openUrl
-import ir.ayantech.whygoogle.helper.trying
-import ir.tafreshiali.whyoogle_ads.AdvertisementCore.ayanAdvertisement
+import ir.ayantech.whygoogle.helper.*
 import ir.tafreshiali.whyoogle_ads.AdvertisementEndpoint
 import ir.tafreshiali.whyoogle_ads.AyanAdvertisement
 import ir.tafreshiali.whyoogle_ads.R
@@ -69,9 +66,10 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
     adiveryInterstitialAdUnit: String,
     application: Application,
     ayanAdvertisement: AyanAdvertisement = ir.tafreshiali.whyoogle_ads.AdvertisementCore.ayanAdvertisement,
-    admobMainInitializationStatus: (Boolean) -> Unit,
+    onSourceInitialized: (Boolean) -> Unit,
     callback: (Boolean) -> Unit,
 ) {
+
     if (this.Active) {
         ApplicationAdvertisementType.appAdvertisementType =
             this.Sources.firstOrNull { it.Key == ApplicationAdvertisementType.APPLICATION_ADVERTISEMENT_SOURCE }?.Value
@@ -83,7 +81,7 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
                 initializeAdmobAdvertisement(
                     admobInterstitialAdUnit = admobInterstitialAdUnit,
                     ayanAdvertisement = ayanAdvertisement,
-                    admobMainInitializationStatus = admobMainInitializationStatus,
+                    admobMainInitializationStatus = onSourceInitialized,
                     handleAdmobInterstitialAdvertisement = { admobInterstitialAd ->
                         ir.tafreshiali.whyoogle_ads.AdvertisementCore.updateApplicationAdmobInterstitialAdvertisement(
                             admobInterstitialAd = admobInterstitialAd
@@ -104,19 +102,25 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
                     adiveryInterstitialAdUnit = adiveryInterstitialAdUnit,
                     adiveryAppKey = adiveryAppKey
                 )
+                onSourceInitialized(true)
             }
 
             ApplicationCommonAdvertisementKeys.AYAN_ADVERTISEMENT -> {
-                ApplicationAdvertisementType.appNativeAdvertisementType =
-                    ApplicationCommonAdvertisementKeys.AYAN_ADVERTISEMENT
-
-                ApplicationAdvertisementType.appInterstitialAdvertisementType =
-                    ApplicationCommonAdvertisementKeys.AYAN_ADVERTISEMENT
+                onSourceInitialized(true)
             }
         }
     }
     callback.invoke(this.Active)
 }
+
+
+fun AppConfigAdvertisementOutput.findRelatedAdUnit(key: String): String =
+    this.Sources.firstOrNull { it.Key == key }?.Value
+        ?: ""
+
+fun List<Source>.findRelatedAdUnit(key: String): String =
+    this.firstOrNull { it.Key == key }?.Value
+        ?: ""
 
 
 /**
