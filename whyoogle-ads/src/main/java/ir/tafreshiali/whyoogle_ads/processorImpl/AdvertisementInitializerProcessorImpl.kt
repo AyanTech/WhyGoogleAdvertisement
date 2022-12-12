@@ -34,7 +34,7 @@ class AdvertisementInitializerProcessorImpl : AdvertisementInitializerProcessor 
             callBack = {
 
                 //Save The Advertisement Response After Each Request And Use It In Other Parts
-                AdvertisementResponse.appAdvertisementResponse = this.toJsonString()
+                AdvertisementResponse.appAdvertisementResponse = it.toJsonString()
 
                 if (it.Active) {
                     it.checkAdvertisementStatus(
