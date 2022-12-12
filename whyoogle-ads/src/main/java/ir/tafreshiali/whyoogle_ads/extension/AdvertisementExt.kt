@@ -13,6 +13,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.view.children
 import com.adivery.sdk.AdiveryNativeAdView
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.nativead.NativeAd
@@ -82,7 +83,7 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
                 initializeAdmobAdvertisement(
                     admobInterstitialAdUnit = admobInterstitialAdUnit,
                     ayanAdvertisement = ayanAdvertisement,
-                    admobMainInitializationStatus =admobMainInitializationStatus,
+                    admobMainInitializationStatus = admobMainInitializationStatus,
                     handleAdmobInterstitialAdvertisement = { admobInterstitialAd ->
                         ir.tafreshiali.whyoogle_ads.AdvertisementCore.updateApplicationAdmobInterstitialAdvertisement(
                             admobInterstitialAd = admobInterstitialAd
@@ -507,19 +508,22 @@ fun showApplicationInterstitialAdvertisement(
  * Important Note : Should Be Used In The [androidx.recyclerview.widget.RecyclerView.onCreateViewHolder] */
 fun MultiViewTypeViewHolder<Any>.registerClickForNativeAdvertisement() {
     this.registerClickListener(this.itemView) { rootView ->
-        when (rootView) {
-            is AdiveryNativeAdView -> {
-                rootView.findViewById<AppCompatButton>(ir.ayantech.pishkhancore.R.id.adivery_call_to_action)
-                    .performClick()
-            }
+        if (rootView is LinearLayout) {
+            when (rootView.children.firstOrNull()) {
 
-            is NativeAdView -> {
-                rootView.findViewById<AppCompatButton>(ir.tafreshiali.whyoogle_ads.R.id.ad_call_to_action)
-            }
+                is AdiveryNativeAdView -> {
+                    rootView.findViewById<AppCompatButton>(ir.ayantech.pishkhancore.R.id.adivery_call_to_action)
+                        .performClick()
+                }
 
-            is LinearLayout -> {
-                rootView.findViewById<MaterialButton>(ir.tafreshiali.whyoogle_ads.R.id.ayan_ad_call_to_action)
-                    .performClick()
+                is NativeAdView -> {
+                    rootView.findViewById<AppCompatButton>(ir.tafreshiali.whyoogle_ads.R.id.ad_call_to_action)
+                }
+
+                is LinearLayout -> {
+                    rootView.findViewById<MaterialButton>(ir.tafreshiali.whyoogle_ads.R.id.ayan_ad_call_to_action)
+                        .performClick()
+                }
             }
         }
     }
