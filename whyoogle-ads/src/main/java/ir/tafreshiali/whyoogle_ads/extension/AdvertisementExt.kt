@@ -521,7 +521,7 @@ fun MultiViewTypeViewHolder<Any>.registerClickForNativeAdvertisement() {
                 }
 
                 is LinearLayout -> {
-                    rootView.findViewById<MaterialButton>(ir.tafreshiali.whyoogle_ads.R.id.ayan_ad_call_to_action)
+                    rootView.findViewById<AppCompatButton>(ir.tafreshiali.whyoogle_ads.R.id.ayan_ad_call_to_action)
                         .performClick()
                 }
             }
