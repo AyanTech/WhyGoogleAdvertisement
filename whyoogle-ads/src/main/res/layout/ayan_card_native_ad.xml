@@ -18,7 +18,6 @@
                 android:id="@+id/ayan_ad_call_to_action"
                 style="@style/AyanAdsButtonStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/margin_4"

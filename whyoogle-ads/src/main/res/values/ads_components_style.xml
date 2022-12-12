@@ -75,7 +75,7 @@
         <item name="android:paddingEnd">@dimen/margin_32</item>
         <item name="android:clipToPadding">false</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:height">@dimen/margin_40</item>
+        <item name="android:layout_height">@dimen/margin_32</item>
         <item name="android:background">@drawable/back_color_accent_button</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="fontFamily">@font/iran_sans_mobile_regular</item>
