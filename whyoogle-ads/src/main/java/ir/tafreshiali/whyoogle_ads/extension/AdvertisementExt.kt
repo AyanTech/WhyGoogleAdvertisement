@@ -75,6 +75,8 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
             this.Sources.firstOrNull { it.Key == ApplicationAdvertisementType.APPLICATION_ADVERTISEMENT_SOURCE }?.Value
                 ?: return
 
+        callback.invoke(this.Active)
+
         when (ApplicationAdvertisementType.appAdvertisementType) {
 
             ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY -> {
@@ -110,7 +112,6 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
             }
         }
     }
-    callback.invoke(this.Active)
 }
 
 
