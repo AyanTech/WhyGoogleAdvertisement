@@ -511,8 +511,9 @@ fun showApplicationInterstitialAdvertisement(
 /**
  * For Handling The Clicks On Whole Item In List
  * Important Note : Should Be Used In The [androidx.recyclerview.widget.RecyclerView.onCreateViewHolder] */
-fun MultiViewTypeViewHolder<Any>.registerClickForNativeAdvertisement() {
+fun MultiViewTypeViewHolder<Any>.registerClickForNativeAdvertisement(analyticsEvent: () -> Unit) {
     this.registerClickListener(this.itemView) { rootView ->
+        analyticsEvent()
         if (rootView is LinearLayout) {
             when (rootView.children.firstOrNull()) {
 
