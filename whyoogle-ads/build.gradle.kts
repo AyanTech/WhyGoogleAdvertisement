@@ -73,6 +73,10 @@ dependencies {
     //kotlin reflection
     implementation(Reflection.kotlinReflection)
 
+    //Glide
+    implementation(Glide.glide)
+    annotationProcessor(Glide.glideCompiler)
+
 
 }
 
@@ -95,7 +99,7 @@ afterEvaluate {
                 artifactId = "whygoogle-ads"
 
                 // Version Library Name (Example : "1.0.0")
-                version = "1.3.3"
+                version = "1.3.4"
             }
         }
     }

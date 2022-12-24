@@ -298,16 +298,10 @@ fun ViewGroup.loadAyanNativeAdvertisementView(
             it.isSelected = true
         } ?: run {
             Log.d("AYAN_ADVERTISEMENT", "cant replace the title in the passed layout")
-            return@trying
-        }
-
-        val adIcon = adView.findViewById<AppCompatImageView>(R.id.ayan_ad_app_icon)
-        adIcon?.loadFromString(ayanCustomAdvertisementModel.Banner) ?: run {
-            Log.d("AYAN_ADVERTISEMENT", "cant load the banner link in the passed layout")
-            return@trying
         }
 
         val adButtonTitle = adView.findViewById<AppCompatButton>(R.id.ayan_ad_call_to_action)
+
         adButtonTitle?.let {
             it.text = ayanCustomAdvertisementModel.ButtonRedirectName
             it.setOnClickListener {
@@ -315,17 +309,26 @@ fun ViewGroup.loadAyanNativeAdvertisementView(
             }
         } ?: run {
             Log.d("AYAN_ADVERTISEMENT", "cant load the button content in the passed layout")
-            return@trying
         }
-        if (adButtonTitle.isNull() || adIcon.isNull() || header.isNull()) {
-            onAdFailed()
-            return@trying
-        } else {
+
+
+        val adIcon = adView.findViewById<AppCompatImageView>(R.id.ayan_ad_app_icon)
+
+
+        adIcon?.loadImageUrl(ayanCustomAdvertisementModel.Banner, onImageLoaded = {
             addView(
                 adView,
                 layoutParams
             )
             onAdLoaded()
+        }) ?: run {
+            Log.d("AYAN_ADVERTISEMENT", "cant load the image container in the passed layout")
+        }
+
+
+        if (adButtonTitle.isNull() || adIcon.isNull() || header.isNull()) {
+            onAdFailed()
+            return@trying
         }
     }
 }
