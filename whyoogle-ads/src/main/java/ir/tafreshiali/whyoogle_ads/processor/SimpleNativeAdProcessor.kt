@@ -19,6 +19,6 @@ interface SimpleNativeAdProcessor {
         ayanApi: AyanApi,
         appGeneralAdStatus: Boolean,
         adView: ViewGroup,
-        onAdLoaded: () -> Unit
+        onAdLoaded: (() -> Unit)? = null
     )
 }

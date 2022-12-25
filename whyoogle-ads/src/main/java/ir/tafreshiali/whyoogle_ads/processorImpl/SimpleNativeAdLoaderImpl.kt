@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import ir.ayantech.ayannetworking.api.AyanApi
+import ir.ayantech.whygoogle.helper.makeGone
 import ir.ayantech.whygoogle.helper.makeVisible
 import ir.tafreshiali.whyoogle_ads.AdvertisementCore
 import ir.tafreshiali.whyoogle_ads.ayan_ads.domain.AyanCustomAdvertisementInput
@@ -30,7 +31,7 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
         ayanApi: AyanApi,
         appGeneralAdStatus: Boolean,
         adView: ViewGroup,
-        onAdLoaded: () -> Unit
+        onAdLoaded: (() -> Unit)?
     ) {
         if (appGeneralAdStatus)
             handleApplicationNativeAdvertisement(
@@ -40,7 +41,7 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
                         adiveryNativeLayoutId = adiveryNativeLayoutId,
                         onAdLoaded = {
                             adView.makeVisible()
-                            onAdLoaded()
+                            onAdLoaded?.invoke()
                         })
                 },
                 loadAdmobNativeView = {
@@ -53,11 +54,12 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
                                 admobNativeLayoutId = adiveryNativeLayoutId,
                                 onViewReady = {
                                     adView.makeVisible()
-                                    onAdLoaded()
+                                    onAdLoaded?.invoke()
                                 }
                             )
                         },
                         onNativeAdFailed = {
+                            adView.makeGone()
                             Log.d("Admob", "Loading Native Ad Is Failed")
                         }
                     )
@@ -73,9 +75,10 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
                                 ayanCustomAdvertisementModel = ayanAdCustomModel,
                                 onAdLoaded = {
                                     adView.makeVisible()
-                                    onAdLoaded()
+                                    onAdLoaded?.invoke()
                                 },
                                 onAdFailed = {
+                                    adView.makeGone()
                                     Log.d(
                                         "Admob",
                                         "Loading Ayan Native Advertisement in a list failed"
