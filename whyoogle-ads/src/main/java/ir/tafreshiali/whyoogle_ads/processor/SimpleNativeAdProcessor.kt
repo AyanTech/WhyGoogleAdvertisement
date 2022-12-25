@@ -17,7 +17,7 @@ interface SimpleNativeAdProcessor {
         ayanNativeAdvertisementInput: AyanCustomAdvertisementInput,
         @LayoutRes adiveryNativeLayoutId: Int = R.layout.adivery_native_ad,
         @LayoutRes admobNativeLayoutId: Int = R.layout.admob_simple_native_ad,
-        @LayoutRes ayanNativeLayoutId: Int,
+        @LayoutRes ayanNativeLayoutId: Int = R.layout.ayan_simple_native_ad,
         ayanApi: AyanApi,
         appGeneralAdStatus: Boolean,
         appNativeAdStatus: Boolean,
