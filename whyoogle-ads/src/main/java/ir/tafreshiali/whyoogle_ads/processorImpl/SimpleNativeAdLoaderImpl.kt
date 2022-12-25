@@ -36,57 +36,60 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
         if (appGeneralAdStatus)
             handleApplicationNativeAdvertisement(
                 loadAdiveryNativeView = {
-                    adView.loadAdiveryNativeAdvertisementView(
-                        adiveryNativeAdUnit = adiveryNativeAdUnit,
-                        adiveryNativeLayoutId = adiveryNativeLayoutId,
-                        onAdLoaded = {
-                            adView.makeVisible()
-                            onAdLoaded?.invoke()
-                        })
+                    if (adiveryNativeAdUnit.isNotEmpty())
+                        adView.loadAdiveryNativeAdvertisementView(
+                            adiveryNativeAdUnit = adiveryNativeAdUnit,
+                            adiveryNativeLayoutId = adiveryNativeLayoutId,
+                            onAdLoaded = {
+                                adView.makeVisible()
+                                onAdLoaded?.invoke()
+                            })
                 },
                 loadAdmobNativeView = {
-                    AdvertisementCore.admobAdvertisement.loadNativeAdLoader(
-                        context = activityContext.application,
-                        admobNativeAdvertisementId = admobNativeAdvertisementId,
-                        onNativeAdLoaded = { admobNativeAd ->
-                            adView.loadAdmobNativeAdvertisementView(
-                                nativeAd = admobNativeAd,
-                                admobNativeLayoutId = adiveryNativeLayoutId,
-                                onViewReady = {
-                                    adView.makeVisible()
-                                    onAdLoaded?.invoke()
-                                }
-                            )
-                        },
-                        onNativeAdFailed = {
-                            adView.makeGone()
-                            Log.d("Admob", "Loading Native Ad Is Failed")
-                        }
-                    )
+                    if (admobNativeAdvertisementId.isNotEmpty())
+                        AdvertisementCore.admobAdvertisement.loadNativeAdLoader(
+                            context = activityContext.application,
+                            admobNativeAdvertisementId = admobNativeAdvertisementId,
+                            onNativeAdLoaded = { admobNativeAd ->
+                                adView.loadAdmobNativeAdvertisementView(
+                                    nativeAd = admobNativeAd,
+                                    admobNativeLayoutId = adiveryNativeLayoutId,
+                                    onViewReady = {
+                                        adView.makeVisible()
+                                        onAdLoaded?.invoke()
+                                    }
+                                )
+                            },
+                            onNativeAdFailed = {
+                                adView.makeGone()
+                                Log.d("Admob", "Loading Native Ad Is Failed")
+                            }
+                        )
                 },
                 loadAyanNativeView = {
-                    AdvertisementCore.ayanAdvertisement.loadAyanCustomNativeAdvertisement(
-                        ayanApi = ayanApi,
-                        input = ayanNativeAdvertisementInput,
-                        callBack = { ayanAdCustomModel ->
-                            adView.loadAyanNativeAdvertisementView(
-                                activityContext = activityContext,
-                                ayanNativeLayoutId = ayanNativeLayoutId,
-                                ayanCustomAdvertisementModel = ayanAdCustomModel,
-                                onAdLoaded = {
-                                    adView.makeVisible()
-                                    onAdLoaded?.invoke()
-                                },
-                                onAdFailed = {
-                                    adView.makeGone()
-                                    Log.d(
-                                        "Admob",
-                                        "Loading Ayan Native Advertisement in a list failed"
-                                    )
-                                }
-                            )
-                        }
-                    )
+                    if (ayanNativeAdvertisementInput.Container.isNotEmpty())
+                        AdvertisementCore.ayanAdvertisement.loadAyanCustomNativeAdvertisement(
+                            ayanApi = ayanApi,
+                            input = ayanNativeAdvertisementInput,
+                            callBack = { ayanAdCustomModel ->
+                                adView.loadAyanNativeAdvertisementView(
+                                    activityContext = activityContext,
+                                    ayanNativeLayoutId = ayanNativeLayoutId,
+                                    ayanCustomAdvertisementModel = ayanAdCustomModel,
+                                    onAdLoaded = {
+                                        adView.makeVisible()
+                                        onAdLoaded?.invoke()
+                                    },
+                                    onAdFailed = {
+                                        adView.makeGone()
+                                        Log.d(
+                                            "Admob",
+                                            "Loading Ayan Native Advertisement in a list failed"
+                                        )
+                                    }
+                                )
+                            }
+                        )
                 }
             )
     }

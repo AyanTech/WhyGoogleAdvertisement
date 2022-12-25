@@ -43,73 +43,76 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
             if (itemList.isNotEmpty()) {
                 handleApplicationNativeAdvertisement(
                     loadAdiveryNativeView = {
-                        loadAdiveryNativeAdvertisementView(
-                            adiveryNativeAdUnit = adiveryNativeAdUnit,
-                            context = activityContext,
-                            adiveryNativeLayoutId = adiveryNativeLayoutId,
-                            onAdLoaded = { adiveryView ->
+                        if (adiveryNativeAdUnit.isNotEmpty())
+                            loadAdiveryNativeAdvertisementView(
+                                adiveryNativeAdUnit = adiveryNativeAdUnit,
+                                context = activityContext,
+                                adiveryNativeLayoutId = adiveryNativeLayoutId,
+                                onAdLoaded = { adiveryView ->
 
-                                if (itemList.find { it is AdiveryNativeAdView } == null) {
+                                    if (itemList.find { it is AdiveryNativeAdView } == null) {
 
-                                    itemList.add(adViewInListIndex, adiveryView)
+                                        itemList.add(adViewInListIndex, adiveryView)
 
-                                    updateListItems(itemList)
+                                        updateListItems(itemList)
+                                    }
+
                                 }
-
-                            }
-                        )
+                            )
                     },
                     loadAdmobNativeView = {
-                        AdvertisementCore.admobAdvertisement.loadNativeAdLoader(
-                            context = activityContext.application,
-                            admobNativeAdvertisementId = admobNativeAdvertisementId,
-                            onNativeAdLoaded = { admobNativeAd ->
-                                loadAdmobNativeAdvertisementView(
-                                    context = activityContext.application,
-                                    admobNativeAdvertisement = admobNativeAd,
-                                    admobNativeLayoutId = R.layout.admob_native_ad,
-                                    onAdLoaded = { admobAdView ->
-                                        if (itemList.find { it is ViewGroup } == null) {
-                                            itemList.add(adViewInListIndex, admobAdView)
+                        if (admobNativeAdvertisementId.isNotEmpty())
+                            AdvertisementCore.admobAdvertisement.loadNativeAdLoader(
+                                context = activityContext.application,
+                                admobNativeAdvertisementId = admobNativeAdvertisementId,
+                                onNativeAdLoaded = { admobNativeAd ->
+                                    loadAdmobNativeAdvertisementView(
+                                        context = activityContext.application,
+                                        admobNativeAdvertisement = admobNativeAd,
+                                        admobNativeLayoutId = R.layout.admob_native_ad,
+                                        onAdLoaded = { admobAdView ->
+                                            if (itemList.find { it is ViewGroup } == null) {
+                                                itemList.add(adViewInListIndex, admobAdView)
 
-                                            updateListItems(itemList)
+                                                updateListItems(itemList)
+                                            }
                                         }
-                                    }
-                                )
-                            },
-                            onNativeAdFailed = {
-                                Log.d(
-                                    "Admob",
-                                    "Loading Admob Native Advertisement in a list failed"
-                                )
-                            }
-                        )
+                                    )
+                                },
+                                onNativeAdFailed = {
+                                    Log.d(
+                                        "Admob",
+                                        "Loading Admob Native Advertisement in a list failed"
+                                    )
+                                }
+                            )
                     },
                     loadAyanNativeView = {
-                        AdvertisementCore.ayanAdvertisement.loadAyanCustomNativeAdvertisement(
-                            ayanApi = ayanApi,
-                            input = ayanNativeAdvertisementInput,
-                            callBack = { ayanAdCustomModel ->
-                                loadAyanNativeAdvertisementView(
-                                    activityContext = activityContext,
-                                    ayanNativeLayoutId = ayanNativeLayoutId,
-                                    ayanCustomAdvertisementModel = ayanAdCustomModel,
-                                    onAdLoaded = { ayanAdView ->
-                                        if (itemList.find { it is ViewGroup } == null) {
-                                            itemList.add(adViewInListIndex, ayanAdView)
+                        if (ayanNativeAdvertisementInput.Container.isNotEmpty())
+                            AdvertisementCore.ayanAdvertisement.loadAyanCustomNativeAdvertisement(
+                                ayanApi = ayanApi,
+                                input = ayanNativeAdvertisementInput,
+                                callBack = { ayanAdCustomModel ->
+                                    loadAyanNativeAdvertisementView(
+                                        activityContext = activityContext,
+                                        ayanNativeLayoutId = ayanNativeLayoutId,
+                                        ayanCustomAdvertisementModel = ayanAdCustomModel,
+                                        onAdLoaded = { ayanAdView ->
+                                            if (itemList.find { it is ViewGroup } == null) {
+                                                itemList.add(adViewInListIndex, ayanAdView)
 
-                                            updateListItems(itemList)
+                                                updateListItems(itemList)
+                                            }
+                                        },
+                                        onAdFailed = {
+                                            Log.d(
+                                                "Admob",
+                                                "Loading Ayan Native Advertisement in a list failed"
+                                            )
                                         }
-                                    },
-                                    onAdFailed = {
-                                        Log.d(
-                                            "Admob",
-                                            "Loading Ayan Native Advertisement in a list failed"
-                                        )
-                                    }
-                                )
-                            }
-                        )
+                                    )
+                                }
+                            )
                     }
                 )
             }
