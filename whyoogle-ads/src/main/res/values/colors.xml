@@ -3,6 +3,7 @@
     <color name="white">#FFFFFF</color>
     <color name="advertisementHeadLineColor">#FF27272B</color>
     <color name="advertisementActiveButtonColor">#9c27b0</color>
+    <color name="advertisementActiveButtonTextColor">#9c27b0</color>
     <color name="advertisementDisableButtonColor">#DADADA</color>
     <color name="grayText">#8C8989</color>
     <color name="gray">#EFEFEF</color>

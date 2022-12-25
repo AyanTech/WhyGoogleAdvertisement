@@ -3,7 +3,8 @@
     <item android:state_enabled="true">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/half_radius" />
-            <solid android:color="@color/advertisementActiveButtonColor" />
+            <stroke android:width="@dimen/margin_1" android:color="@color/advertisementActiveButtonColor" />
+
         </shape>
     </item>
     <item android:state_enabled="false">

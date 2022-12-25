@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/background_result"
     android:gravity="center_vertical"
     android:padding="@dimen/margin_4">
@@ -25,7 +26,8 @@
         android:layout_marginStart="@dimen/margin_4"
         android:layout_marginTop="@dimen/margin_4"
         android:layout_marginEnd="@dimen/margin_4"
-        android:layout_marginBottom="@dimen/margin_4" />
+        android:layout_marginBottom="@dimen/margin_4"
+        tools:text="ثبت نام"/>
 
     <TextView
         android:id="@+id/adivery_headline"
