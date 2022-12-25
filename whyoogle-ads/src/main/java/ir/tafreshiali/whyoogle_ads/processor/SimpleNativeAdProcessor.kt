@@ -11,7 +11,6 @@ import ir.tafreshiali.whyoogle_ads.ayan_ads.domain.AyanCustomAdvertisementInput
 interface SimpleNativeAdProcessor {
     fun simpleNativeAdProcessor(
         activityContext: AppCompatActivity,
-        context: Application,
         adiveryNativeAdUnit: String,
         admobNativeAdvertisementId: String,
         ayanNativeAdvertisementInput: AyanCustomAdvertisementInput,

@@ -16,7 +16,6 @@ interface InListAdvertisementProcessor {
         @LayoutRes admobNativeLayoutId: Int = R.layout.admob_simple_native_ad,
         @LayoutRes ayanNativeLayoutId: Int = R.layout.ayan_simple_native_ad,
         ayanApi: AyanApi,
-        context: Application,
         activityContext: AppCompatActivity,
         appGeneralAdStatus: Boolean,
         itemList: MutableList<Any>,

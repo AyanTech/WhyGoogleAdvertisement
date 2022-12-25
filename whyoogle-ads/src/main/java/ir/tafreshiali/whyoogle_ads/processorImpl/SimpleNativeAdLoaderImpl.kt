@@ -22,7 +22,6 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
      * @param adView of type [ViewGroup] the view that ad load in it , it can be defined in xml or kotlin code.*/
     override fun simpleNativeAdProcessor(
         activityContext: AppCompatActivity,
-        context: Application,
         adiveryNativeAdUnit: String,
         admobNativeAdvertisementId: String,
         ayanNativeAdvertisementInput: AyanCustomAdvertisementInput,
@@ -48,7 +47,7 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
                 },
                 loadAdmobNativeView = {
                     AdvertisementCore.admobAdvertisement.loadNativeAdLoader(
-                        context = context,
+                        context = activityContext.application,
                         admobNativeAdvertisementId = admobNativeAdvertisementId,
                         onNativeAdLoaded = { admobNativeAd ->
                             adView.loadAdmobNativeAdvertisementView(

@@ -33,7 +33,6 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
         @LayoutRes admobNativeLayoutId: Int,
         @LayoutRes ayanNativeLayoutId: Int,
         ayanApi: AyanApi,
-        context: Application,
         activityContext: AppCompatActivity,
         appGeneralAdStatus: Boolean,
         itemList: MutableList<Any>,
@@ -62,11 +61,11 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
                     },
                     loadAdmobNativeView = {
                         AdvertisementCore.admobAdvertisement.loadNativeAdLoader(
-                            context = context,
+                            context = activityContext.application,
                             admobNativeAdvertisementId = admobNativeAdvertisementId,
                             onNativeAdLoaded = { admobNativeAd ->
                                 loadAdmobNativeAdvertisementView(
-                                    context = context,
+                                    context = activityContext.application,
                                     admobNativeAdvertisement = admobNativeAd,
                                     admobNativeLayoutId = R.layout.admob_native_ad,
                                     onAdLoaded = { admobAdView ->
