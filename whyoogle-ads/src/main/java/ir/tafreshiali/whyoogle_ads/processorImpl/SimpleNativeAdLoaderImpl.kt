@@ -32,7 +32,8 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
         ayanApi: AyanApi,
         appGeneralAdStatus: Boolean,
         appNativeAdStatus: Boolean,
-        adView: ViewGroup
+        adView: ViewGroup,
+        onAdLoaded: () -> Unit
     ) {
         if (appGeneralAdStatus && appNativeAdStatus)
             handleApplicationNativeAdvertisement(
@@ -40,7 +41,10 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
                     adView.loadAdiveryNativeAdvertisementView(
                         adiveryNativeAdUnit = adiveryNativeAdUnit,
                         adiveryNativeLayoutId = adiveryNativeLayoutId,
-                        onAdLoaded = { adView.makeVisible() })
+                        onAdLoaded = {
+                            adView.makeVisible()
+                            onAdLoaded()
+                        })
                 },
                 loadAdmobNativeView = {
                     AdvertisementCore.admobAdvertisement.loadNativeAdLoader(
@@ -52,6 +56,7 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
                                 admobNativeLayoutId = adiveryNativeLayoutId,
                                 onViewReady = {
                                     adView.makeVisible()
+                                    onAdLoaded()
                                 }
                             )
                         },
@@ -71,6 +76,7 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
                                 ayanCustomAdvertisementModel = ayanAdCustomModel,
                                 onAdLoaded = {
                                     adView.makeVisible()
+                                    onAdLoaded()
                                 },
                                 onAdFailed = {
                                     Log.d(

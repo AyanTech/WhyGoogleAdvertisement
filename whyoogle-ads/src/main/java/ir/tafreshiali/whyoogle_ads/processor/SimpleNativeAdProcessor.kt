@@ -21,6 +21,7 @@ interface SimpleNativeAdProcessor {
         ayanApi: AyanApi,
         appGeneralAdStatus: Boolean,
         appNativeAdStatus: Boolean,
-        adView: ViewGroup
+        adView: ViewGroup,
+        onAdLoaded: () -> Unit
     )
 }
