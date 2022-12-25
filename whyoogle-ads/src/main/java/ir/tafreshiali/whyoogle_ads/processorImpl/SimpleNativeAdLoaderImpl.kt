@@ -1,6 +1,5 @@
 package ir.tafreshiali.whyoogle_ads.processorImpl
 
-import android.app.Application
 import android.util.Log
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -30,11 +29,10 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
         ayanNativeLayoutId: Int,
         ayanApi: AyanApi,
         appGeneralAdStatus: Boolean,
-        appNativeAdStatus: Boolean,
         adView: ViewGroup,
         onAdLoaded: () -> Unit
     ) {
-        if (appGeneralAdStatus && appNativeAdStatus)
+        if (appGeneralAdStatus)
             handleApplicationNativeAdvertisement(
                 loadAdiveryNativeView = {
                     adView.loadAdiveryNativeAdvertisementView(

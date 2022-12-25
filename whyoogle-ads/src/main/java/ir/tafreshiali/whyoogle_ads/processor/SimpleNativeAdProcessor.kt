@@ -1,6 +1,5 @@
 package ir.tafreshiali.whyoogle_ads.processor
 
-import android.app.Application
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +18,6 @@ interface SimpleNativeAdProcessor {
         @LayoutRes ayanNativeLayoutId: Int = R.layout.ayan_simple_native_ad,
         ayanApi: AyanApi,
         appGeneralAdStatus: Boolean,
-        appNativeAdStatus: Boolean,
         adView: ViewGroup,
         onAdLoaded: () -> Unit
     )
