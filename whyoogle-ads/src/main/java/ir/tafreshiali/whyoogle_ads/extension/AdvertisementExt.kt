@@ -330,6 +330,9 @@ fun ViewGroup.loadAyanNativeAdvertisementView(
             onAdFailed()
             return@trying
         }
+        this.setOnClickListener {
+            ayanCustomAdvertisementModel.ButtonRedirectLink.openUrl(context = activityContext)
+        }
     }
 }
 
