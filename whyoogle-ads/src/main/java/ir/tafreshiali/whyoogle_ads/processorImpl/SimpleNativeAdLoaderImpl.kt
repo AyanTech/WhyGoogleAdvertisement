@@ -53,7 +53,7 @@ class SimpleNativeAdLoaderImpl : SimpleNativeAdProcessor {
                             onNativeAdLoaded = { admobNativeAd ->
                                 adView.loadAdmobNativeAdvertisementView(
                                     nativeAd = admobNativeAd,
-                                    admobNativeLayoutId = adiveryNativeLayoutId,
+                                    admobNativeLayoutId = admobNativeLayoutId,
                                     onViewReady = {
                                         adView.makeVisible()
                                         onAdLoaded?.invoke()

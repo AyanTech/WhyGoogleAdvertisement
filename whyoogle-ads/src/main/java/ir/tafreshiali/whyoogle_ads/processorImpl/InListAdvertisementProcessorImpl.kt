@@ -69,7 +69,7 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
                                     loadAdmobNativeAdvertisementView(
                                         context = activityContext.application,
                                         admobNativeAdvertisement = admobNativeAd,
-                                        admobNativeLayoutId = R.layout.admob_native_ad,
+                                        admobNativeLayoutId = admobNativeLayoutId,
                                         onAdLoaded = { admobAdView ->
                                             if (itemList.find { it is ViewGroup } == null) {
                                                 itemList.add(adViewInListIndex, admobAdView)
