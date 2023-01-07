@@ -7,6 +7,7 @@ import androidx.core.view.children
 import com.adivery.sdk.AdiveryNativeAdView
 import com.google.android.gms.ads.nativead.NativeAdView
 import ir.ayantech.whygoogle.adapter.MultiViewTypeViewHolder
+import ir.tafreshiali.whyoogle_ads.R
 import ir.tafreshiali.whyoogle_ads.databinding.RowNativeAdInListPlaceHolderBinding
 
 
@@ -21,7 +22,7 @@ fun MultiViewTypeViewHolder<Any>.handleClickForNativeAdvertisement(analyticsEven
             when (rootView.children.firstOrNull()) {
 
                 is AdiveryNativeAdView -> {
-                    rootView.findViewById<AppCompatButton>(ir.ayantech.pishkhancore.R.id.adivery_call_to_action)
+                    rootView.findViewById<AppCompatButton>(R.id.adivery_call_to_action)
                         .performClick()
                 }
 

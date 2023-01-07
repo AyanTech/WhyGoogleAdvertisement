@@ -68,7 +68,7 @@ dependencies {
     compileOnly(ayan.Networking.pishkhanNetworking)
 
     //Ayan - Core
-    implementation(ayan.PishkhanCore.pishkhanCore)
+    compileOnly(ayan.PishkhanCore.pishkhanCore)
 
     //kotlin reflection
     implementation(Reflection.kotlinReflection)
@@ -99,7 +99,7 @@ afterEvaluate {
                 artifactId = "whygoogle-ads"
 
                 // Version Library Name (Example : "1.0.0")
-                version = "1.4.6"
+                version = "1.4.7"
             }
         }
     }

@@ -13,7 +13,6 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.view.children
 import com.adivery.sdk.AdiveryNativeAdView
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.nativead.NativeAd
@@ -23,11 +22,11 @@ import ir.ayantech.advertisement.core.AdvertisementCore
 import ir.ayantech.ayannetworking.api.AyanApi
 import ir.ayantech.ayannetworking.api.OnChangeStatus
 import ir.ayantech.ayannetworking.api.OnFailure
-import ir.ayantech.pishkhancore.helper.loadFromString
 import ir.ayantech.pishkhancore.model.AppConfigAdvertisementOutput
 import ir.ayantech.pishkhancore.model.Source
-import ir.ayantech.whygoogle.adapter.MultiViewTypeViewHolder
-import ir.ayantech.whygoogle.helper.*
+import ir.ayantech.whygoogle.helper.isNull
+import ir.ayantech.whygoogle.helper.openUrl
+import ir.ayantech.whygoogle.helper.trying
 import ir.tafreshiali.whyoogle_ads.AdvertisementEndpoint
 import ir.tafreshiali.whyoogle_ads.AyanAdvertisement
 import ir.tafreshiali.whyoogle_ads.R

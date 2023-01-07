@@ -1,15 +1,12 @@
 package ir.tafreshiali.whyoogle_ads.processorImpl
 
-import android.app.Application
 import android.util.Log
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.adivery.sdk.AdiveryNativeAdView
 import ir.ayantech.ayannetworking.api.AyanApi
-import ir.ayantech.pishkhancore.core.PishkhanCore.ayanApi
 import ir.tafreshiali.whyoogle_ads.AdvertisementCore
-import ir.tafreshiali.whyoogle_ads.R
 import ir.tafreshiali.whyoogle_ads.ayan_ads.domain.AyanCustomAdvertisementInput
 import ir.tafreshiali.whyoogle_ads.extension.handleApplicationNativeAdvertisement
 import ir.tafreshiali.whyoogle_ads.extension.loadAdiveryNativeAdvertisementView
