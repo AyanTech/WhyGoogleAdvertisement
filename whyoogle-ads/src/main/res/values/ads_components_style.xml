@@ -21,7 +21,7 @@
 
 
     <style name="AdiveryAdsButtonStyle">
-        <item name="android:textColor">@drawable/enable_disable_button_text_color</item>
+        <item name="android:textColor">@drawable/enable_disable_native_advertisement_button_text_color</item>
         <item name="android:textSize">@dimen/sub_medium_text</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingStart">@dimen/margin_32</item>
@@ -29,7 +29,7 @@
         <item name="android:clipToPadding">false</item>
         <item name="android:textStyle">bold</item>
         <item name="android:height">@dimen/margin_40</item>
-        <item name="android:background">@drawable/back_color_accent_button</item>
+        <item name="android:background">@drawable/advertisement_button_color</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="fontFamily">@font/iran_sans_mobile_regular</item>
         <item name="android:fontFamily">@font/iran_sans_mobile_regular</item>
@@ -45,7 +45,7 @@
 
 
     <style name="AdmobAdsButtonStyle">
-        <item name="android:textColor">@drawable/enable_disable_button_text_color</item>
+        <item name="android:textColor">@drawable/enable_disable_native_advertisement_button_text_color</item>
         <item name="android:textSize">@dimen/sub_medium_text</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingStart">@dimen/margin_32</item>
@@ -53,7 +53,7 @@
         <item name="android:clipToPadding">false</item>
         <item name="android:textStyle">bold</item>
         <item name="android:height">@dimen/margin_40</item>
-        <item name="android:background">@drawable/back_color_accent_button</item>
+        <item name="android:background">@drawable/advertisement_button_color</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="fontFamily">@font/roboto_regular</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
@@ -68,7 +68,7 @@
     </style>
 
     <style name="AyanAdsButtonStyle">
-        <item name="android:textColor">@drawable/enable_disable_button_text_color</item>
+        <item name="android:textColor">@drawable/enable_disable_native_advertisement_button_text_color</item>
         <item name="android:textSize">@dimen/sub_medium_text</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingStart">@dimen/margin_32</item>
@@ -76,7 +76,7 @@
         <item name="android:clipToPadding">false</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_height">@dimen/margin_32</item>
-        <item name="android:background">@drawable/back_color_accent_button</item>
+        <item name="android:background">@drawable/advertisement_button_color</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="fontFamily">@font/iran_sans_mobile_regular</item>
         <item name="android:fontFamily">@font/iran_sans_mobile_regular</item>
