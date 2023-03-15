@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        style="@style/MainCards"
+        style="@style/AyanNativeAdCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -43,7 +43,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:textColor="@color/advertisementHeadLineColor"
+                android:textColor="@color/ayanAdvertisementHeadLineColor"
                 tools:text="خرید ملک" />
 
             <androidx.appcompat.widget.AppCompatImageView

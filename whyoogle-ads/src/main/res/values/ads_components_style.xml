@@ -3,24 +3,14 @@
 
 
     <style name="MainCards">
-        <item name="cardBackgroundColor">@color/white</item>
+        <item name="cardBackgroundColor">@color/mainCardBackgroundColor</item>
         <item name="cardCornerRadius">@dimen/half_radius</item>
         <item name="cardElevation">@dimen/main_Elevation</item>
         <item name="cardPreventCornerOverlap">false</item>
         <item name="cardUseCompatPadding">true</item>
     </style>
 
-
-    <!--ADIVERY ADVERTISEMENT UI COMPONENTS STYLE-->
-
-    <style name="AdiveryAdsTextViewStyle">
-        <item name="fontFamily">@font/iran_sans_mobile_regular</item>
-        <item name="android:fontFamily">@font/iran_sans_mobile_regular</item>
-        <item name="android:textColor">@color/advertisementHeadLineColor</item>
-    </style>
-
-
-    <style name="AdiveryAdsButtonStyle">
+    <style name="AdButton">
         <item name="android:textColor">@drawable/enable_disable_native_advertisement_button_text_color</item>
         <item name="android:textSize">@dimen/sub_medium_text</item>
         <item name="android:gravity">center</item>
@@ -31,55 +21,70 @@
         <item name="android:height">@dimen/margin_40</item>
         <item name="android:background">@drawable/advertisement_button_color</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="RowNativeAdInListPlaceHolder" />
+
+    <style name="SimpleNativeAdBackground">
+        <item name="android:background">@drawable/simple_native_advertisement_bg</item>
+    </style>
+
+    <!--ADIVERY ADVERTISEMENT UI COMPONENTS STYLE-->
+
+    <style name="AdiveryCard" parent="MainCards">
+        <item name="cardBackgroundColor">@color/adiveryCardBackgroundColor</item>
+    </style>
+
+    <style name="AdiveryAdsTextViewStyle">
+        <item name="fontFamily">@font/iran_sans_mobile_regular</item>
+        <item name="android:fontFamily">@font/iran_sans_mobile_regular</item>
+        <item name="android:textColor">@color/adiveryAdvertisementHeadLineColor</item>
+    </style>
+
+
+    <style name="AdiveryAdsButtonStyle" parent="AdButton">
         <item name="fontFamily">@font/iran_sans_mobile_regular</item>
         <item name="android:fontFamily">@font/iran_sans_mobile_regular</item>
     </style>
+
+    <style name="AdiveryNativeAdSquareCard" parent="MainCards"/>
+
+    <style name="AdiveryNativeAdBackground" parent="SimpleNativeAdBackground"/>
 
     <!--ADMOB ADVERTISEMENT UI COMPONENTS STYLE-->
 
     <style name="AdmobAdsTextViewStyle">
         <item name="fontFamily">@font/roboto_regular</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:textColor">@color/advertisementHeadLineColor</item>
+        <item name="android:textColor">@color/admobAdvertisementHeadLineColor</item>
     </style>
 
 
-    <style name="AdmobAdsButtonStyle">
-        <item name="android:textColor">@drawable/enable_disable_native_advertisement_button_text_color</item>
-        <item name="android:textSize">@dimen/sub_medium_text</item>
-        <item name="android:gravity">center</item>
-        <item name="android:paddingStart">@dimen/margin_32</item>
-        <item name="android:paddingEnd">@dimen/margin_32</item>
-        <item name="android:clipToPadding">false</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:height">@dimen/margin_40</item>
-        <item name="android:background">@drawable/advertisement_button_color</item>
-        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    <style name="AdmobAdsButtonStyle" parent="AdButton">
         <item name="fontFamily">@font/roboto_regular</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
+
+    <style name="AdmobNativeAdCard" parent="MainCards"/>
+    <style name="AdmobNativeAdSquareCard" parent="MainCards"/>
+
+    <style name="AdmobNativeAdBackground" parent="SimpleNativeAdBackground"/>
 
 
     <!--AYAN ADVERTISEMENT UI COMPONENTS STYLE-->
     <style name="AyanAdsTextViewStyle">
         <item name="fontFamily">@font/iran_sans_mobile_regular</item>
         <item name="android:fontFamily">@font/iran_sans_mobile_regular</item>
-        <item name="android:textColor">@color/advertisementHeadLineColor</item>
+        <item name="android:textColor">@color/ayanAdvertisementHeadLineColor</item>
     </style>
 
-    <style name="AyanAdsButtonStyle">
-        <item name="android:textColor">@drawable/enable_disable_native_advertisement_button_text_color</item>
-        <item name="android:textSize">@dimen/sub_medium_text</item>
-        <item name="android:gravity">center</item>
-        <item name="android:paddingStart">@dimen/margin_32</item>
-        <item name="android:paddingEnd">@dimen/margin_32</item>
-        <item name="android:clipToPadding">false</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:layout_height">@dimen/margin_32</item>
-        <item name="android:background">@drawable/advertisement_button_color</item>
-        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    <style name="AyanAdsButtonStyle" parent="AdButton">
         <item name="fontFamily">@font/iran_sans_mobile_regular</item>
         <item name="android:fontFamily">@font/iran_sans_mobile_regular</item>
     </style>
+
+    <style name="AyanNativeAdCard" parent="MainCards"/>
+
+    <style name="AyanNativeAdBackground" parent="SimpleNativeAdBackground"/>
 
 </resources>

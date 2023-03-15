@@ -4,9 +4,9 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
+        style="@style/AyanNativeAdBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/simple_native_advertisement_bg"
         android:gravity="center_vertical"
         android:padding="@dimen/margin_4">
 
@@ -39,7 +39,7 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:textColor="@color/advertisementHeadLineColor"
+            android:textColor="@color/ayanAdvertisementHeadLineColor"
             tools:text="خرید ملک" />
 
         <androidx.appcompat.widget.AppCompatImageView

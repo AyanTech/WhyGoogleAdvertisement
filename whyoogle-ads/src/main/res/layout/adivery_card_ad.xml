@@ -1,6 +1,6 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/MainCards"
+    style="@style/AdiveryCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -49,7 +49,7 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:textColor="@color/advertisementHeadLineColor"
+            android:textColor="@color/adiveryAdvertisementHeadLineColor"
             tools:text="خرید ملک" />
 
         <ImageView
