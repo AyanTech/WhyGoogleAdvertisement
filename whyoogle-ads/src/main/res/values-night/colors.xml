@@ -2,9 +2,12 @@
 <resources>
     <color name="white">#FFFFFF</color>
     <color name="advertisementHeadLineColor">#FFFFFF</color>
-    <color name="primary_color">#9c27b0</color>
-    <color name="advertisementActiveButtonColor">@color/primary_color</color>
-    <color name="advertisementActiveButtonTextColor">@color/primary_color</color>
+    <color name="ayanAdvertisementHeadLineColor">@color/advertisementHeadLineColor</color>
+    <color name="admobAdvertisementHeadLineColor">@color/advertisementHeadLineColor</color>
+    <color name="adiveryAdvertisementHeadLineColor">@color/advertisementHeadLineColor</color>
+    <color name="advertisement_button_color">#9c27b0</color>
+    <color name="advertisementActiveButtonColor">@color/advertisement_button_color</color>
+    <color name="advertisementActiveButtonTextColor">@color/advertisement_button_color</color>
     <color name="advertisementDisableButtonColor">#DADADA</color>
     <color name="grayText">#8C8989</color>
     <color name="gray">#EFEFEF</color>
@@ -13,7 +16,7 @@
     <color name="square_ad_divider">#ECF0F1</color>
     <color name="colorAccent">#7da453</color>
 
-    <color name="mainCardBackgroundColor">@color/white</color>
+    <color name="mainCardBackgroundColor">@color/adBackground</color>
     <color name="adiveryCardBackgroundColor">@color/adBackground</color>
     <color name="adiveryButtonTextColor"/>
 </resources>
