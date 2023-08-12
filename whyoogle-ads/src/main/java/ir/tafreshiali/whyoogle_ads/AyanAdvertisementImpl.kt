@@ -5,7 +5,6 @@ import android.util.Log
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.initialization.AdapterStatus
 import com.google.android.gms.ads.interstitial.InterstitialAd
-import ir.ayantech.advertisement.core.AdvertisementCore
 import ir.ayantech.ayannetworking.api.AyanApi
 import ir.ayantech.ayannetworking.api.OnChangeStatus
 import ir.ayantech.ayannetworking.api.OnFailure

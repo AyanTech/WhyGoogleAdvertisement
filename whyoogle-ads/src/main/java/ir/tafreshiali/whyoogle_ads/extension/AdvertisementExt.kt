@@ -18,7 +18,6 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.google.android.material.textview.MaterialTextView
-import ir.ayantech.advertisement.core.AdvertisementCore
 import ir.ayantech.ayannetworking.api.AyanApi
 import ir.ayantech.ayannetworking.api.OnChangeStatus
 import ir.ayantech.ayannetworking.api.OnFailure
@@ -27,6 +26,7 @@ import ir.ayantech.pishkhancore.model.Source
 import ir.ayantech.whygoogle.helper.isNull
 import ir.ayantech.whygoogle.helper.openUrl
 import ir.ayantech.whygoogle.helper.trying
+import ir.tafreshiali.whyoogle_ads.AdvertisementCore
 import ir.tafreshiali.whyoogle_ads.AdvertisementEndpoint
 import ir.tafreshiali.whyoogle_ads.AyanAdvertisement
 import ir.tafreshiali.whyoogle_ads.R

@@ -59,7 +59,8 @@ dependencies {
     //Ayan - Advertisement
     compileOnly(ad.AdmobAdvertisement.admobAdvertisement)
 
-    api(ad.AdiveryAdvertisement.advertisement)
+    //Adivery - Advertisement
+    api(ad.AdiveryAdvertisement.adivery)
 
     //Ayan - Why google
     compileOnly(ayan.WhyGoogle.whyGoogle)

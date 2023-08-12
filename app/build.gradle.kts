@@ -45,6 +45,7 @@ dependencies {
     implementation(AndroidX.appCompatActivity)
     implementation(MaterialDesign.materialDesign)
     implementation(AndroidX.constraintLayout)
+    implementation(project(mapOf("path" to ":whyoogle-ads")))
     testImplementation(Junit.junit)
     androidTestImplementation(Junit.junitTestExt)
     androidTestImplementation(Junit.junitTestExtKtx)
