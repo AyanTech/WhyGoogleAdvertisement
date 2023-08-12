@@ -93,14 +93,14 @@ afterEvaluate {
 
                 // Library Package Name (Example : "com.frogobox.androidfirstlib")
                 // NOTE : Different GroupId For Each Library / Module, So That Each Library Is Not Overwritten
-                groupId = "com.github.alitafreshi"
+                groupId = "com.github.ayantech"
 
                 // Library Name / Module Name (Example : "androidfirstlib")
                 // NOTE : Different ArtifactId For Each Library / Module, So That Each Library Is Not Overwritten
                 artifactId = "whygoogle-ads"
 
                 // Version Library Name (Example : "1.0.0")
-                version = "2.0.1"
+                version = "2.0.2"
             }
         }
     }
