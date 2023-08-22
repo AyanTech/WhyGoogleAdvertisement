@@ -15,11 +15,25 @@
         android:marqueeRepeatLimit="marquee_forever"
         android:scrollHorizontally="true"
         android:singleLine="true"
+        android:visibility="gone"
         android:text="adsfgblndflkndlbldskfbnkldfsnbkldfnblkdnfbklsdnfbklmsdfnbkldsfnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+<!--
+
+    <com.adivery.sdk.AdiveryNativeAdView
+        android:id="@+id/native_ad_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:placement_id="04b32db2-a991-433b-844b-cad003f74693"
+        app:adivery_native_ad_layout="@layout/ad_layout_example" />
+-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
