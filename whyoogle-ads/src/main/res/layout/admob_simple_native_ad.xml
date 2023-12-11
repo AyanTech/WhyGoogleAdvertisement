@@ -1,56 +1,72 @@
-<com.google.android.gms.ads.nativead.NativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.gms.ads.nativead.NativeAdView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/AdmobNativeAdBackground"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="2dp"
+    android:paddingTop="2dp"
+    android:background="@drawable/bg_white_6radius_no_stroke">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:padding="@dimen/margin_4">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/ad_app_icon"
-            android:layout_width="@dimen/margin_32"
-            android:layout_height="@dimen/margin_32"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/margin_4"
-            android:layout_marginTop="@dimen/margin_4"
-            android:layout_marginEnd="@dimen/margin_4"
-            android:layout_marginBottom="@dimen/margin_4" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="6.50dp"
+            android:paddingHorizontal="10.40dp"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/ad_app_icon"
+                android:layout_width="@dimen/margin_32"
+                android:layout_height="@dimen/margin_32"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_10" />
+
+            <TextView
+                android:id="@+id/ad_headline"
+                style="@style/text_small_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textAlignment="viewStart"
+                android:layout_marginHorizontal="2.60dp"
+                android:layout_toStartOf="@+id/ad_call_to_action"
+                android:layout_toEndOf="@+id/ad_app_icon"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                tools:text="Buy A House In America" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/ad_call_to_action"
+                style="@style/AdmobAdsButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="5dp"
+                tools:text="Register" />
+
+        </RelativeLayout>
 
         <TextView
-            android:id="@+id/ad_headline"
-            style="@style/AdmobAdsTextViewStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/margin_4"
-            android:layout_marginTop="@dimen/margin_4"
-            android:layout_marginEnd="@dimen/margin_4"
-            android:layout_marginBottom="@dimen/margin_4"
-            android:layout_toStartOf="@+id/ad_call_to_action"
-            android:layout_toEndOf="@+id/ad_app_icon"
-            android:ellipsize="marquee"
-            android:fadingEdge="horizontal"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:scrollHorizontally="true"
-            android:singleLine="true"
-            tools:text="Buy A House In America" />
+            android:id="@+id/ad_attribute"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentLeft="true"
+            android:background="@color/orange"
+            android:gravity="center"
+            android:text="Ad"
+            android:textColor="@color/white"
+            android:textSize="11sp" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/ad_call_to_action"
-            style="@style/AdmobAdsButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/margin_32"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/margin_4"
-            android:layout_marginTop="@dimen/margin_4"
-            android:layout_marginEnd="@dimen/margin_4"
-            android:layout_marginBottom="@dimen/margin_4"
-            tools:text="Register" />
 
     </RelativeLayout>
 

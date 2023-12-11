@@ -42,6 +42,7 @@ android {
 dependencies {
 
     implementation(AndroidX.coreKtx)
+    compileOnly(ad.AdmobAdvertisement.admobAdvertisement)
     implementation(AndroidX.appCompatActivity)
     implementation(MaterialDesign.materialDesign)
     implementation(AndroidX.constraintLayout)
@@ -50,4 +51,5 @@ dependencies {
     androidTestImplementation(Junit.junitTestExt)
     androidTestImplementation(Junit.junitTestExtKtx)
     androidTestImplementation(Espresso.espresso)
+
 }

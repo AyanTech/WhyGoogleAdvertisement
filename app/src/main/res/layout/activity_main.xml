@@ -34,6 +34,16 @@
         app:placement_id="04b32db2-a991-433b-844b-cad003f74693"
         app:adivery_native_ad_layout="@layout/ad_layout_example" />
 -->
+<!--
+
+    <LinearLayout
+        android:id="@+id/nativeLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent" />
+-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,4 +19,8 @@
     <color name="mainCardBackgroundColor">@color/adBackground</color>
     <color name="adiveryCardBackgroundColor">@color/adBackground</color>
     <color name="adiveryButtonTextColor"/>
+
+    <color name="black">#0C0C0C</color>
+    <color name="orange">#FFA500</color>
+
 </resources>
