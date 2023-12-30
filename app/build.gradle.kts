@@ -45,6 +45,7 @@ dependencies {
     compileOnly(ad.AdmobAdvertisement.admobAdvertisement)
     implementation(AndroidX.appCompatActivity)
     implementation(MaterialDesign.materialDesign)
+    implementation(Messaging.messaging)
     implementation(AndroidX.constraintLayout)
     implementation(project(mapOf("path" to ":whyoogle-ads")))
     testImplementation(Junit.junit)

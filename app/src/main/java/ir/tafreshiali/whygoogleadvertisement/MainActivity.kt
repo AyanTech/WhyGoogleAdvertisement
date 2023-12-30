@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val tv = findViewById<TextView>(R.id.marqueeTv)
-       // val adView = findViewById<LinearLayout>(R.id.nativeLl)
+     //  val adView = findViewById<LinearLayout>(R.id.nativeLl)
         tv.isSelected = true
 
         //val adiveryNativeAdView = findViewById<AdiveryNativeAdView>(R.id.native_ad_view)
@@ -58,8 +58,9 @@ class MainActivity : AppCompatActivity(),
                     adiveryNativeAdView?.loadAd()
 
                 }*/
+/*
+     MobileAds.initialize(this)
 
-/*        MobileAds.initialize(this)
 
         loadNativeAdLoader(
             application,
@@ -69,8 +70,8 @@ class MainActivity : AppCompatActivity(),
                     nativeAd = admobNativeAd,
                     admobNativeLayoutId = ir.tafreshiali.whyoogle_ads.R.layout.admob_simple_native_ad,
                     onViewReady = {
-                        //  adView.makeVisible()
-                        // onAdLoaded?.invoke()
+                        // adView.makeVisible()
+                      // onAdLoaded?.invoke()
                     }
                 )
             },

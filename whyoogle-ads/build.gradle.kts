@@ -55,6 +55,7 @@ dependencies {
     androidTestImplementation(Junit.junitTestExt)
     androidTestImplementation(Junit.junitTestExtKtx)
     androidTestImplementation(Espresso.espresso)
+    implementation(Messaging.messaging)
 
     //Ayan - Advertisement
     compileOnly(ad.AdmobAdvertisement.admobAdvertisement)
@@ -100,7 +101,7 @@ afterEvaluate {
                 artifactId = "whygoogle-ads"
 
                 // Version Library Name (Example : "1.0.0")
-                version = "2.0.4"
+                version = "2.1.0"
             }
         }
     }
