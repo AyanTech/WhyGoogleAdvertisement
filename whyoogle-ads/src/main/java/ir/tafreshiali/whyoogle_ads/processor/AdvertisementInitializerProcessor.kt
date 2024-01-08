@@ -21,19 +21,20 @@ interface AdvertisementInitializerProcessor {
         get() =
             consentInformation?.privacyOptionsRequirementStatus ==
                     ConsentInformation.PrivacyOptionsRequirementStatus.REQUIRED
-    @Deprecated(message = "This method is deprecated")
+
     fun appAdvertisementGeneralProcessor(
+        activity: Activity,
         ayanApi: AyanApi,
         application: Application,
+        checkGDPR: Boolean = true,
         changeStatus: OnChangeStatus? = null,
         failure: OnFailure? = null,
         onSourceInitialized: (Boolean) -> Unit,
         updateAppGeneralAdvertisementStatus: (Boolean) -> Unit
     )
 
-
+    @Deprecated(message = "This method is deprecated")
     fun appAdvertisementGeneralProcessor(
-        activity: Activity,
         ayanApi: AyanApi,
         application: Application,
         changeStatus: OnChangeStatus? = null,

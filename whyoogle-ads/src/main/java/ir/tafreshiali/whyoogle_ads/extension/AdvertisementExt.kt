@@ -14,15 +14,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import com.adivery.sdk.AdiveryNativeAdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.google.android.material.textview.MaterialTextView
+import com.google.android.ump.ConsentInformation
+import com.google.android.ump.ConsentRequestParameters
 import ir.ayantech.ayannetworking.api.AyanApi
 import ir.ayantech.ayannetworking.api.OnChangeStatus
 import ir.ayantech.ayannetworking.api.OnFailure
 import ir.ayantech.pishkhancore.model.AppConfigAdvertisementOutput
 import ir.ayantech.pishkhancore.model.Source
+import ir.ayantech.whygoogle.helper.SimpleCallBack
 import ir.ayantech.whygoogle.helper.isNull
 import ir.ayantech.whygoogle.helper.openUrl
 import ir.ayantech.whygoogle.helper.trying
@@ -34,6 +38,11 @@ import ir.tafreshiali.whyoogle_ads.admob.AdmobAdvertisement
 import ir.tafreshiali.whyoogle_ads.ayan_ads.domain.AyanCustomAdvertisementModel
 import ir.tafreshiali.whyoogle_ads.constance.ApplicationCommonAdvertisementKeys
 import ir.tafreshiali.whyoogle_ads.datasource.shared_preference.ApplicationAdvertisementType
+import com.google.android.ump.ConsentDebugSettings
+import com.google.android.ump.UserMessagingPlatform
+import ir.tafreshiali.whyoogle_ads.BuildConfig
+import java.util.concurrent.atomic.AtomicBoolean
+
 
 /**
  * getAppConfigAdvertisement an extension function for getting application advertisement info
@@ -59,6 +68,7 @@ fun AyanApi.getAppConfigAdvertisement(
  * checkAdvertisementStatus Based on [AppConfigAdvertisementOutput]
  * @param ayanAdvertisement of type [AyanAdvertisement]
  * @param callback a lambda function for doing some operation on the advertisement activation state*/
+@Deprecated(message = "This method is deprecated")
 fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
     adiveryAppKey: String,
     admobInterstitialAdUnit: String,
@@ -111,6 +121,86 @@ fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
             }
         }
     }
+}
+
+fun AppConfigAdvertisementOutput.checkAdvertisementStatus(
+    activity: Activity,
+    checkGDPR: Boolean = true,
+    adiveryAppKey: String,
+    admobInterstitialAdUnit: String,
+    adiveryInterstitialAdUnit: String,
+    application: Application,
+    ayanAdvertisement: AyanAdvertisement = ir.tafreshiali.whyoogle_ads.AdvertisementCore.ayanAdvertisement,
+    onSourceInitialized: (Boolean) -> Unit,
+    callback: (Boolean) -> Unit,
+): ConsentInformation? {
+    var consentInformation: ConsentInformation? = null
+
+    if (this.Active) {
+        ApplicationAdvertisementType.appAdvertisementType =
+            this.Sources.firstOrNull { it.Key == ApplicationAdvertisementType.APPLICATION_ADVERTISEMENT_SOURCE }?.Value
+                ?: return null
+
+        callback.invoke(this.Active)
+
+        when (ApplicationAdvertisementType.appAdvertisementType) {
+
+            ApplicationCommonAdvertisementKeys.ADMOB_ADVERTISEMENT_KEY -> {
+                if (checkGDPR) {
+                    consentInformation = checkGDPR(activity = activity) {
+                        initializeAdmobAdvertisement(
+                            admobInterstitialAdUnit = admobInterstitialAdUnit,
+                            ayanAdvertisement = ayanAdvertisement,
+                            admobMainInitializationStatus = onSourceInitialized,
+                            handleAdmobInterstitialAdvertisement = { admobInterstitialAd ->
+                                ir.tafreshiali.whyoogle_ads.AdvertisementCore.updateApplicationAdmobInterstitialAdvertisement(
+                                    admobInterstitialAd = admobInterstitialAd
+                                )
+
+
+                                ir.tafreshiali.whyoogle_ads.AdvertisementCore.admobInterstitialAdvertisement?.addAdmobInterstitialCallback(
+                                    admobInterstitialAdUnit = admobInterstitialAdUnit,
+                                    application = application,
+                                    admobAdvertisement = ir.tafreshiali.whyoogle_ads.AdvertisementCore.admobAdvertisement,
+                                )
+                            }
+                        )
+                    }
+                } else {
+                    initializeAdmobAdvertisement(
+                        admobInterstitialAdUnit = admobInterstitialAdUnit,
+                        ayanAdvertisement = ayanAdvertisement,
+                        admobMainInitializationStatus = onSourceInitialized,
+                        handleAdmobInterstitialAdvertisement = { admobInterstitialAd ->
+                            ir.tafreshiali.whyoogle_ads.AdvertisementCore.updateApplicationAdmobInterstitialAdvertisement(
+                                admobInterstitialAd = admobInterstitialAd
+                            )
+
+
+                            ir.tafreshiali.whyoogle_ads.AdvertisementCore.admobInterstitialAdvertisement?.addAdmobInterstitialCallback(
+                                admobInterstitialAdUnit = admobInterstitialAdUnit,
+                                application = application,
+                                admobAdvertisement = ir.tafreshiali.whyoogle_ads.AdvertisementCore.admobAdvertisement,
+                            )
+                        }
+                    )
+                }
+            }
+
+            ApplicationCommonAdvertisementKeys.ADIVERY_ADVERTISEMENT_KEY -> {
+                ayanAdvertisement.loadAdiveryAdvertisement(
+                    adiveryInterstitialAdUnit = adiveryInterstitialAdUnit,
+                    adiveryAppKey = adiveryAppKey
+                )
+                onSourceInitialized(true)
+            }
+
+            ApplicationCommonAdvertisementKeys.AYAN_ADVERTISEMENT -> {
+                onSourceInitialized(true)
+            }
+        }
+    }
+    return consentInformation
 }
 
 
@@ -512,5 +602,82 @@ fun showApplicationInterstitialAdvertisement(
     }
 }
 
+private fun checkGDPR(activity: Activity, callback: SimpleCallBack): ConsentInformation? {
+    var consentInformation: ConsentInformation? = null
 
+    val params = ConsentRequestParameters.Builder()
+        .setConsentDebugSettings(
+            if (BuildConfig.DEBUG) {
+                ConsentDebugSettings.Builder(activity)
+                    .setDebugGeography(ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA)
+                    .setForceTesting(true)
+                    .build()
+            } else null
+        )
+        .build()
 
+    consentInformation = UserMessagingPlatform.getConsentInformation(activity)
+
+    if (BuildConfig.DEBUG)
+        consentInformation?.reset()
+
+    consentInformation?.requestConsentInfoUpdate(
+        activity,
+        params,
+        {
+            UserMessagingPlatform.loadAndShowConsentFormIfRequired(
+                activity
+            ) { loadAndShowError ->
+                // Consent gathering failed.
+                Log.w(
+                    "dghdfgjhj", String.format(
+                        "%s: %s",
+                        loadAndShowError?.errorCode,
+                        loadAndShowError?.message
+                    )
+                )
+
+                // Consent has been gathered.
+                if (consentInformation?.canRequestAds() == true) {
+                    initializeMobileAdsSdk(activity, callback)
+                }
+
+//                    binding.privacyIv.changeVisibility(isPrivacyOptionsRequired)
+            }
+        },
+        { requestConsentError ->
+            // Consent gathering failed.
+            Log.w(
+                "dghdfgjhj", String.format(
+                    "%s: %s",
+                    requestConsentError.errorCode,
+                    requestConsentError.message
+                )
+            )
+        })
+
+    // Check if you can initialize the Google Mobile Ads SDK in parallel
+    // while checking for new consent information. Consent obtained in
+    // the previous session can be used to request ads.
+    if (consentInformation?.canRequestAds() == true) {
+        initializeMobileAdsSdk(activity, callback)
+    }
+
+    return consentInformation
+}
+var isMobileAdsInitializeCalled: AtomicBoolean
+    get() = AtomicBoolean(false)
+    set(value) {
+        isMobileAdsInitializeCalled = value
+    }
+private fun initializeMobileAdsSdk(activity: Activity, callback: SimpleCallBack) {
+
+    if (isMobileAdsInitializeCalled.getAndSet(true)) {
+        return
+    }
+
+    // Initialize the Google Mobile Ads SDK.
+    MobileAds.initialize(activity)
+
+    callback()
+}

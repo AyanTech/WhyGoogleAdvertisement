@@ -28,15 +28,6 @@ class AdvertisementInitializerProcessorImpl : AdvertisementInitializerProcessor 
 
     override var consentInformation: ConsentInformation? = null
 
-
-    /**
-     * Used to send ads request to the server and initialize the advertisement
-     * Important Note = [appAdvertisementGeneralProcessor] should calls once in a [androidx.appcompat.app.AppCompatActivity.onCreate] or in a [android.app.Application.onCreate] but before call this function,
-     * you should ensure that you would initialize the [ir.ayantech.ayannetworking.api.AyanApi]
-     * @param application
-     * @param [changeStatus] [failure] for state handling in upstreams.
-     * @param updateAppGeneralAdvertisementStatus a lambda function that has [Boolean] value witch determine that app should shows the ads or not.*/
-
     @Deprecated(message = "This method is deprecated")
     override fun appAdvertisementGeneralProcessor(
         ayanApi: AyanApi,
@@ -68,37 +59,47 @@ class AdvertisementInitializerProcessorImpl : AdvertisementInitializerProcessor 
         )
     }
 
+    /**
+     * Used to send ads request to the server and initialize the advertisement
+     * Important Note = [appAdvertisementGeneralProcessor] should calls once in a [androidx.appcompat.app.AppCompatActivity.onCreate] or in a [android.app.Application.onCreate] but before call this function,
+     * you should ensure that you would initialize the [ir.ayantech.ayannetworking.api.AyanApi]
+     * @param application
+     * @param [changeStatus] [failure] for state handling in upstreams.
+     * @param updateAppGeneralAdvertisementStatus a lambda function that has [Boolean] value witch determine that app should shows the ads or not.*/
+
     override fun appAdvertisementGeneralProcessor(
         activity: Activity,
         ayanApi: AyanApi,
         application: Application,
+        checkGDPR: Boolean,
         changeStatus: OnChangeStatus?,
         failure: OnFailure?,
         onSourceInitialized: (Boolean) -> Unit,
         updateAppGeneralAdvertisementStatus: (Boolean) -> Unit
     ) {
-        checkGDPR(activity) {
-            ayanApi.getAppConfigAdvertisement(
-                callBack = {
+//        checkGDPR(activity) {
+        ayanApi.getAppConfigAdvertisement(
+            callBack = {
 
-                    //Save The Advertisement Response After Each Request And Use It In Other Parts
-                    AdvertisementResponse.appAdvertisementResponse = it.toJsonString()
+                //Save The Advertisement Response After Each Request And Use It In Other Parts
+                AdvertisementResponse.appAdvertisementResponse = it.toJsonString()
 
-                    if (it.Active) {
-                        it.checkAdvertisementStatus(
-                            application = application,
-                            onSourceInitialized = onSourceInitialized,
-                            callback = updateAppGeneralAdvertisementStatus,
-                            adiveryInterstitialAdUnit = it.findRelatedAdUnit(key = ApplicationAdvertisementType.AD_INTERSTITIAL_ADIVERY_KEY),
-                            admobInterstitialAdUnit = it.findRelatedAdUnit(key = ApplicationAdvertisementType.AD_INTERSTITIAL_ADMOB_KEY),
-                            adiveryAppKey = it.findRelatedAdUnit(key = ApplicationAdvertisementType.APP_ADIVERY_KEY)
-                        )
-                    }
-                },
-                onChangeStatus = changeStatus,
-                onFailure = failure
-            )
-        }
+                if (it.Active) {
+                    consentInformation = it.checkAdvertisementStatus(
+                        activity = activity,
+                        application = application,
+                        onSourceInitialized = onSourceInitialized,
+                        callback = updateAppGeneralAdvertisementStatus,
+                        adiveryInterstitialAdUnit = it.findRelatedAdUnit(key = ApplicationAdvertisementType.AD_INTERSTITIAL_ADIVERY_KEY),
+                        admobInterstitialAdUnit = it.findRelatedAdUnit(key = ApplicationAdvertisementType.AD_INTERSTITIAL_ADMOB_KEY),
+                        adiveryAppKey = it.findRelatedAdUnit(key = ApplicationAdvertisementType.APP_ADIVERY_KEY)
+                    )
+                }
+            },
+            onChangeStatus = changeStatus,
+            onFailure = failure
+        )
+//        }
     }
 
     private fun checkGDPR(activity: Activity, callback: SimpleCallBack) {
