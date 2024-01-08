@@ -101,7 +101,7 @@ afterEvaluate {
                 artifactId = "whygoogle-ads"
 
                 // Version Library Name (Example : "1.0.0")
-                version = "2.1.1"
+                version = "2.1.2"
             }
         }
     }
