@@ -638,9 +638,7 @@ private fun checkGDPR(activity: Activity, callback: SimpleCallBack): ConsentInfo
                 )
 
                 // Consent has been gathered.
-                if (consentInformation?.canRequestAds() == true) {
                     initializeMobileAdsSdk(activity, callback)
-                }
 
 //                    binding.privacyIv.changeVisibility(isPrivacyOptionsRequired)
             }
