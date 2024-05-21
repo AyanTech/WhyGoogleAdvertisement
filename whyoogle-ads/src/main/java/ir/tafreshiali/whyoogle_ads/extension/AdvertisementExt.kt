@@ -24,8 +24,6 @@ import com.google.android.ump.ConsentRequestParameters
 import ir.ayantech.ayannetworking.api.AyanApi
 import ir.ayantech.ayannetworking.api.OnChangeStatus
 import ir.ayantech.ayannetworking.api.OnFailure
-import ir.ayantech.pishkhancore.model.AppConfigAdvertisementOutput
-import ir.ayantech.pishkhancore.model.Source
 import ir.ayantech.whygoogle.helper.SimpleCallBack
 import ir.ayantech.whygoogle.helper.isNull
 import ir.ayantech.whygoogle.helper.openUrl
@@ -41,6 +39,8 @@ import ir.tafreshiali.whyoogle_ads.datasource.shared_preference.ApplicationAdver
 import com.google.android.ump.ConsentDebugSettings
 import com.google.android.ump.UserMessagingPlatform
 import ir.tafreshiali.whyoogle_ads.BuildConfig
+import ir.tafreshiali.whyoogle_ads.model.AppConfigAdvertisementOutput
+import ir.tafreshiali.whyoogle_ads.model.Source
 import java.util.concurrent.atomic.AtomicBoolean
 
 

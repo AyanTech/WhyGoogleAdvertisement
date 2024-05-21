@@ -33,6 +33,7 @@
 
 #For Kepping Domain Classes
 -keep class ir.tafreshiali.whyoogle_ads.ayan_ads.domain.** { *; }
+-keep class ir.tafreshiali.whyoogle_ads.model.** { *; }
 
 
 # The following rules are used to strip any non essential Google Play Services classes and method.
