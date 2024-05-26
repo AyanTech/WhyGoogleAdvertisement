@@ -4,7 +4,7 @@ import android.util.Log
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import com.adivery.sdk.AdiveryNativeAdView
+//import com.adivery.sdk.AdiveryNativeAdView
 import ir.ayantech.ayannetworking.api.AyanApi
 import ir.tafreshiali.whyoogle_ads.AdvertisementCore
 import ir.tafreshiali.whyoogle_ads.ayan_ads.domain.AyanCustomAdvertisementInput
@@ -40,22 +40,22 @@ class InListAdvertisementProcessorImpl : InListAdvertisementProcessor {
             if (itemList.isNotEmpty()) {
                 handleApplicationNativeAdvertisement(
                     loadAdiveryNativeView = {
-                        if (adiveryNativeAdUnit.isNotEmpty())
-                            loadAdiveryNativeAdvertisementView(
-                                adiveryNativeAdUnit = adiveryNativeAdUnit,
-                                context = activityContext,
-                                adiveryNativeLayoutId = adiveryNativeLayoutId,
-                                onAdLoaded = { adiveryView ->
-
-                                    if (itemList.find { it is AdiveryNativeAdView } == null) {
-
-                                        itemList.add(adViewInListIndex, adiveryView)
-
-                                        updateListItems(itemList)
-                                    }
-
-                                }
-                            )
+//                        if (adiveryNativeAdUnit.isNotEmpty())
+//                            loadAdiveryNativeAdvertisementView(
+//                                adiveryNativeAdUnit = adiveryNativeAdUnit,
+//                                context = activityContext,
+//                                adiveryNativeLayoutId = adiveryNativeLayoutId,
+//                                onAdLoaded = { adiveryView ->
+//
+//                                    if (itemList.find { it is AdiveryNativeAdView } == null) {
+//
+//                                        itemList.add(adViewInListIndex, adiveryView)
+//
+//                                        updateListItems(itemList)
+//                                    }
+//
+//                                }
+//                            )
                     },
                     loadAdmobNativeView = {
                         if (admobNativeAdvertisementId.isNotEmpty())

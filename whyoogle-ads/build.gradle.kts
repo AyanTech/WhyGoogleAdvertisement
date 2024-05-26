@@ -61,7 +61,7 @@ dependencies {
     compileOnly(ad.AdmobAdvertisement.admobAdvertisement)
 
     //Adivery - Advertisement
-    api(ad.AdiveryAdvertisement.adivery)
+//    api(ad.AdiveryAdvertisement.adivery)
 
     //Ayan - Why google
     compileOnly(ayan.WhyGoogle.whyGoogle)
@@ -101,7 +101,7 @@ afterEvaluate {
                 artifactId = "whygoogle-ads"
 
                 // Version Library Name (Example : "1.0.0")
-                version = "2.1.5"
+                version = "2.1.6"
             }
         }
     }

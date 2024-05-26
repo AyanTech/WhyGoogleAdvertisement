@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.children
-import com.adivery.sdk.AdiveryNativeAdView
+//import com.adivery.sdk.AdiveryNativeAdView
 import com.google.android.gms.ads.nativead.NativeAdView
 import ir.ayantech.whygoogle.adapter.MultiViewTypeViewHolder
 import ir.tafreshiali.whyoogle_ads.R
@@ -21,10 +21,10 @@ fun MultiViewTypeViewHolder<Any>.handleClickForNativeAdvertisement(analyticsEven
         if (rootView is LinearLayout) {
             when (rootView.children.firstOrNull()) {
 
-                is AdiveryNativeAdView -> {
-                    rootView.findViewById<AppCompatButton>(R.id.adivery_call_to_action)
-                        .performClick()
-                }
+//                is AdiveryNativeAdView -> {
+//                    rootView.findViewById<AppCompatButton>(R.id.adivery_call_to_action)
+//                        .performClick()
+//                }
 
                 is NativeAdView -> {
                     rootView.findViewById<AppCompatButton>(ir.tafreshiali.whyoogle_ads.R.id.ad_call_to_action)

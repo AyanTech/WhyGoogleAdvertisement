@@ -13,7 +13,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
-import com.adivery.sdk.AdiveryNativeAdView
+//import com.adivery.sdk.AdiveryNativeAdView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.nativead.NativeAd
@@ -459,24 +459,24 @@ fun ViewGroup.loadAdiveryNativeAdvertisementView(
     onAdLoaded: () -> Unit,
     @LayoutRes adiveryNativeLayoutId: Int
 ) {
-    this.addView(
-        AdvertisementCore.requestNativeAds(
-            context = context,
-            layoutId = adiveryNativeLayoutId,
-            customAdUnit = adiveryNativeAdUnit
-        ) {
-            trying {
-                findViewById<TextView>(R.id.adivery_headline).isSelected = true
-                onAdLoaded()
-            }
-        }
-    )
-    trying {
-        this.setOnClickListener {
-            this.findViewById<AppCompatButton>(R.id.adivery_call_to_action)
-                .performClick()
-        }
-    }
+//    this.addView(
+//        AdvertisementCore.requestNativeAds(
+//            context = context,
+//            layoutId = adiveryNativeLayoutId,
+//            customAdUnit = adiveryNativeAdUnit
+//        ) {
+//            trying {
+//                findViewById<TextView>(R.id.adivery_headline).isSelected = true
+//                onAdLoaded()
+//            }
+//        }
+//    )
+//    trying {
+//        this.setOnClickListener {
+//            this.findViewById<AppCompatButton>(R.id.adivery_call_to_action)
+//                .performClick()
+//        }
+//    }
 }
 
 
@@ -485,35 +485,35 @@ fun ViewGroup.loadAdiveryNativeAdvertisementView(
  * @param [onAdLoaded] a lambda function for updating upstreams to react when ever advertisement loaded
  * @param [adiveryNativeLayoutId] of type [LayoutRes] the id of created layout in (project / library ) res folder */
 
-fun loadAdiveryNativeAdvertisementView(
-    context: Context,
-    adiveryNativeAdUnit: String,
-    onAdLoaded: (AdiveryNativeAdView) -> Unit,
-    @LayoutRes adiveryNativeLayoutId: Int
-) {
-    var adView: AdiveryNativeAdView? = null
-
-    adView = AdvertisementCore.requestNativeAds(
-        context = context,
-        layoutId = adiveryNativeLayoutId,
-        customAdUnit = adiveryNativeAdUnit
-    ) {
-        trying {
-            adView?.let {
-                it.findViewById<TextView>(R.id.adivery_headline).isSelected =
-                    true
-
-                val adiveryButton =
-                    it.findViewById<AppCompatButton>(R.id.adivery_call_to_action)
-
-                adiveryButton.setOnClickListener {
-                    adiveryButton.performClick()
-                }
-            }
-            adView?.let { onAdLoaded(it) }
-        }
-    }
-}
+//fun loadAdiveryNativeAdvertisementView(
+//    context: Context,
+//    adiveryNativeAdUnit: String,
+//    onAdLoaded: (AdiveryNativeAdView) -> Unit,
+//    @LayoutRes adiveryNativeLayoutId: Int
+//) {
+//    var adView: AdiveryNativeAdView? = null
+//
+//    adView = AdvertisementCore.requestNativeAds(
+//        context = context,
+//        layoutId = adiveryNativeLayoutId,
+//        customAdUnit = adiveryNativeAdUnit
+//    ) {
+//        trying {
+//            adView?.let {
+//                it.findViewById<TextView>(R.id.adivery_headline).isSelected =
+//                    true
+//
+//                val adiveryButton =
+//                    it.findViewById<AppCompatButton>(R.id.adivery_call_to_action)
+//
+//                adiveryButton.setOnClickListener {
+//                    adiveryButton.performClick()
+//                }
+//            }
+//            adView?.let { onAdLoaded(it) }
+//        }
+//    }
+//}
 
 
 /** Loading Admob Native Advertisement To The [LinearLayout]
